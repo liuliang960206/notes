@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(curAry){
+            var newAry = [];
+            for(var i=0;i<curAry.length;i++){ 
+                var item = curAry[i];
+                if(newAry.indexOf(item) === -1){
+                    newAry.push(item);
+                }
+            }
+            return newAry;
+        }
+        var ary = [3,2,3,3,2];
+        console.log(fn(ary));
+        var ary1 = [5,5,9,85,'好'];
+        console.log(fn(ary1));
+    </script>
+</body>
+</html>

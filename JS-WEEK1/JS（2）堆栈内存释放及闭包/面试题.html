@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // 一
+        // var n = 10;
+        // function fn(){
+        //     var n = 20;
+        //     function f (){
+        //         n++;
+        //         console.log(n); //21
+        //     };
+        //     f();
+        //     return f;
+        // };
+        // var x = fn(); 
+        // x(); 
+        // x(); 
+        // var y = fn(); 
+        // y(); 
+        // y();
+
+        // console.log(n);//10
+
+
+        // //二
+        // function fun(n, o) {
+        //     console.log(o); // undefined
+        //     return {
+        //         fun: function (m) {
+        //             return fun(m, n);
+        //         }
+        //     };
+        // }
+        // var a = fun(0);
+        // a.fun(1);
+        // a.fun(2);
+        // a.fun(3);
+
+        // var b = fun(0).fun(1).fun(2).fun(3);
+
+        // var c = fun(0).fun(1);
+        // c.fun(2);
+        // c.fun(3);
+
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+
+        // //三
+        // var i = 1;
+        // function fn(i){
+        //     var i = 2;
+        //     return function (n) {
+        //         console.log(n + (++i));
+        //     };
+        // };
+        // var f = fn(2);
+        // f(3);
+        // fn(5)(6);
+        // fn(7)(8);
+        // f(4);
+
+
+        // // 题一
+        // function fn(n) {
+        //     return function (a) {
+        //         a++;
+        //         n += a
+        //         console.log(n);
+        //     };
+        // }
+        // var f = fn(10);
+        // f(1); // 12
+        // f(2); // 15
+
+
+        // // 题二
+        // function fn(n) {
+        //     n = n;
+        //     return function (a) {
+        //         a++;
+        //         console.log((n += a));
+        //     };
+        // }
+        // var f = fn(10);
+        // f(1); // 12
+
+
+        // // 题三
+        // var num = 20;
+        // var obj = {
+        //     num: 30,
+        //     fn: (function (num) {
+        //         num += 5;
+        //         return function () {
+        //             console.log(num);
+        //         };
+        //     })(num)
+        // };
+        // obj.fn(num); //25
+
+    
+
+
+
+    </script>
+</body>
+
+</html>

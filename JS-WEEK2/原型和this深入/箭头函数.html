@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let fn = (x, y) => {
+
+        // };
+        // fn(1, 2);
+
+        // let fn = x => {
+        //     //只有一个参数，可以省略小括号
+        // };
+        // fn(1);
+
+        // let fn = (x = 0, y = 0) => x + y; //如果函数体中只有一句操作，并且是return的，可以省略大括号（给形参设置默认值）
+        // console.log(fn(1,2));
+
+        // let fn = x => y => x + y;
+        // /*
+        //     var fn = function fn(x) {
+        //         return function (y) {
+        //             return x + y;
+        //         };
+        //     };
+        //  */
+
+        /* 
+            普通函数和箭头函数的区别：
+            1.箭头函数没有arguments,但可以用剩余运算符代替
+            2.箭头函数没有自己的执行主体（thiis），它的this都是继承上下文中的this
+         */
+        //  let fn = (...arg) => {
+        //     //  arguments; //=>报错
+        //     console.log(arg);
+        //  }
+        //  fn(1,2,3,4);
+
+        let obj = {
+            fn: (function(){
+                //=>this:window
+                return () => {
+                    console.log(this);
+                }
+            }) ()
+        };
+        obj.fn(); //=> this:window 箭头函数执行和 . 前面是谁无关，因为箭头函数没有执行主体，在箭头函数中使用的this都是直接找上下文中的this来使用
+    </script>
+</body>
+
+</html>

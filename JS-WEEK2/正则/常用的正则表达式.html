@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //利用正则检测有效数字
+        // let reg = /[+-]?(\d|[1-9]\d)(\.\d+)?/g;
+        // let str = 'hsj+452ijds962.3sk.6';
+        // console.log(reg.exec(str));
+        // console.log(str.match(reg));
+
+        // //电话（手机）号码正则 1) 11位数字 2)以1开头
+        // // let reg = /^1\d{10}$/;
+        // let reg = /^1(?:87|59|86)\d{8}$/;
+        // let str = '18704366271';
+        // console.log(str.match(reg));
+
+
+        // let str = 'zhufeng{2018}zhufeng{2019}zhufeng{2020}' ;
+        // let reg = /\d+/g;
+        // // let reg = /\{(\d+)\}/g;
+        // console.log(reg.exec(str)); // 如果正则中有小括号分组 exec方法也能捕获第一个小分组里面的内容
+        // console.log(str.match(reg));
+
+
+
+        // //中文姓名 1）中文汉字[\u4E00-\u9FA5]{2,} 2）
+        // let reg = /^[\u4E00-\u9FA5]{2,}((·)([\u4E00-\u9FA5]{2,}))?$/;
+        // console.log(reg.test('汤姆')); //true
+
+        // console.log(reg.test('汤姆·')); //false
+        // console.log(reg.exec('汤姆·')); // null
+
+        // console.log(reg.test('汤姆·汉克斯')); //true
+        // console.log(reg.exec('汤姆·汉克斯'));
+
+
+
+        // 邮箱 1)数字、字母、下划线、- . 但是-和.不能作为开头，不能连续出现-或者. 2) @后面（域名）：xxx.xx.xx  xxx.xx  xxx.xx.xx.xx  xxx-xxx-xx.xx.xx
+        let reg = /^\w+((.|-)\w)*@[A-Za-z\d]+((-|\.)[A-Za-z0-9]+)?(\.[A-Za-z0-9]+)?$/
+        console.log(reg.test('zhufeng_peixun@zhufeng.com')); //true
+        console.log(reg.exec('zhufengpeixun@zhufeng.com.cn'));
+
+
+    </script>
+</body>
+
+</html>

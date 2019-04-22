@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // console.log(a); //=> 报错
+        // let a = 12;
+        // console.log(window.a); //=>undefined
+        // console.log(a); //=>12
+
+
+        // let a = 10;
+        // let b = 10;
+        // let fn = function (){
+        //     console.log(a,b); //=>报错
+        //     let a = b = 20;
+        //     console.log(a,b);
+        // };
+        // fn();
+        // console.log(a,b);
+
+
+        // let a = 12;
+        // console.log(a);
+        // let a = 13; //=>报错  let不能声明相同名字的变量
+        // console.log(a);
+
+        let a = 10;
+        let b = 10;
+        let fn = function (){
+            // console.log(a,b); //=>报错
+            let a = b = 20; 
+            console.log(a,b); //=>20,20
+        };
+        fn();
+        console.log(a,b); //=> 10,20
+
+
+    </script>
+</body>
+</html>

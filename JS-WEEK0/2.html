@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 200px;
+            height: 50px;
+            border: 1px solid #000;
+        }
+
+        #box div {
+            display: none;
+        }
+
+        #box div.show {
+            display: block;
+        }
+
+        button.active {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="active">按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+
+    <section id="box">
+        <div class="show">头条</div>
+        <div>体育</div>
+        <div>新闻</div>
+    </section>
+    <script>
+        const btns = document.querySelectorAll('button');
+        const divList = document.querySelectorAll('#box>div');
+
+        for (var i = 0; i < btns.length; i++) {//通过循环获取每一个按钮
+            btns[i].index = i
+            btns[i].onclick = function () { // 当点击时 清除所有按钮的类名 和所有 div的类名
+                for (k = 0; k < btns.length; k++) {
+                    btns[k].className = '';
+                    divList[k].className = '';
+                };
+                this.className = 'active';// 给当前点击的元素（即btns[i]）添加类名
+                divList[this.index].className = 'show'; // 给当前点击button对应的div添加类名
+                // 当前点击的button和其对应的div 索引是一样的，所以用当前button的索引（this.index）
+            };
+        };
+
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>按钮1</button>
+    <button>按钮2</button>
+    <button>按钮3</button>
+    <script>
+        // let arr = ['新闻','头条','热榜'];
+        // const btns = document.querySelectorAll('button');
+        // for(let i=0;i<btns.length;i++){
+        //     btns[i].onclick = function(){
+        //         alert(i);
+        //     }
+        // }
+
+        // var arr = ['新闻', '头条', '热榜'];
+        // var btns = document.querySelectorAll('button');
+
+        // var _loop = function _loop(i) {
+        //     btns[i].onclick = function () {
+        //         alert(i);
+        //     };
+        // };
+
+        // for (var i = 0; i < btns.length; i++) {
+        //     _loop(i);
+        // }
+
+
+        let arr = ['新闻', '头条', '热榜'];
+        const btns = document.querySelectorAll('button');
+
+        // for (let i = 0; i < btns.length; i++) {
+        //     btns[i].onclick = function () {
+        //         alert(arr[i]);
+        //     };
+        // };
+
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].num = i;
+            btns[i].onclick = function () {
+                alert(arr[this.num]);
+            };
+            console.log(i)
+        };
+
+    </script>
+</body>
+
+</html>

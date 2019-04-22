@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            构造函数执行，不写return，浏览器会默认返回创建的实例；如果自己写了return：
+            1.return是个基本值，返回的结果依然是类的实例
+            2.如果返回的是引用值，则会把默认返回的实例覆盖，此时接受到的结果就不再是那个实例了 
+            => 构造函数执行的时候，尽量减少return的使用，防止覆盖实例
+         */
+        function Fn(){
+            var n = 10;
+            this.m = n;
+            // return '哈哈';
+            // return {name:'哈哈'};
+            return; //=>这样是return是结束代码执行的作用，并且不会覆盖返回的实例
+        };
+        var f = new Fn(); //=> var f = new Fn; 在构造函数执行的时候，如果Fn不需要传递实参，我们可以省略小括号，意思还是创建实例（和加小括号没有区别）
+        // console.log(f); // Fn { m:10 }
+        console.log(f); 
+        console.log(f.m); // 10
+        console.log(f.n); // undefined
+
+
+
+        // instanceof : 检测某一个实例是否隶属于这个类
+        console.log(f instanceof Fn); // true
+        console.log(f instanceof Array); // false
+        console.log(f instanceof Object); // true
+        console.log('m' in f); // true
+        console.log('n' in f); // flase
+        console.log('toString' in f); // true toString是它得的公有属性
+
+        //hasOwnProperty: 检测当前属性是否为对象的私有属性（不仅要有这个属性，而且必须还是私有的才可以）
+        console.log(f.hasOwnProperty('m')); //true
+        console.log(f.hasOwnProperty('n')); //false
+        console.log(f.hasOwnProperty('toString')); //false 不是私有属性
+
+        
+
+
+
+    </script>
+</body>
+</html>

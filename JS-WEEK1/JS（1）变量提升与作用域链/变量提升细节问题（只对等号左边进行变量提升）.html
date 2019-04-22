@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        /* 
+            变量提升：
+            var fn; =>只对等号左边进行变量提升
+            sum = AAAFFF111;
+         */
+         
+        fn(); //=>报错
+        sum(); //=> 2
+
+        //=>匿名函数之函数表达式
+        //=>对于等号右边的值，不进行提升
+        var fn = function () { console.log(1); };
+
+        fn(); //代码执行到此处，会把函数值赋值给fn
+
+        //=>普通函数
+        function sum() {
+            console.log(2);
+        };
+
+        
+    </script>
+</body>
+
+</html>

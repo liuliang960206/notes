@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Boolean true false
+
+        // 其他类型转换为Boolean类型
+        // 0 '' null undefined NaN 这五个值都是false 其余都是true
+
+        // Boolean() !! 将其他值转换为Boolean值
+        Boolean(0) // false
+        !!null // false
+
+        // ! 取反 （先转换为Boolean值 然后再取反）
+        !1 // false
+        ![] // false
+
+        ![] == []; // false == [] => 0 == 0 => true
+        [] == []; // false 比较的引用地址
+
+        [] == false // true
+        ![] == false // false == false => true
+
+        if ('a' + 'b') { // 'ab'
+            console.log(123)
+        }
+
+        var n = 'a' + 'b' ? 1 : 2
+        console.log(n) // 1
+
+
+
+        /* 
+            相对比较
+            1.其他值和数字进行比较时，两边都是转换为数字（Number()）再进行比较
+            2.其他值和Boolean值进行比较时，两边都是转换为数字（Number()）再进行比较
+            3.字符串和引用类型进行比较时，两边都转为字符串（toString()）再比较
+            4.特殊记
+            (1)NaN 和任何值都不相等 包括自己
+            (2) 相对比较时 ==  null == undefined 但是它俩 和其他值都不相等
+            5.引用类型和引用类型 比较的是引用地址 
+
+         */
+
+
+
+        //  <h3 id="title" class="text"></h3>
+        var h1 = document.getElementById('title')
+
+        // [h2][0]
+        var h2 = document.getElementsByClassName('text')[0]
+        console.log(h2)
+
+        var h3 = document.getElementsByTagName('h3')[0]
+        console.log(h3)
+
+        // Number() 严格转换
+        // 只要字符串中包含非数字字符 就直接返回NaN
+        Number('10') // 10
+        Number('10a') // NaN
+
+        Number('') // 0
+        Number([]) // 0
+        Number(null) // 0
+        Number(false) // 0
+        Number(true) // 1
+        Number({ id: 1 }) // NaN
+        Number(undefined) // NaN
+        // 提取
+        parseInt('10.5px') // 10
+        parseInt(10.5) // 10
+
+        // parseFloat()
+        parseFloat('10.5px') // 10.5
+
+    </script>
+</body>
+
+</html>

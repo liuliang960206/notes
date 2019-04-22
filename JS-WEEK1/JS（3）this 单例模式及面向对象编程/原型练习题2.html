@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Fn(){
+            var n = 10;
+            this.name = '珠峰';
+            this.age = 12;
+            console.log(this); //实例 {name:'珠峰',age:12}
+        };
+        Function.prototype.n = function(){
+            console.log(123);
+        };
+        var fn = new Fn();
+        console.log(fn); // 实例 {name:'珠峰',age:12}
+        console.dir(Fn); // Fn函数本身
+        console.log(fn.n); // f(){console.log(123)}
+        console.log(Fn.n); // 123 undefined
+        console.log(Fn.n()); // 123 undefined
+        console.log(fn.name); //'珠峰'
+        console.log(fn.age); // '12'
+        console.log(fn.constructor); //Fn(){...}
+        console.log(fn.__proto__); //{constructor: ƒ}
+        console.log(Fn.prototype); //{constructor: ƒ}
+        console.log(fn instanceof Fn); //true
+        console.log(fn instanceof Object); //true
+        console.log(fn instanceof Function); //flase
+        console.log('n' in fn); //flase
+        console.log('n' in Fn); //true n在Fn的原型(Function.prototype.n)上 
+        console.log('name' in fn); //true
+        console.log('name' in Fn); //true Fn有一个自带的属性name
+        console.log('age' in Fn); //false
+        console.log('constructor' in Fn); //true
+        console.log('toString' in Fn); //true toString是在基类Object上的公有属性
+        console.log(fn.hasOwnProperty('name')); //true
+        console.log(fn.hasOwnProperty('age'));//true
+        console.log(fn.hasOwnProperty('n')); //false
+        console.log(fn.hasOwnProperty('toString')); //false
+
+        //编写一个方法，检测属性是否为对象的公有属性
+        function hasPubProperty(attr,obj){
+            return (attr in obj) && (obj.hasOwnProperty(attr) === false)
+        };
+        console.log(hasPubProperty('toString',fn)); //true
+    </script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function add() {
+            var total = null;
+            for (var i = 0; i < arguments.length; i++) {
+                var cur = Number(arguments[i]);
+                !isNaN(cur) ? total += cur : null;
+            }
+            return total;
+        }
+        console.log(add(NaN, 30, 50, '30'));
+        console.log(add(NaN, 30, 50, '30'));
+
+        add(...arg) {
+            let sum = 0
+            for (let val of arg) {
+                sum += val
+            }
+            return sum
+        }
+    </script>
+</body>
+
+</html>

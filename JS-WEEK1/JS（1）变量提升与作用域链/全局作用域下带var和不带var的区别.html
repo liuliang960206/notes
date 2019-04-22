@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 变量提升：var a; <=> window.a = undefined
+        console.log(a); //=>undefined
+        var a = 12; //=> 变量a = 12 同时 window.a = 12
+        console.log(a); //=>12
+        console.log(window.a); //=>window[a] 输出属性值 12
+        // 在“全局作用域”当中，我们用var 和 function 声明一个变量相当于给全局对象增加了一个属性名
+
+        console.log(a); //=>Uncaught ReferenceError: a is not defined
+        console.log(window.a); //=>undefined
+        a = 12; //=> 如果不声明var 相当于给window添加了一个属性a 即window.a = 12
+        console.log(a); // 12
+        console.log(window.a); //12
+    </script>
+</body>
+</html>

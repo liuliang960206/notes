@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            call中的细节：
+            1.非严格模式下，如果不传参数，或者第一个参数传的是null或者undefined，this都指向window
+            2.在严格模式下，第一个参数是谁，this就指向谁（包括null和undefined），不传this就是undefined
+        */
+
+        "use strict"
+        let fn = function (a, b) {
+            console.log(this, a, b);
+        };
+        let obj = {
+            name: 'obj'
+        };
+        fn.call(obj, 10, 20);  // this:{...} a:10 b:20
+        fn.call(10, 20); // this:{10} a+b => NaN
+        fn.call(); // this:window  a,b都是undefined
+        fn.call(null); // this:window  a,b都是undefined
+        fn.call(undefined); // this:window  a,b都是undefined
+
+
+        /* 
+            apply：和call基本一模一样，只有一个区别：传参方式
+            fn.call(obj,10,20)
+            fn.apply(obj,[10,20])
+            apply 把需要传递给fn的参数放到一个数组或者类数组中传递进去，虽然写的是一个数组，但是也相当于给fn一个个传递的
+        */
+
+
+        /* 
+            bind:语法和call一模一样，唯一的区别在于立即执行还是等待执行
+            fn.call(obj,10,20); //=> 改变fn中的this，并且把fn立即执行
+            fn.bind(obj,10,20); //=> 改变fn中的this，但是此时的fn并没有执行（不兼容IE6~8)
+        */
+
+        
+
+
+    </script>
+</body>
+
+</html>

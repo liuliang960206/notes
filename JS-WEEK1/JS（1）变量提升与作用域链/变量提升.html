@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            变量提升：
+            function fn...
+         */
+        fn();
+        function fn(){
+            /* 
+                变量提升：
+                var a;
+             */
+            console.log(a); //=>undefined
+            var a = 100;
+            console.log(a); //=>100
+        };
+        fn();
+
+        function fn(a){ // a n f 都是私有作用域中的私有变量
+            var n = 100;
+            function f(){
+
+            };
+            console.log('fn');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // // for循环多数循环数组
+        // // 倒着输出数组中的每一项
+        // var ary = [2, 5, 6, 4, 5];
+        // ary.class = '03/02';
+        // for (var i = ary.length - 1; i >= 0; i--) {
+        //     console.log(ary[i]);
+        // }
+
+        // //for in 循环 多数循环对象
+        // // 区别：for in可以循环在对象或者数组中添加的自定义属性
+        // var obj = {
+        //     name: 'zf',
+        //     id: 6,
+        //     age: 10
+        // };
+        // for (key in obj) {
+        //     console.log(key, obj[key]);
+        // }
+
+        for (var i = 1; i <= 10; i += 2) {
+            if (i <= 5) {
+                i++;
+                continue; 
+            } else {
+                i -= 2;
+                break;
+            }
+            i--;
+            console.log(i);
+        }
+        console.log(i); //=>5
+    </script>
+</body>
+
+</html>

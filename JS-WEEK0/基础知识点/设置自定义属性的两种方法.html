@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <p>123</p>
+    </div>
+    <!-- <img src="12345" alt=""> -->
+    <script>
+        /* 
+            行内属性：
+            1.给元素设置自定义属性（行内属性）
+            元素.setAttribute('属性名','属性值')
+            2.获取行间自定义属性
+            元素.getAttribute('属性名')
+            3.删除行间自定义属性
+            元素.removeAttribute('属性名')
+        */
+        const box = document.querySelector('div');
+        box.setAttribute('zdy','1');//<div id="box" data-my-index = '1'></div>
+        console.dir(box.getAttribute('zdy')); //1 获取行间属性
+
+
+        box.setAttribute('data-my-Index','2'); 
+        // 设置行间属性：利用box下的属性dataset 
+        // <div id="box" data-my-index = '2'></div>
+        console.dir(box.dataset.myIndex); //2 获取行间属性
+        console.log(box.getAttribute('id')); //box
+        console.log(box.id); //box 元素.内置行间属性 
+        console.dir(box); 
+       
+
+        /* 
+            公共属性：
+            1.给元素设置自定义属性
+            元素.myIndex1 = 123
+
+            此方法是在元素对象上添加一个自定义属性，HTML中的行内标签上是看不到此属性的
+        */
+        box.myIndex1 = 123;
+        console.log(box.myIndex1); // 123
+
+
+
+    </script>
+</body>
+
+</html>

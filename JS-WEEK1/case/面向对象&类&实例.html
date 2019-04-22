@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //创建一个警察类，实例化一个黑猫警长  此时为面向对象编程
+        function Police(name,num){
+            this.name = name;
+            this.job = '警察';
+            this.uniform = '警服';
+            this.id = id;
+            this.zongzhi = '为人民服务'
+        };
+        Police.prototype.wq = function(){
+            console.log('带枪');
+        };
+        Police.prototype.catch = function(){
+            console.log('抓捕');
+        };
+        let cat = new Police('黑猫',001);
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let reg = /^12|14$/; // 12或者14或者以12开头或者以14结尾的都可以
+        // console.log(reg.test('12')); //true
+        // console.log(reg.test('14'));//true
+        // console.log(reg.test('1214'));//true
+        // console.log(reg.test('1258465414'));//true
+        // console.log(reg.test('914'));//true
+        // console.log(reg.test('123'));//true
+        // console.log(reg.test('12ko'));//true
+        // console.log(reg.test('+kj14'));//true
+        // console.log(reg.test('12dsjjkn14'));//true
+
+
+
+        // let reg = /^(12|14)$/; // 分组改变默认优先级
+        // console.log(reg.test('12')); //true
+        // console.log(reg.test('14'));//true
+        // console.log(reg.test('1214'));//false
+        // console.log(reg.test('1258465414'));//false
+        // console.log(reg.test('914'));//false
+        // console.log(reg.test('123'));//false
+        // console.log(reg.test('12ko'));//false
+        // console.log(reg.test('+kj14'));//false
+        // console.log(reg.test('12dsjjkn14'));//false
+
+
+        // //分组引用
+        // let reg = /^([a-z])([a-z])\2\1$/;//正则中出现的\1代表和第一个分组出现一模一样的内容
+        // console.log(reg.test('oppo')); //true
+        // console.log(reg.test('poop')); //true
+
+
+        //分组捕获
+        //编写一个正则匹配身份证号码
+        let reg = /^(\d{6})(\d{4})(\d{2})(\d{2})\d{2}(\d)(?:\d|X)$/;
+        console.log(reg.exec('220802199603241523'));
+        //["220802199603241523", "220802", "1996", "03", "24", "2", "3", index: 0, input: "220802199603241523", groups: undefined]
+        
+
+
+    </script>
+</body>
+</html>

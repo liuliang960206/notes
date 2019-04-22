@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">点击</button>
+    <img src="" alt="" id="img"/>
+    <script>
+        console.log(Math.round(2.5))
+        console.log(Math.ceil(2.1))
+        console.log(Math.floor(2.3))
+        console.log(Math.abs(-9))
+        console.log(Math.pow(2, 3))
+        console.log(Math.min(4, 5, 0, -5, -10, 2, 3))
+        console.log(Math.max(4, 5, 0, -5, -10, 2, 3))
+
+        var ary = [5, -3, -6, 5, 2.5];
+        console.log(Math.max(...ary))
+        console.log(Math.min(...ary))
+        console.log(...ary) //克隆数组
+
+        console.log(Math.random())
+        console.log(Math.round(Math.random())) //0到1之间的随机整数
+        console.log(Math.round(Math.random() * (100 - 1) + 1)) //包含m
+
+        // 随机点名
+        var btn = document.getElementById('btn');
+        btn.onclick= function fn() {
+            var ary = [
+                '郭德纲',
+                '于谦',
+                '郭麒麟',
+                '阎鹤祥',
+                '孟鹤堂',
+                '周九良',
+                '张鹤伦',
+                '郎鹤焱',
+                '烧饼',
+                '曹鹤阳',
+                '张云雷',
+                '杨九郎'
+            ];
+            var name = Math.round(Math.random() * (ary.length - 1));
+            this.innerHTML = ary[name]
+        }
+
+        // 随机点图片
+        var img = document.getElementById('img');
+        img.onclick = function fn(){
+            var src = [
+                
+            ]
+        }
+
+    </script>
+</body>
+
+</html>

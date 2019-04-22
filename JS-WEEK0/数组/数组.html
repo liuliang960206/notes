@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="ul"></ul>
+    <script>
+        /*
+            数组写法：
+            1) let arr = new Array;
+            2) let arr = [];
+            有length属性，能读能写
+            数组中获取每个值可以通过下标操作 [1,2.3][2] //=>3
+            清空数组：arr.length = 0; //=> 不要写arr = [];
+         */
+
+        /*
+           向数组末尾添加一项或多项：每项之间用逗号分隔
+           方案一：arr.push(100);
+           方案二：arr.length = 5;
+                  arr[4] = 100;
+         */
+        // let arr = [2, 'haha', '56', function () { }];
+        // // arr.length = 5;
+        // // arr[4] = 100;
+        // // arr.push(100,56); 
+        // let ary = arr.push(100,56); // 用返回值（即把新数组的返回值赋值给变量）
+        // console.logl(arr); //=>  [2, "haha", "56", ƒ, 100]
+        // console.log(ary); //=>  5
+
+        // // 函数调用还有函数调用，先算函数内部的调用，如果有多个，从左到右计算
+        // let arr = [1,5,2]
+        // arr.push(95,52,arr.push(10),52,51,arr.push(33,44));
+        // console.log(arr); //=>[1,5,2,10,33,44,95,52,4,52,51,6]
+
+
+        // /* 
+        //     删除数组最后一项：不用传参
+        //     arr.pop(); 
+        //     返回值：删除的那一项
+        //  */
+        //  let arr = [1,5,2];
+        //  arr.length = 2;
+        //  console.log(arr);
+
+
+        // /* 
+        //     arr.splice();
+        //  */
+        // let arr = [true,'haha',10,{},[1,2,3]];
+        // console.log(arr.splice(0)); 
+        // console.log(arr);
+
+        // let arr = [1,2,3,4,5,6];
+        // console.log(arr.splice(arr.length,0,10,20))
+        // console.log(arr)
+
+
+        // /*
+        // forEach: 专门用来循环数组的。
+        // 两个参数:
+        // 1) 第一个参数:
+        // 函数-> function(){}
+        // function(数组中的每个值,索引值,整个数组){
+        // }
+        // 2) 第二个参数:
+        // 改变this指向,写啥是啥（如果写个null,undefined还是为window）
+
+        // */
+        // let arr = [true, 'haha', 10, {}, [1, 2, 3]];
+        // arr.forEach(function (item, i, all) {
+        //     console.log(item);//数组中的每项
+        //     // console.log(i); //索引
+        //     // console.log(all); // 整个数组
+        //     // console.log(this); //第二个参数如果没有，则this是window
+        // }, arr);
+
+
+        // /*
+        //     map: 循环数组，它的返回值为新的数组
+        //     function(item,i,all){
+        //         return 新数组的每项
+        //     }
+        // */
+        // const ul = document.getElementById('ul');
+        // let html = '';
+        // let arr = [1, '你好', '哈哈', '呵呵'];
+        // let newArr = arr.map(function (item, i) {
+        //     return '<li>' + item + '</li>';
+        // });
+        // ul.innerHTML = newArr.join('');
+        // console.log(newArr.join(''));
+        // console.log(newArr);
+
+
+        // /*
+        //     join()：以某个字符串为连接符，连接数组的每一项.
+        //     最后返回一个字符串。
+        //     注意：如果不需要连接符，必须使用空字符串表示''
+        // */
+        // let arr = ['你', '好', '吗']; //'你|好'
+        // console.log(arr.join(''));
+        // console.log(arr.join().length);
+        // console.log(arr[0] + arr[1] + arr[2]);
+
+
+        // /* 
+        //     filter:数组的过滤，过滤条件成立的这个值
+        //     参数：
+        //     function(item,i,all){
+        //         return 条件成立的某一项
+        //     }
+        //     函数返回值为过滤后的新数组
+        //  */
+
+        // //过滤大于10小于30的数字
+        // let arr = [3, 10, 18, 38, 48, 26];
+        // let ary = arr.filter(function (item, i) {
+        //     return item >= 10 && item < 30
+        // })
+        // console.log(ary);
+
+
+
+        // /*
+        //     some：
+        //     查看数组中某项数据是否满足某个条件，
+        //     只要有一个符合条件就返回true，
+        //     如果所以项条件都不成立，返回false
+        //     返回一个布尔值
+        // */
+        // let arr = [1, 2, 3, 4, 5];
+        // //查看数组中是否有6，明显没有，就返回false
+        // let res = arr.some(function (item) { 
+        //     return item === 6 
+        // });
+        // console.log(res); // flase(数组中没有6)
+
+        // let res1 = arr.indexOf(6);
+        // console.log(res1); //-1(数组中没有6)
+
+
+        // /*
+        //     every：
+        //     判断数组中是不是每一项都符合某个条件
+        //     全部都符合返回true，只要有一项不符合就返回false
+        //     参数:
+        //     function (item,i,all){}
+        // */
+        let arr = ['62',[],NaN,{},(function(){})(),/^$/,2333];
+        // let arr1 = [1,2,3,4,5,6];
+        // let res = arr.every(function(item,i){
+        //     return item;
+        // });
+        // let res1 = arr1.every(function(item,i){
+        //     return item;
+        // });
+        // console.log(res); //false (不是所有项都为true)
+        // console.log(res1); //true (所有项都为true)
+
+        // let arr1 = ['',2,3,4,5,6];
+        // alert(arr.every(function (item) { return item }) ? '都是true' : '有内鬼');
+        // let len = arr.length;
+        // let num = 0;
+        // for (let i = 0; i < len; i++) {
+        //     if (arr[i]) {
+        //         num++;
+        //     };
+        // };
+        // if (num === len) {
+        //     alert('都是true');
+        // } else {
+        //     alert('有内鬼');
+        // };
+
+        // /* 
+        //     concat：连接一个或多个数组
+        //     返回值：新数组
+        //     无参数即克隆数组
+        // */
+        // let arr = [1, 2, 3]
+        // let arr1 = [4, 5, 6]
+        // console.log(arr.concat(arr1)) //[1, 2, 3, 4, 5, 6]
+        // console.log(arr.concat()) // [1, 2, 3]
+
+
+     
+
+    </script>
+</body>
+
+</html>

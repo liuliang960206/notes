@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            作用域链 变量查找机制：
+            当在作用域中查找一个变量时，先看当前作用域中是否声明过这个变量，如果当前作用域中没有声明过，就去上级作用域查找，一直找到window为止
+            如果window上也没有就报错
+
+            如何查找上级作用域：看函数是在哪定义的
+        */
+
+        // function fn() {
+        //     //=> 【私有作用域】
+        //     //=> 变量提升：var a;私有变量
+        //     console.log(a); // undefined
+        //     var a = 12;
+        //     console.log(a); // 12
+        // }
+        // fn();
+        // console.log(a); // 报错（闭包机制：私有作用域保护里面的私有变量不受外界的干扰）
+
+
+        // fn();
+        // function fn() {
+        //     // console,log(a); //=>直接输出会报错
+        //     a = 12; //=> window.a = 12
+        //     console.log(a); //=>12
+        // };
+        // console.log(a); //=>12
+
+
+        // 全局下的变量提升：var x; var y; fn = AAAFFF111
+        console.log(x, y); //=> undefined undefined
+        var x = 10,
+            y = 20; //=>x=10;y=20;
+        function fn() {
+            //=> 私有作用域
+            //=>变量提升：var x (x是私有变量，此时x还未赋值 所以是undefined)
+            console.log(x, y); //=>undefined 20
+            var x = y = 100; //=> x = 100;(私有) y = 100(全局)
+            // var x = 100;
+            // y = 100; =>此处的y不带var
+            console.log(x, y); //=>100,100
+        };
+        fn();
+        console.log(x, y); //=>10,100
+
+
+        // // 函数中 return后面代码虽然不执行 但会进行变量提升
+        // function fn(){
+        //     console.log(n);
+        //     return;
+        //     var n = 123;
+        // }
+        // fn();
+
+        // function fn(){
+        //     console.log(n); // undefined
+        //     console.log(foo); // 报错
+        //     return function foo(){ // 返回值 未参与变量提升
+        //         console.log('foo');
+        //     };
+        //     var n = 123;
+        // }
+        // fn();
+        
+        var n = 100;
+        function fe(){
+            return function f(n){ //=>形参：私有变量
+                console.log(n)
+            }
+        }
+        var fn = fe();
+        fn(100); //100
+    </script>
+</body>
+
+</html>

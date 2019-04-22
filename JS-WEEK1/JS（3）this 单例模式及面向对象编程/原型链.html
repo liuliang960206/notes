@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var ary = new Array(1,2,3);
+        // console.dir(ary);
+
+        // var ary1 = [1,2,3];
+        // console.dir(ary1);
+        // var obj = {};
+        // console.dir(obj)
+
+
+        // // 题一
+        // function Fn(){
+        //     var n = 100;
+        //     this.AA = function (){
+        //         console.log('AA[私]');
+        //     };
+        //     this.BB = function (){
+        //         console.log('BB[私]');
+        //     };
+        // };
+        // Fn.prototype.AA == function(){
+        //     console.log('AA[公]');
+        // };
+        // var f1 = new Fn;
+        // var f2 = new Fn;
+        // console.log(f1.n); //undinfned
+        // console.log(f1.__proto__.AA === f2.__proto__.AA); //true(都指向原型上的AA)
+        // console.log(f1.__proto__.AA === Fn.prototype.AA); // true
+        // console.log(f1.hasOwnProperty === Fn.prototype.hasOwnProperty); //true (都是基类上的属性)
+        // f1.name = '123';// 给自己设置私有属性
+        // f1.__proto__.name = '123';// 给原型上设置公有属性（每个实例都可以用这个属性）<=> Fn.prototype.name = '123'
+
+
+
+        // function Fn(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // };
+        // let a = new Fn();
+        // let b = new Fn();
+        // Fn.prototype.c = function(){
+        //     console.log(456);
+        // };
+        // // Object.prototype.c = function(){
+        // //     console.log(123);
+        // // };
+        // a.c('111')
+        // b.c('111')
+        // console.dir(a);
+        // console.dir(Fn);
+        // // console.dir(new Fn.b);
+
+
+
+        function fn(name) {
+            this.name = name;
+            this.say = function () {
+                console.log(this.name);
+            };
+        };
+        fn.prototype.say = function () {
+            console.log('原型下的');
+        };
+        Object.prototype.say = function () {
+            console.log('对象的');
+        };
+        fn.say = function () {
+            console.log('fn的');
+        };
+        Function.prototype.say = function () {
+            console.log('Func');
+        };
+        let f = new fn();
+        f.say = function () {
+            console.log('自己的');
+        };
+        f.say();
+
+
+
+        // function Gui(name) {
+        //     this.name = name;
+        //     this.jiao = '4只';
+        //     this.keer = '椭圆壳儿';
+        //     this.zishi = '爬';
+        // }
+
+        // Gui.prototype.shi = function(食物){
+        //     console.log(this.name+'吃'+食物);
+        // }
+
+        // // Object.prototype.shi = function(){
+        // //     console.log(this.name+'喝水');
+        // // };
+
+        // let g1 = new Gui('草龟');//墨
+        // let g2 = new Gui('鳄龟');
+        // // console.log(g1.__proto__ === Gui.prototype);
+        // g1.shi('啥都吃');
+        // // g2.shi('泥鳅');
+        // console.dir(g1);
+        // console.log(Object.prototype.__proto__);
+        // // console.log(g1.shi === g2.shi);
+
+
+    </script>
+</body>
+
+</html>

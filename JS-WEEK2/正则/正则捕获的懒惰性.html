@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            基于exec可以实现正则捕获
+            1.如果当前字符串和正则不匹配 => null
+            2.如果匹配，捕获的结果是一个数组
+                0：大正则捕获的内容
+                index：正则捕获的起始索引
+                input：原始操作的字符串
+            3.执行一次exec只能捕获到第一个和正则匹配的内容，其余匹配的内容还没有捕获到，而且执行多次也无效 => 正则捕获的懒惰性
+
+            正则捕获的懒惰性：只能捕获到第一个匹配的内容，剩余的默认捕获不到
+         */
+        // let str = 'zhufeng2018zhufeng2019';
+        // let str1 = 'hellohello';
+        // let reg = /\d+/;
+        // console.log(reg.test(str)); //true
+        // console.log(reg.test(str1)); //false
+        // console.log(reg.exec(str1)); // null
+        // console.log(reg.exec(str)); //["2018", index: 5, input: "hello2018hello2019", groups: undefined]
+
+        // // 正则懒惰性的原因：lastIndex不变
+        // // lastIndex 正则捕获时候，下一次在字符串中开始查找的索引
+        // let str = 'zhufeng2018zhufeng2019';
+        // let reg = /\d+/;
+        // console.log(reg.exec(str)); //=> 2018
+        // console.log(reg.lastIndex); //=> 0 
+        // console.log(reg.exec(str)); //=> 2018
+        // console.log(reg.lastIndex); //=>0
+
+        // // 即使手动修改了lastIndex值 依旧无效
+        // reg.lastIndex = 11;
+        // console.log(reg.lastIndex); //=>0
+
+
+        // // 解决正则懒惰性：加全局修饰符g
+        // let str = 'zhufeng2018zhufeng2019';
+        // let reg = /\d+/g;
+        // console.log(reg.lastIndex); //=> 0
+        // console.log(reg.exec(str)); //=> 2018
+        // console.log(reg.lastIndex); //=> 11
+        // console.log(reg.exec(str)); //=> 2019
+        // console.log(reg.lastIndex); //=>22
+        // console.log(reg.exec(str)); //=> null
+        // console.log(reg.lastIndex); //=>0
+        // console.log(reg.exec(str)); //=> 2018
+
+        // /* 
+        //     编写一个方法：执行一次即可获取
+        //  */
+        // let str = 'zhufeng2018zhufeng2019yangfan2020qihang2021';
+        // let reg = /\d+/g;
+        // RegExp.prototype.myExecAll = function(str){
+        //     // 为了防止出现死循环，我们检测一下正则是否加g，没有加g只把第一次捕获的结果返回即可
+        //     if(!this.global){
+        //         return this.exec(str);
+        //     };
+        //     //this:reg 当前操作的正则
+        //     //执行exec开始捕获,具体捕获多少次不定，但是一直到捕获不到内容（null）为止，期间把捕获到的内容存储到数组中
+        //     let result = [];
+        //     let valAry = this.exec(str);
+        //     while(valAry){ //=>this.lastIndex < str.length
+        //         result.push(valAry[0]); //=>把每次捕获到的结果第一项（具体捕获的内容）存储到容器中 
+        //         valAry = this.exec(str);
+        //     };
+        //     return result;
+        // };
+        // console.log(reg.myExecAll(str));
+
+
+        // let str = 'zhufeng2018zhufeng2019yangfan2020qihang2021';
+        // let reg = /\d+/g;
+        // console.log(str.match(reg));
+        // //字符串方法：match 实现了自己编写的execAll处理的事情，但也要加全局修饰符g，把所有匹配的内容都捕获到，最后统一存储到一个数组中返回
+
+
+        // // 正则捕获出现分组的细节
+        // let str = 'zhufeng{2018}zhufeng{2019}yangfan{2020}qihang{2021}';
+        // let reg = /\{(?:\d+)\}/g; //大括号有特殊含义：{n}出现的次数
+        // console.log(reg.exec(str));
+        // //["{2018}", "2018", ...]
+        // // 在正则捕获时，如果正则中存在分组，捕获的时候不仅把大正则匹配到的字符捕获到（数组第一项），而且把小分组匹配的内容也单独抽取出来（数组中的第二项开始就是小分组捕获的内容） =>'分组捕获'
+        // // /\{(?:\d+)\}/g  => ?:是用来阻止分组捕获内容的 “只匹配不捕获”
+
+        // //match方法的局限性
+        // console.log(str.match(reg)); //=>{2018}", "{2019}", "{2020}", "{2021} match方法也有自己的局限性，在正则设置了g，基于match捕获的内容只有大正则匹配的，小分组的内容没有单独抽取出来
+
+
+    </script>
+</body>
+
+</html>

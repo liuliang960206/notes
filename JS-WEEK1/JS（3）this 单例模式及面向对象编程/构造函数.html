@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 构造函数模式
+        function Fn(){
+
+        };
+        Fn(); //=>普通函数执行
+        var f = new Fn(); //=> Fn是类 f是一个实例
+        var f2 = new Fn(); //=> f2也是Fn的一个实例，f2和f是独立分来的，互不影响
+
+        // 单例模式
+        var obj1 = {}; // obj1是Object的一个实例
+        var obj2 = {}; // obj2是Object的一个实例
+
+        /* 
+            在JS中创建值有两种方式
+            1.字面量表达式
+            2.构造函数模式
+         */
+
+        var obj = {}; //=>字面量表达式
+        var obj = new Object(); //=>构造函数模式
+        // 不管是哪种方式 创造出来的都是Object类的实例，而实例之间是独立分开的，所以 var xxx = {} 这种模式是JS中的单例模式
+
+        // 两种方式创建对象的值 没有区别
+        var obj = {};
+        var obj = new Object{};
+
+
+        // 基本数据类型基于两种不同的模式创建出来的值是不一样的
+        // 基于字面量创建出来的值是基本类型值
+        // 基于构造函数创建出来的值是引用类型
+        var num1 = 12;
+        var num2 = new Number(12); // num2是数字类的实例 num1 也是数字类的实例 它只是JS表达数字的特殊方式之一 都可以数字类提供的属性和方法
+        typeof num1; // "Number"
+        typeof num2; // "Object"
+
+    </script>
+</body>
+</html>

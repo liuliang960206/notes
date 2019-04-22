@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="box" v-for='1'>
+        <div id="box1"></div>
+    </div>
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li id="li">3</li>
+        <li>4</li>
+    </ul>
+    
+    <script>
+        // const div = document.getElementById('box');
+        // const li = document.getElementById('li');
+        const ul = document.getElementById('ul');
+
+        // console.dir(div);
+        // console.dir(div.attributes.nodeType); //undefiened
+        // console.dir(div.attributes);
+        // console.dir(div.attributes[0].nodeType); //2
+        // console.dir(div.attributes[length].nodeType); //2
+
+
+        // console.log(ul.children);
+        // console.log(li);
+        // console.log(li.parentNode);
+        // console.log(li.previousElementSibling);
+        // console.log(li.nextElementSibling);
+
+        let li = document.createElement('li');
+        ul.appendChild(li);
+        let p = document.createElement('p');
+        box.insertBefore(p,box1)
+        
+    </script>
+</body>
+</html>

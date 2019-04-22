@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            编写一个方法fn，实现任意数求平均数（去除数字中的最大和最小，然后再算平均数，保留小数点后面两位）
+
+            arguments: 类数组（不能直接调取数组原型上的方法）
+            1.先给arguments排序（不能使用sort方法），把排序后的值去掉首尾
+            2.把剩下的值求和，除以总长度，求出平均数即可
+        */
+
+        // let fn = function () {
+        //     // // 把内置的slice
+        //     // // 类数组借用数组原型上的方法，实现相关的操作（借用slice实现把类数组转化为数组(3种方法)）
+        //     // let ary = [].slice.call(arguments); //类数组转化为数组
+        //     // let ary = Array.prototype.slice.call(arguments);
+        //     // let ary = [...arguments];
+        //     let ary = Array.from(arguments);
+
+        //     ary.sort(function (a, b) {
+        //         return a - b;
+        //     });
+        //     ary.pop();
+        //     ary.shift();
+        //     let total = eval(ary.join('+'));
+        //     return (total / ary.length).toFixed(2);
+        // };
+        // console.log(fn(10, 9.8, 9.536, 8.76, 8.3, 9.268, 6.61, 8.63));
+
+
+        let fn = function (...ary) { //此处使用剩余运算符 没有参数即全部实参都是剩余参数 使用剩余参数 函数length值为0
+            ary.sort(function (a, b) {
+                return a - b;
+            });
+            ary.pop();
+            ary.shift();
+            let total = eval(ary.join('+'));
+            return (total / ary.length).toFixed(2);
+        };
+        console.log(fn(10, 9.8, 9.536, 8.76, 8.3, 9.268, 6.61, 8.63));
+        console.dir(fn)
+
+
+
+
+        // // 需求:重写数组的slice方法，实现：ary.slice(0)相当于把ary克隆一份新数组
+        // Array.prototype.mySlice = function () {
+        //     let newAry = [];
+        //     for (let i = 0; i < this.length; i++) {
+        //         newAry.push(this[i]);
+        //     };
+        //     return newAry;
+        // }
+        // let ary = [1, 5, 3, 6];
+        // console.log(ary.mySlice()); //=>[1,5,3,6]
+
+
+        // // 如果我们把内置的slice执行，并且让方法中的this指向arguments，就相当于把arg转换为数组
+        // let newAry = [];
+        // for (let i = 0; i < this.length; i++) {
+        //     newAry.push(this[i]);
+        // };
+
+        // let ary = [];
+        // for (let i = 0; i < arguments.length; i++) {
+        //     ary.push(arguments[i]);
+        // };
+
+        // [].sort.call(arguments,function(){
+        //     return a - b;
+        // });
+        // 借用sort给arg排序，除此之外其它的很多数组的方法都可以被arg借用
+
+    </script>
+</body>
+<!--  -->
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // //剩余运算符
+        // function fn(context,...arg){
+        //     // 获取传递值中的第一个和剩下的
+        //     console.log(context,arg); // {} [10,20,30]
+        // };
+        // let obj = {};
+        // fn(obj,10,20,30);
+
+        // function sum(...arg){
+        //     //=>传递几个实参，arg中就存储多少个，此时的arg和arguments是一样的，区别是 arg是一个数组，arguments是一个类数组
+        //     console.log(arg);//[1,2,3,4]
+        // };
+        // sum(1,2,3,4);
+
+
+        // //展开运算符=> 数组 对象 类数组
+        // let ary = [1,2,3];
+        // // Math.max(...ary); //=>Math.max(1,2,3);
+        // let fn = function(a,b,c){
+        //     console.log(a,b,c); //=>1,2,3
+        // };
+        // fn(...ary);
+
+        let obj = {name:'xxx',age:20};
+        let newObj = {...obj,sex:0};
+        console.log(obj); //=>{name: "xxx", age: 20} 
+        console.log(newObj);//=>{name: "xxx", age: 20, sex: 0} 把原有对象展开（克隆）放到新对象中
+
+    </script>
+</body>
+</html>

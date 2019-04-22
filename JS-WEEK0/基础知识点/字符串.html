@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box div{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        let width = 200;
+        let height = 200;
+        let bg = 'lightblue';
+
+        // box.innerHTML = '<div style="width:' + width + 'px;background:'+ bg +';height:'+height+'px;">1</div>';
+
+        box.innerHTML = `<div style="width:${width}px;height:${height}px;background:${bg};"></div>`;
+
+
+        // let num = 10;
+        // console.log(num + '1'); //字符串101
+        //console.log({age:18}+'');"[object Object]10"
+      
+        // let html = '';
+        // for (let i = 0; i < 100; i++) {
+        //     html += '<div>'+(i+1)+'</div>';
+        // }
+        // box.innerHTML = html;
+        
+    </script>
+</body>
+
+</html>

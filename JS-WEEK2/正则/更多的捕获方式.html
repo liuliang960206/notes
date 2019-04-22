@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let str = 'zhufeng2018zhufeng2019';
+        // let reg = /\d+/g;
+        // console.log(reg.test(str)); //true
+        // console.log(reg.lastIndex); //11 基于test进行匹配的时候，如果设置了g，test匹配也相当于捕获，修改了lastIndex的值
+        // console.log(reg.exec(str));//["2019",...]
+        // console.log(str.match(reg));//["2019",...]
+
+
+        // let str = 'zhufeng2018';
+        // let reg = /\d+/g;
+        // console.log(reg.exec(str));//[2018] 把reg.lastIndex值修改了
+        // console.log(reg.exec('zhufeng2018zhufeng2019')); //[2019] 虽然捕获的不是同一个字符串，但是正则是同一个，上一次正则处理的时候修改了它的lastIndex，也会对下一次匹配的字符串产生影响
+
+
+        // // RegExp.$1方式
+        // let str = 'zhufeng2018peixun2019';
+        // let reg = /(\d+)/g;
+        // console.log(reg.test(str)); //true
+        // console.log(RegExp.$1); //2018
+        // // $1是RegExp类的属性
+        // //=> 把上一次匹配（test/exec）到的结果获取到，获取的是第一个小分组匹配的内容，大正则匹配的内容无法获取，他是一个全局的值，浏览器中$1只有一个，其他的正则操作也会覆盖这个值，所以这种方式一般不用
+        // console.log(reg.test(str)); //true
+        // console.log(RegExp.$1); //2019
+        // console.log(reg.test(str));//false
+        // console.log(RegExp.$1); //2019
+        // console.log(reg.test(str));//true
+        // console.log(RegExp.$1); //2018
+
+
+
+        // /* 
+        //     replace：实现正则捕获的方法（本身是字符串替换）
+        //  */
+        //  // 需求：把所有的'zhufeng'替换成'zhufengpeixun'
+        // let str = 'zhufeng2018zhufeng2019'; 
+        // let reg = /(\d+)/g;
+        // str = str.replace('zhufeng','zhufengpeixun'); //一次只能替换一个，第二次还是从索引[0]开始替换
+        // console.log(str); //zhufengpeixun2018zhufeng2019
+
+
+        // // 真实项目中，需要基于正则来替换
+        // let str = 'zhufeng2018zhufeng2019';
+        // str = str.replace(/zhufeng/g,'zhufengpeixun');
+        // console.log(str); //zhufengpeixun2018zhufengpeixun2019
+
+
+        // /* 
+        //     replace原理：
+        //  */
+        // let str = 'zhufeng{val:2018}zhufeng{val:2019}';
+        // reg = /\{val:(\d+)\}/g;
+        // str = str.replace(reg,'#'); // 用reg正则和str字符进行匹配，匹配几次就替换几次，每一次都是当前“大正则”匹配的结果用第二个传递的字符串替换掉了
+        // console.log(str); //zhufeng#zhufeng#
+
+        // str = str.replace(reg,'$1'); // $1不是拿这个字符替换掉大正则匹配的内容，此处的$1代表第一个分组匹配的内容，等价于 RegExp.$1
+        // console.log(str); //zhufeng2018zhufeng2019
+
+        /* 
+            1.reg和str匹配多少次，函数就被触发执行多少次，而且传递了一些参数信息值
+            2.每一次arg存储的信息和执行exec捕获的信息相似（内置原理：每一次正则匹配fe的结果，都把函数执行，然后基于exec把本次匹配的信息捕获到，然后把捕获的信息传递给这个函数）
+            3.每一函数返回的内容是什么，就把当前大正则匹配的内容替换成什么
+         */
+        let str = 'zhufeng{val:2018}zhufeng{val:2019}zhufeng{val:2020}';
+        reg = /\{val:(\d+)\}/g;
+        console.log(reg.exec(str));
+        str = str.replace(reg, () => {
+            return 'AA';
+        });
+        console.log(str);//zhufengAAzhufengAA
+
+    </script>
+</body>
+
+</html>

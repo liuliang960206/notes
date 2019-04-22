@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 柯理化函数
+        function fn() {
+            return function () {
+
+            };
+        };
+        var f = fn();
+
+
+        // 惰性函数
+        var utils = (function () {
+            return {
+
+            }
+        })();
+
+
+        // 闭包项目实战应用
+        //=> 真实项目中为了保证JS的性能（堆栈内存的性能优化），应该尽可能的减少闭包的使用（不销毁的堆栈内存是耗性能的）
+        // 1.闭包具有保护作用，保护私有变量不受外界干扰
+        // 2.闭包具有保存作用，形成不销毁的栈内存，把一些值保存下来，方便后面的调取使用
+        (function () {
+            var n = 12;
+            function fn() {
+
+            };
+            //...
+        })();
+
+
+
+        // //=> JQ代码片段
+        // (function (window) {
+        //     var jQuery = function () {
+        //         //...
+        //     };
+        //     //...
+        //     window.jQuery = window.$ = jQuery; //=> 把需要供外面使用的方法，通过给window设置属性的方式把暴露出去
+        // })(window); 
+
+        // jQuery();
+        // $();
+
+
+        //=> Zepro代码片段
+        //=> 基于return把需要供外面使用的方法把暴露出去
+        var Zepto = (function () {
+            //...
+            return {
+                xxx:function(){
+
+                }
+            };
+        })();
+        Zepto.xxx();
+        //  Zepto是前面的自执行函数的返回值 也就是xxx
+
+
+
+    </script>
+</body>
+
+</html>

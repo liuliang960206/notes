@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            面向对象编程：把具有相同特征的事务抽象出一个类，把描述这个类的属性和方法挂在这个类的原型（prototype）上，这种方式叫做面向对象编程
+            构造函数模式 + 原型模式 = js面向对象模式
+            类：Fn (内置类：Object / Array / Date / RegExp / Function)
+            实例：new xxx()
+            
+        */
+
+        /* 
+            原型{prototype)：
+            1.所有的函数数据类型都有一个prototype的属性，它的属性值是一个对象，浏览器会为他开辟一个堆内存
+            2.在浏览器给prototype开辟的堆内存中有一个自带的属性：constructor,这个属性存储的是当前函数本身
+            3.所有的对象都有一个__proto__的属性，这个属性指向当前所属类的prototype（如果不能确定它是谁的实例，就是基类Object的实例）
+
+            原型链(__proto__)：
+            它是一种基于__proto__的向上查找机制。当我们操作实例上的某个属性或者方法的时候，首先会在自己空间中查找私有属性或方法
+            找到则查找结束，用私有属性即可；如果没查到，则基于__proto__找所属类（即构造函数）的prototype，如果有则用此公有属性，如果没有，继续基于原型上的__proto__向上查找，一直找到基类Object的prototype为止
+            如果Object.prototype上没有此属性，则此属性或方法不存在
+
+            构造函数的原型下的方法只给它的实例化对象使用
+        */
+
+        function Fn(name, age) {
+            let n = '哈哈';
+            this.name = name;
+            this.age = age;
+            this.AA = function(){
+                console.log(1)
+            }
+        };
+        Fn.prototype.m = function () {
+            console.log(2);
+        };
+        Fn.prototype.AA = function(){
+            console.log(3);
+        }
+        Object.prototype.m = function () {
+            console.log(4);
+        };
+        Function.prototype.m = function(){
+            console.log(5)
+        }
+        let f1 = new Fn('Tom','18');
+        let f2 = new Fn('Jerry','18');
+
+        // console.log(f1.n); //undefined
+        console.log(Fn.prototype.m()); //2 ud
+        console.log(new Fn().m()); //2
+        console.log(f1.m()); //2
+
+        console.log(f1.m() === Fn.prototype.m()); //true
+        console.log(typeof Fn.prototype); // 'object'
+        console.log(f1 === f2); // false
+        console.log(f1.__proto__.AA === f2.__proto__.AA); // true
+
+        console.log(f1.__proto__.AA === Fn.prototype.AA); // true 
+        console.log(f1.hasOwnProperty === Fn.prototype.hasOwnProperty); //true
+        f1.BB = '123'; // 给自己设置私有属性 
+        f1.__proto__.CC = '456';// 给原型上设置公有属性（每个实例都可以用这个属性）<=> Fn.prototype.name = '123'
+        console.log(f1.BB);//123
+        console.log(f1.CC);//456
+
+    </script>
+</body>
+
+</html>

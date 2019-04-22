@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: pink;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: .5s
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        const circle = document.getElementById('box');
+        box.onclick = function(){
+           fn();
+        };
+        let num = 0;
+        function fn() {
+            num += 100;
+            box.style.left = num + 'px';
+            setTimeout(() => {
+               fn();
+            }, 1500);
+        };
+
+
+
+        /*
+            递归：函数自己调用自己
+            一个函数里面有相应的运算或者逻辑处理，需要这个处理重复执行
+        */
+
+        // // 1~5的累加求和
+        // total = null;
+        // function fn(n) {
+        //     if (n >= 5) {
+        //         return 5;
+        //     };
+        //     total = n + fn(n + 1);
+        //     return total
+        // }
+        // fn(1);
+        // console.log(total);
+
+
+        // // for循环方案：在1~100以内，获取能被3整除并且能被5整除的数，累加求和
+        // var total = null;
+        // for (var i = 0; i <= 100; i++) {
+        //     if (i % 3 === 0 && i % 5 === 0) {
+        //         // console.log(i)
+        //         total += i;
+        //     }
+        // }
+        // console.log(total)
+
+
+        // // 在1~100以内，获取能被2整除的数，累加求和
+        // function fn(num) {
+        //     if (num < 1) {
+        //         return 0;
+        //     }
+        //     if (num % 2 === 0) {
+        //         return num + fn(num - 1);
+        //     }
+        //     return fn(num - 1);
+        // }
+        // console.log(fn(100));
+
+
+        // //1~100以内 能被3并且能被5整除的数 累加
+        // function fn(num) {
+        //     if (num < 15) {
+        //         return 0;
+        //     }
+        //     if (num % 3 === 0 && num % 5 === 0) {
+        //         return num + fn(num - 1);
+        //     }
+        //     return fn(num - 1);
+        // };
+        // console.log(fn(100));
+
+
+    </script>
+</body>
+
+</html>

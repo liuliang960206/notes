@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            时间字符串格式化
+            "2018/4/30 17:50:23" => "04-30 17:50"
+         */
+
+        // 简单处理
+        // let str = "2018/4/30 17:50:23";
+        // let ary = str.split(/(?:\/| |:)/g)
+        // console.log(ary); //["2018", "4", "30", "17", "50", "23"]
+        // let [,month,day,hours,minutes] = ary;
+        // let result = `${month}-${day} ${hours}:${minutes}`;
+        // console.log(result);
+
+        // /* 
+        //     1.获取时间字符串中的所有数字（split）
+        //     2.指定最后想要的时间格式，我们基于这个数组中的内容，我们基于这个数组中的内容，帮你拼接好即可
+        //  */
+        // let str = "2018/4/30 17:50:23";
+        // let ary = str.match(/\d+/g).map(item => {
+        //     return item < 10 ? '0' + item : item;
+        // }); // map相对于forEach来讲多了返回值，函数中return的是什么，就是把当前数组中迭代的这一项替换成什么
+        // console.log(ary);//["2018", "04", "30", "17", "50", "23"]
+        // let template = '{0}年{1}月{2}日 {3}时{4}分{5}秒';
+        // template = template.replace(/\{(\d)\}/g,(...arg) =>{
+        //     let [, index] = arg; //index：每一次正则匹配小分组捕获的结果
+        //     return ary[index];
+        // });
+        // console.log(template); //2018年04月30日 17时50分23秒
+
+
+
+        //时间字符串格式化
+        String.prototype.myFormatTime = function myFormatTime(template = '{0}年{1}月{2}日 {3}时{4}分{5}秒') {
+            let ary = this.match(/\d+/g).map(item => (item < 10 ? '0' + item : item));
+            return template.replace(/\{(\d)\}/g,(...[,index]) => ary[index] || '00');
+        };
+        let str = "2018/4/30 17:50:23";
+        console.log(str.myFormatTime());
+        console.log(str.myFormatTime('{1}-{2} {3}:{4}'));
+    </script>
+</body>
+
+</html>

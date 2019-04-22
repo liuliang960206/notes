@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // // 堆内存创建和销毁
+        // // 定义一个对象 数组 函数 浏览器都要分配一块堆内存 存储引用类型的数据
+
+        // var obj = xxx1
+        // obj引用这块儿内存
+        // var obj = {
+        //     id: 1
+        // }
+        // xxx1.id
+        // obj.id
+        // // 浏览器的内存也是有限 我尽量避免”内存泄露“（JS中有一些无用变量 占用着内存）
+
+        // // 谷歌浏览器 会检测当前是否 有没被占用内存 将它回收
+
+        // var obj = {
+        //     id: 1
+        // }
+
+        // // 用完释放内存 谷歌浏览器默认会进行回收
+        // obj = null // 空指针对象
+
+        // // 引用计数
+        // var obj1 = { id: 2 } // fff 引用数 1
+        // var obj2 = obj1 // obj2 = fff 引用数 2
+        // obj1 = null // fff 引用数 1
+        // obj2 = null // fff 引用数 0 这块内存可以被回收
+
+        // 堆内存
+        // 创建：定义一个对象 数组 函数 都会创建一个堆内存。 比如 var obj = { id: 1 }
+        // 释放：手工将对象赋值为null。 比如 obj = null
+
+        // // 函数传参的时候 引用类型传递的是引用地址
+        // function add(a) { // a = xxx
+        //     a.n = 20 // xxx.n = 20
+        //     console.log(a === obj) // true
+        // }
+        // var obj = { n: 1 } // obj = xxx
+        // add(obj) // add(xxx)
+        // console.log(obj) // {n: 20}
+
+
+        // // 当函数内部的引用类型被外部（外部变量或属性）占用，不会销毁 
+        // function fe() {
+        //     return { id: 1 }; //return AAAFFF111
+        // };
+        // var obj = fe(); // 执行形成一个不销毁的栈内存，里面定义堆内存，被外部变量占用
+        // fe(); // 形成一个占内存，可以正常销毁
+
+
+
+        // function fe() {
+        //     var n = 0
+        //     return function ff() {
+        //         n++
+        //         console.log(n)
+        //     }
+        // }
+        // var f1 = fe() 
+        // f1() 
+        // f1() 
+        // var f2 = fe() 
+        // f2() 
+
+
+        var i = 1;
+        function fn(i){
+            return function (n) {
+                console.log(n + (++i)); // 6 12 16 8
+            };
+        };
+        var f = fn(2);
+        f(3);
+        fn(5)(6);
+        fn(7)(8);
+        f(4);
+
+
+        // var f = fn(2); //=>先把fn执行（传递实参2），把fn执行的返回结果（return后面的值）赋值给f
+        // f(); //=> 把返回的结果执行
+        // fn(2)(); //=> 和上面两步骤类似，都是把fn执行，把fn执行的返回结果再执行
+
+        //=> 在和其他值进行运算时候有一些区别
+        // i++; => 自身累加1 （先拿原有值进行运算，运算结束后，本身累加1）
+        // ++i; => 自身累加1 (先自身累加1，拿累加后的结果进行运算)
+        // var k = 1;
+        // console.log(5 + k++, k);
+        // var k = 1;
+        // console.log(5 + ++k, k);
+
+        // var k = 1;
+        // console.log(5 + (++k) + (k++) + 4 + (k--) + (++k) + 3 + (--k) + (k++)); // 26
+
+
+    </script>
+</body>
+
+</html>

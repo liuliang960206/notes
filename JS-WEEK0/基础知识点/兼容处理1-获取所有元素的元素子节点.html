@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <dic id="box">
+        <ul>
+            <li>元素1</li>
+            <li>元素2</li>
+            <li>元素3</li>
+            <li>元素4</li>
+        </ul>
+        <div>123</div>
+        <div>456</div>
+    </dic>
+    <script>
+        function fn(curEle) {
+            var childNodes = curEle.childNodes;
+            var newNodes = [];
+            for (var i = 0; i < childNodes.length; i++) {
+                var item = childNodes[i];
+                if (item !== null && item.nodeType === 1) {
+                    newNodes.push(item);
+                }
+            }
+            return newNodes;
+        }
+        var tarEle = document.getElementById('box');
+        console.log(fn(tarEle));
+        var tarEle1 = document.querySelector('#box>ul');
+        console.log(fn(tarEle1));
+    </script>
+</body>
+
+</html>

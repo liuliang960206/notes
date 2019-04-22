@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var a = 12;
+        // var b = 13;
+        // var c = 14;
+        // function fn(a) {
+        //     console.log(a, b, c); 
+        //     var b = c = a = 20;
+        //     console.log(a, b, c);
+        // };
+        // fn(a);
+        // console.log(a, b, c); 
+
+
+        // /* 
+        //     变量提升：
+        //     var a; var b; var c; fn = xxx...
+        //  */
+        // var a = 12;
+        // var b = 13;
+        // var c = 14;
+        // function fn(a){
+        //     /* 
+        //         形参赋值： a = 12
+        //         变量提升： var b;
+        //         => 在私有作用域中，只有以下两种情况是私有变量
+        //         A:声明过的变量（带var或者带function）
+        //         B:形参也是变量
+        //         剩下的都不是自己私有的变量，都需要基于作用域链的机制向上查找
+        //      */
+        //     console.log(a,b,c); //=>12 undefined 14 (c是全局变量，a b 是私有变量)
+        //     var b = c = a = 20;
+        //     console.log(a,b,c); //=>20,20,20 （把全局的a修改为20）
+        // };
+        // fn(a); //=>把fn执行 (实参：值) => 把全局变量a = 12 传递给函数的形参
+        // console.log(a,b,c);  //=> 12,13,20
+        
+
+        var ary = [12, 23];
+        function fn(ary) {
+            console.log(ary) // [12 23]
+            ary[0] = 100;
+            ary = [100];
+            ary[0] = 0;
+            console.log(ary); // [0]
+        };
+        fn(ary);
+        console.log(ary); //[100,23]
+    </script>
+</body>
+
+</html>

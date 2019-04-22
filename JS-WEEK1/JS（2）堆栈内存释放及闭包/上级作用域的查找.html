@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // //=> 当前函数执行，形成一个私有作用域A，A的上级作用域是谁，和他在哪执行的没有关系，和他在哪创建（定义）的有关系，在哪创建的，他的上级作用域就是谁
+        // var a = 12;
+        // function fn(){
+        //     console.log(a); //=>12
+        // };
+
+        // function sum (){
+        //     var a = 120;
+        //     fn();
+        // };
+        // sum();
+
+        
+        // var a = 12;
+        // function fn(){
+        //     //=> arguments 实参集合
+        //     // arguments.callee 当前函数本身
+        //     // arguments.callee.caller：当前函数在哪执行的，caller就是谁；caller记录的是他的宿主环境；在全局下执行caller的结果是null
+        //     console.log(arguments.callee);  //=>fn(){}
+        //     console.log(arguments.callee.caller);  //=>sum(){}
+
+        // };
+        // function sum (){
+        //     var a = 120;
+        //     fn();
+        // };
+        // sum();
+
+
+        var n = 10;
+        function fn(){
+            var n = 20;
+            function f (){
+                n++;
+                console.log(n); //21
+            };
+            f();
+            return f;
+        };
+        var x = fn();
+        x(); // 22
+        x(); // 23
+        console.log(n); // n 10
+
+
+    </script>
+</body>
+</html>

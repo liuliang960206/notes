@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // // 需求一：获取数组中的最大值&最小值
+
+        // /* 
+        //     1.先排序（从小到大）=>sort
+        //  */
+        // const arr = [9, 6, 5, 60, 1, 20, 4, 16];
+        // arr.sort(function (a, b) { //原地排序 不会返回新数组
+        //     return a - b;
+        // });
+        // console.log(arr);
+        // console.log(arr[0]); // 最小值1
+        // console.log(arr[arr.length - 1]); // 最大值60
+
+
+        // /* 
+        //    2.假设循环比较
+        // */
+        // const ary = [9, 6, 5, 60, 1, 20, 4, 16];
+        // let min = ary[0]; // 假设第一个是最小的
+        // let max = ary[0]; // 假设第一个是最大的
+        // for (let i = 1; i < ary.length; i++) {
+        //     let item = ary[i];
+        //     item < min ? min = ary[i] : null;
+        //     item > max ? max = ary[i] : null;
+        // };
+        // console.log(min);
+        // console.log(max);
+
+
+
+        // /* 
+        //     3.Math
+        //     获取一堆数中的最大值&最小值
+        //     我们需要将要比较的数字，要以一个一个实参的形式 传递到Math.max的方法里 才能正常使用
+        //     1) ES6扩展运算符 ...对象
+        //     2) apply 利用apply传参形式（数组或者类数组形式）
+        //        apply让Math.min执行，并且以数组的形式给传参
+        //     3) 数组转换成字符串，再进行字符串拼接
+        //     enel 相当于小型JS解释器：把字符串当做JS代码执行
+        //     数组和字符串拼接的时候 会默认调用自身的toString方法将自己转换成字符串 再拼接
+
+        //  */
+        // console.log(Math.max(9, 6, 5, 60, 1));
+        // console.log(Math.min(9, 6, 5, 60, 1));
+
+        // var ary1 = [9, 6, 5, 60, 1];
+        // console.log(Math.min(ary1)); // NaN
+        // console.log(Math.min(...ary1)); // 1
+        // console.log(Math.max(...ary1)); // 60
+
+        // var ary2 = [9, 6, 5, 60, 1];
+        // console.log(Math.min.apply(null, ary2)); // 1
+        // console.log(Math.max.apply(null, ary2)); // 60
+        // console.log(Math.max.apply(null, [2, 6, 9])); // 9
+
+        // var ary3 = [9, 6, 5, 60, 1];
+        // // var str = ary3.toString(); //'9, 6, 5, 60, 1' 
+        // var str2 = `Math.min(${ary3})`; //=>Math.min(9, 6, 5, 60, 1)
+        // // var str2 = "Math.min("+ary3+")"; //=>Math.min(9, 6, 5, 60, 1)
+        // console.log(eval(str2));
+
+
+        /* 
+            基于apply获取数组中最值
+        */
+        var ary = [9, 6, 5, 60, 1];
+        console.log(Math.max.apply(null,ary));
+        console.log(Math.min.apply(null,ary));
+    </script>
+</body>
+
+</html>

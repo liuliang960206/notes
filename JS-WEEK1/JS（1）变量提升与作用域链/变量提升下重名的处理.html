@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // /* 
+        //     1.带var和function关键字声明相同的名字，这种也算是重名，其实是一个fn，只是存储的值的类型不一样
+        //     2.关于重名的处理：如果名字重复，不会重新声明，但是会重新定义（重新赋值），不管是变量提升还是代码执行阶段皆如此
+        //  */
+        // var fn = 12; //=>window.fn
+        // function fn (){ //=>window.fn = ...
+        // };
+
+
+        /* 
+            变量提升：
+            fn = ...(1)
+               = ...(2)
+               = ...(3)
+               = ...(4)
+            var fn;
+         */
+        fn(); //=>4
+        function fn() { console.log(1); };
+        fn(); //=>4
+        function fn() { console.log(2); };
+        fn(); //=>4
+        var fn = 100; // 带var的在提升阶段只把声明处理了，赋值操作没有处理，所以在代码执行的时候需要完成赋值 fn=100；
+        fn(); //100() 报错
+        function fn() { console.log(3); };
+        fn();
+        function fn() { console.log(4); };
+        fn();
+
+
+        // // 变量提升：var num = undefined
+        // console.log(num); //=>undefined
+        // var num = 100;
+        // var num; //=>此处声明无意义
+        // var num; //=>此处声明无意义
+        // var num; //=>此处声明无意义
+        // console.log(num); //=>100
+        // //=> 对于同一个变量，不会重复声明
+
+
+        // console.log(fe) // fe函数体
+        // var fe = 123 // 代码执行到这一行时，将fe存储的值 修改为123
+        // console.log(fe) // 123
+        // // 代码执行到函数定义部分 直接跳过 因为变量提升时，已经对函数进行了定义
+        // function fe() {
+        //     console.log('fe')
+        // }
+        // console.log(fe) //123
+
+        console.log(foo)
+        foo()
+        function foo() {
+            console.log(111)
+        }
+        foo()
+
+        function foo() {
+            console.log(222)
+        }
+        foo()
+
+        var foo = function () {
+            console.log(333)
+        }
+        foo()
+
+        function foo() {
+            console.log(666)
+        }
+        foo()
+        foo()
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn(curAry) {
+            for (var i = 0; i < curAry.length; i++) {
+                var item = curAry[i];
+                for (var k = i + 1; k < curAry.length; k++) {
+                    item === curAry[k] ? (curAry.splice(k, 1), k--) : null;
+                }
+            }
+            return curAry;
+        }
+        var ary = [2, 2, 3, 3, 2];
+        console.log(fn(ary));
+
+
+
+        // // 两个数组去掉重复的那一项
+        // let arr = [1, 2, 3, 4];
+        // let arr2 = [5, 6, 4, 7];
+
+        // for (let i = 0; i < arr.length; i++) {
+        //     for (let k = 0; k < arr2.length; k++) {
+        //         if (arr2[k] === arr[i]) {
+        //             arr.splice(i, 1);
+        //             arr2.splice(k, 1);
+        //         };
+        //     };
+        // };
+        // console.log(arr);
+        // console.log(arr2);
+    </script>
+</body>
+
+</html>

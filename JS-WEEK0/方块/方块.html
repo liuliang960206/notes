@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: relative;
+        }
+
+        #box div {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: url('1.jpg') 0 0 no-repeat;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+
+    <script>
+        let num = 0;
+        let pic = 1;
+
+        // 设置100个div
+        let html = '';
+        for (let i = 0; i < 10; i++) {
+            for (let k = 0; k < 10; k++) {
+                html += '<div style="left:' + (k * 55) + 'px;top:' + (i * 55) + 'px;"></div>';
+            }
+        }
+        box.innerHTML = html;
+
+        const divs = document.querySelectorAll('#box div');
+
+        function fn() {
+            for (let i = 0; i < divs.length; i++) {
+                let item = divs[i];
+                item.onmouseover = function () {
+                    this.style.backgroundPosition = `-${this.style.left} -${this.style.top}`;
+                    //num累加1 和循环同步
+                    num++;
+                    // 当num>80 换下一张图片（下一张图片pic++）清除图片定位 重新执行当前循环 同时重新计数（num=0）
+                    if (num >= 80) {
+                        num = 0;
+                        pic++;
+                        pic > 3 ? pic = 1 : null;
+                        clearPosition();
+                        fn();
+                    };
+                    this.onmouseover = null;
+                };
+            };
+        };
+        
+        fn();
+
+        function clearPosition() {
+            for (let i = 0; i < divs.length; i++) {
+                let item = divs[i];
+                // item.style.backgroundPosition = '0 0';
+                item.style.background = `url('${pic}.jpg') 0 0 no-repeat`
+            };
+        };
+
+
+    </script>
+</body>
+
+</html>

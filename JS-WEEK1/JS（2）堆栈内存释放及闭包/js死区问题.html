@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a = 12;
+        if(true){
+            //暂时性死区
+            // 这个变量a 已经被let绑定在这个作用域中
+            console.log(a); //=>报错 a is not defined
+            let a = 13;
+        };
+    </script>
+</body>
+</html>

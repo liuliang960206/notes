@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Singleton Pattern</title>
+</head>
+
+<body>
+    <script>
+        // var obj = {
+        //     xxx: 'xxx'
+        // }
+
+        // 单例模式
+        // 定义：通过将描述一个事物的属性/特性包装到一个对象中。这种创建对象的方式称为单例模式模式；
+        // 优点：解决了全局变量互相影响覆盖的问题。因为person1和person2代表两个不同的堆内存空间，person1和person2 称为命名空间
+
+        // 高级单例模式：高级单例模式不再是直接将一个对象赋值给命名空间，而是先执行一个自执行函数，在函数执行结束时返回一个对象；
+        // 特点：我们可以在自执行函数的作用域声明我们需要的方法或者属性，我们只导出外界需要的方法或者属性，利用类函数的【惰性封装】思想
+
+
+        // 高级单例模式
+        var phone = (function () {
+            function call() {
+                console.log('打电话');
+            }
+            function msg() {
+                console.log('发短信');
+            }
+            var brand = 'MI';
+            var jidai = '基带';
+            return {
+                call: call,
+                msg: msg,
+                brand: brand
+            }
+        })();
+
+
+
+        var n = 2;
+        var obj = {
+            n: 3,
+            fn: (function (n) {
+                n *= 2;
+                this.n += 2;
+                var n = 5;
+                return function (m) {
+                    this.n *= 2;
+                    console.log(m + (++n));
+                }
+            })(n) //=> obj.n 会报错
+        };
+        var fn = obj.fn;
+        fn(3); //9
+        obj.fn(3); //10
+        console.log(n, obj.n); //8 6 
+
+
+    </script>
+</body>
+
+</html>

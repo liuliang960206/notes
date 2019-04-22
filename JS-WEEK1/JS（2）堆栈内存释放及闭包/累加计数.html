@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">0</button>
+    <script>
+        /* 
+            累加计数.方案一
+            利用不销毁的全局作用域
+            实现累加计数的两个条件
+            1.累加变量定义在事件函数的上级作用域中
+            2.这个上级作用域是一个不销毁的栈内存
+         */
+        const btn = document.getElementById('btn');
+        let count = 0; //每次点击时 自身累加1
+        btn.onclick = function () {
+            count++; 
+            console.log(count);
+        }
+
+
+        /* 
+            累加计数.方案二
+            自定义一个不销毁的栈内存
+         */
+
+        // 写法一
+        function fn() {
+            let count = 0; 
+            btn.onclick = function () {
+                count++;  
+                console.log(count);
+            };
+        };
+        fn();
+        fn();
+
+
+        // 写法二 利用自执行函数
+        btn.onclick = (function () {
+            let count = 0;
+            return function f() {
+                count++;
+                console.log(count);
+            };
+        })();
+
+
+        // 写法三 利用return 
+        // 在一个函数返回一个子函数 称之为闭包
+        function fn() {
+            let count = 0;
+            return function f() { // 闭包函数
+                count++;
+                console.log(count);
+            };
+        };
+        btn.onclick = fn();
+
+
+        /* 
+            累加计数.方案三
+            块级作用域
+        */
+        {
+            let count = 0;
+            btn.onclick = function f() {
+                count++;
+                console.log(count);
+            };
+        };
+         
+
+    </script>
+</body>
+
+</html>
