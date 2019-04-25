@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            for in: 循环对象可枚举的属性（包括私有属性和公有属性，及原型上的属性）
+         */
+        let obj = {
+            zdy: 'Tom',
+            id:13,
+        };
+        obj.length = 3
+        console.log(obj)
+        Object.prototype.say = function(){
+            console.log(1)
+        }
+        for(let attr in obj){
+            // 如果attr是obj的私有属性为true，就执行
+            if(obj.hasOwnProperty(attr)){
+                console.log(obj[attr])
+            }
+        }
+    </script>
+
+</body>
+
+</html>

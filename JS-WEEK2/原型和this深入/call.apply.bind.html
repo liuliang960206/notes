@@ -16,7 +16,8 @@
             2.在严格模式下，第一个参数是谁，this就指向谁（包括null和undefined），不传this就是undefined
         */
 
-        "use strict"
+
+        //非严格模式
         let fn = function (a, b) {
             console.log(this, a, b);
         };
@@ -24,13 +25,27 @@
             name: 'obj'
         };
         fn.call(obj, 10, 20);  // this:{...} a:10 b:20
-        fn.call(10, 20); // this:{10} a+b => NaN
-        fn.call(); // this:window  a,b都是undefined
+        fn.call(10, 20); // this:{10} a:20 b:undefined
+        fn.call(); // this:window a,b都是undefined
         fn.call(null); // this:window  a,b都是undefined
         fn.call(undefined); // this:window  a,b都是undefined
 
 
-        /* 
+        // "use strict" //严格模式
+        // let fn = function (a, b) {
+        //     console.log(this, a, b);
+        // };
+        // let obj = {
+        //     name: 'obj'
+        // };
+        // fn.call(obj, 10, 20);  // this:{...} a:10 b:20
+        // fn.call(10, 20); // this:{10} a:20 b:undefined
+        // fn.call(); // this:undefined  a,b都是undefined
+        // fn.call(null); // this:null  a,b都是undefined
+        // fn.call(undefined); // this:undefined  a,b都是undefined
+
+
+        /*
             apply：和call基本一模一样，只有一个区别：传参方式
             fn.call(obj,10,20)
             fn.apply(obj,[10,20])
@@ -38,13 +53,13 @@
         */
 
 
-        /* 
+        /*
             bind:语法和call一模一样，唯一的区别在于立即执行还是等待执行
             fn.call(obj,10,20); //=> 改变fn中的this，并且把fn立即执行
             fn.bind(obj,10,20); //=> 改变fn中的this，但是此时的fn并没有执行（不兼容IE6~8)
         */
 
-        
+
 
 
     </script>

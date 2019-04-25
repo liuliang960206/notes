@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            包装对象:
+            对象是 JavaScript 语言最主要的数据类型，三种原始类型的值——数值、字符串、布尔值——在一定条件下，也会自动转为对象，也就是原始类型的“包装对象”（wrapper）。
+
+            所谓“包装对象”，指的是与数值、字符串、布尔值分别相对应的Number、String、Boolean三个原生对象。这三个原生对象可以把原始类型的值变成（包装成）对象。   
+        */
+
+        // let obj = {};
+        // obj.num = 0;
+        // obj.num++;
+        // console.log(obj.num); //1
+
+        // let str = '1234567';
+        // str.num = 0;
+        // str.num++;
+        // console.log(str.length);
+        // console.log(str.substr(2)); // 34567
+        // console.log(str.num); //undefined 简单类型不能添加属性或方法
+
+        // //如果用构造函数方式写字符串 不能改变长度但可以加属性或者方法
+        // let str2 = new String('1234567'); 
+        // console.log(typeof str2); //object => 实例
+        // str2.length = 1;
+        // console.dir(str2.length);  //7 没有改变原字符串长度，不能写的
+        // str2.num = 10;
+        // console.log(str2.num); // 10
+
+
+        let num = new Number(123); 
+        let str = new String('haha'); 
+        let bol = new Boolean(true); 
+
+        console.log(num); //Number {123}
+        console.log(str); //String {"haha"}
+        console.log(bol); //Boolean {true}
+
+        // 用构造函数创建的值是对象，而用字面量表达式创建的值是普通类型的值
+        console.log(num === 123); //false
+        console.log(str === 'haha'); //false
+        console.log(bol === true); //false
+        
+
+        
+    </script>
+</body>
+
+</html>

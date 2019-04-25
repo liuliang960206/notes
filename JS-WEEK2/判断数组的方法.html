@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            如何判断一个变量为数组？
+            Array.isArray(arr) -> true
+            arr instanceof Array -> true
+            Object.prototype.toString.call(arr) === '[object Array]'
+        */
+
+        // [1,2,3] -> '1,2,3'
+        // 1 -> '1'
+        // {} -> '[object Object]'
+        // -> [object String]
+
+        // Object.prototype.toString.call(arr)
+        // 每个数据类型都有自己的toString方法
+        // 每个toString方法都不一样
+        // 正好Object的toString方法能够显示当前的数据类型
+        // Object.prototype.toString = function(){
+        //     this 处理Object
+        //     return 结果
+        // }
+        // Object.prototype.toString.call(arr) 
+        // '[object Array]'
+
+
+        // let ary = [9, 56, 65, 2, 5, 7, 7, 65];
+        // let obj = {
+        //     name: 1
+        // };
+        // console.log(obj === { ...obj });
+        // console.log({ ...obj });
+        // console.log([...new Set(ary)]);
+        // console.log(ary.sort((a, b) => a - b)[ary.length - 1])
+
+
+        let ary = [9, 56, 65, 2, 5, 7, 7, 65];
+        let min = -Infinity; //负无穷大
+        ary.forEach(item=>{
+            if(item > min){
+                min = item;
+            } 
+        });
+        console.log(min);
+        console.log(Math.max.apply(null,ary));
+        console.log(Math.max(...ary));
+        console.log(...ary);
+
+
+    </script>
+</body>
+
+</html>

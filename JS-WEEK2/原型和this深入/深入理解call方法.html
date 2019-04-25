@@ -19,12 +19,11 @@
             name: 'obj',
             fn: fn
         };
-        // fn();//=>'珠峰'
-        // obj.fn(); //=>'obj'
+        // fn();//=>this:'珠峰'
+        // obj.fn(); //=>this:'obj'
         let oo = { name: "O1O" };
-        fn.call(oo); //this=> O1O
-        fn.call(obj); // this => obj
-
+        fn.call(oo); //this=> O1O 此处改变了fn的this，即oo.name 为O1O
+        fn.call(obj); //this => obj 此处改变了fn的this，即obj.name 为obj
 
 
         // 内置call的原理

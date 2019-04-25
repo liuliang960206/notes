@@ -1,40 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
+    <button id="btn">点击</button>
+    <div id="box"></div>
     <script>
-        // 日期方法
-        var time = new Date(); 
-        console.log(time);
-        console.log(time.getFullYear());
-        console.log(time.getMonth());
-        console.log(time.getDate());
-        console.log(time.getDay());
-        console.log(time.getHours());
-        console.log(time.getMinutes());
-        console.log(time.getSeconds());
-        console.log(time.getMilliseconds());
-        console.log(time.getTime());
-        var time2 = time.getTime('2019/03/21 13:33:00');
-        console.log(time2);
+        // // 日期方法
+        // var time = new Date(); 
+        // console.log(time);
+        // console.log(time.getFullYear());
+        // console.log(time.getMonth());
+        // console.log(time.getDate());
+        // console.log(time.getDay());
+        // console.log(time.getHours());
+        // console.log(time.getMinutes());
+        // console.log(time.getSeconds());
+        // console.log(time.getMilliseconds());
+        // console.log(time.getTime());
+        // var time2 = time.getTime('2019/03/21 13:33:00');
+        // console.log(time2);
 
-        //定时器
-        var timer = setTimeout(function(){
-            alert('hahaha');
-        },1000);
-        clearInterval(timer);
-        var timer2 = setInterval(function(){
-            alert('111')
-        },2000);
-        clearInterval(timer2);
+        // //定时器
+        // var timer = setTimeout(function(){
+        //     alert('hahaha');
+        // },1000);
+        // clearInterval(timer);
+        // var timer2 = setInterval(function(){
+        //     alert('111')
+        // },2000);
+        // clearInterval(timer2);
 
+        let ary = ['上', '下', '左', '右', '前', '后'];
+        let num = 0;
+        let timer = null;
+        // let onOff = false;
+        btn.onclick = function () {
+            clearInterval(timer); //第一种清除定时器的方法
+            // if(onOff)return; //第二种清除定时器的方法
+            // onOff = true;
+            timer = setInterval(() => {
+                box.innerHTML = ary[num];
+                num++;
+                num > ary.length - 1 ? num = 0 : null;
+            },500);
+        };
 
-        
     </script>
 </body>
+
 </html>
