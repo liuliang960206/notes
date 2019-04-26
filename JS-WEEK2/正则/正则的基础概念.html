@@ -10,29 +10,24 @@
 
 <body>
     <script>
+        /* 
+            创建正则的两种方式
+        */
         // let reg = /^\d+$/g; //字面量方式
-        // let reg2 = new RegExp("^\\d+$", "g"); //构造函数方式
+        // let reg2 = new RegExp('^\\d+$', 'g'); //构造函数方式
 
-        //test() 方法用于检测一个字符串是否匹配某个模式.
+        
+        //test() 方法用于检测一个字符串是否匹配正则.
         // let reg = /^.$/;
         // console.log(reg.test('n')); //true
         // console.log(reg.test('1')); //true
         // console.log(reg.test('\n')); //false
         // console.log(reg.test('nn')); //false 只能是一位
 
-        // let reg = /^[.]+$/; //在这里只是小数点
-        // console.log(reg.test('n')); //false
-        // console.log(reg.test('1')); //false
-        // console.log(reg.test('\n')); //false
-        // console.log(reg.test('nn')); //false
-        // console.log(reg.test('.')); //true
 
-        // let reg = /^[\d]+$/;  //在这里依然是0-9之间的任意数字
-        // console.log(reg.test('23')); //true
-        // console.log(reg.test('lks')); //false
-
-
-
+        /* 
+            加^$和不加^$的区别
+        */
         // let reg = /\d+/; //=> 不加^和$，代表字符传中只要包含xxx即可
         // console.log(reg.test('kl55ijs56k')); //true 包含0-9之间的任意数字
 
@@ -41,9 +36,11 @@
         // console.log(reg1.test('5222')); //true
 
 
-
+        /* 
+            量词元字符：
+        */
         // let reg = /\d+/; 
-        // console.log(reg.test('')); //false +可以出现0到多次,但是不能一次都不出现
+        // console.log(reg.test('')); //false +可以出现1到多次,但是不能一次都不出现
         // console.log(reg.test('2')); //true
 
         // let reg = /\d*/; 
@@ -107,54 +104,7 @@
 
 
 
-        /* 
-            关于中括号的特殊细节：
-        */
-
-        // let reg = /^[2-5]$/; 
-        // console.log(reg.test('2')); //true
-        // console.log(reg.test('8')); //false
-        // console.log(reg.test('5')); //true
-
-        // let reg = /^[18]$/; //只能是1或者8
-        // console.log(reg.test('1')); //true
-        // console.log(reg.test('8')); //true
-        // console.log(reg.test('18')); //false
-
-        // let reg1 = /[18]/; //包含1或者8就可以
-        // console.log(reg1.test('1')); //true
-        // console.log(reg1.test('8')); //true
-        // console.log(reg1.test('18')); //false
-        // console.log(reg1.test('958524')); //false
-
-
-        // let reg = /^[13-56]$/;  // 不是13~56  而是1或者3~5或者6
-        // console.log(reg.test('1')); //true
-        // console.log(reg.test('8')); //true
-        // console.log(reg.test('6')); //false
-
-        // /* 
-        //     匹配18-65之间的方法：
-        //     18-19 1[89]
-        //     20-59 [2-5]\d
-        //     60-65 6[0-5]
-        // */
-        // let reg = /^((1[89])|([2-5]\d)|(6[0-5]))$/; 
-        // console.log(reg.test('19')); //true
-
-        /* 
-            需求：编写一个规则，匹配"[object AAA]"
-        */
-        let reg = /^\[object .+\]$/;
-        console.log(reg.test('[object ABVC]')); //true
-        console.log(reg.exec('[object ABVC]')); //true
-
-        // let reg1 = /^(12|13|14)$/;
-        let reg1 = /^(12|13|14)$/;
-        // let reg1 = /^1[2-4]$/;
-        console.log(reg1.test('12')); 
-        console.log(reg1.test('13')); 
-        console.log(reg1.test('1213111')); 
+       
     </script>
 </body>
 

@@ -72,13 +72,26 @@
             2.每一次arg存储的信息和执行exec捕获的信息相似（内置原理：每一次正则匹配fe的结果，都把函数执行，然后基于exec把本次匹配的信息捕获到，然后把捕获的信息传递给这个函数）
             3.每一函数返回的内容是什么，就把当前大正则匹配的内容替换成什么
          */
-        let str = 'zhufeng{val:2018}zhufeng{val:2019}zhufeng{val:2020}';
-        reg = /\{val:(\d+)\}/g;
-        console.log(reg.exec(str));
-        str = str.replace(reg, () => {
-            return 'AA';
-        });
-        console.log(str);//zhufengAAzhufengAA
+        // let str = 'zhufeng{val:2018}zhufeng{val:2019}zhufeng{val:2020}';
+        // reg = /\{val:(\d+)\}/g;
+        // console.log(reg.exec(str));
+        // str = str.replace(reg, () => {
+        //     return 'AA';
+        // });
+        // console.log(str);//zhufengAAzhufengAA
+
+        
+        // 用*替换指定字
+        let str = '为人民服务，为人民奋斗,为人民努力' 
+        let s = str.replace(/服务|奋斗|努力/g,function($0,$1){
+            let temp = '';
+            for (let i = 0; i < $0.length; i++) {
+                temp += '*';
+            };
+            console.log($0); //服务 奋斗 努力
+            return temp
+        })  
+        console.log(s); // 为人民**，为人民**,为人民**
 
     </script>
 </body>

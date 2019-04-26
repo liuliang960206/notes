@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         // let reg = /^12|14$/; // 12或者14或者以12开头或者以14结尾的都可以
@@ -20,7 +22,9 @@
         // console.log(reg.test('12dsjjkn14'));//true
 
 
-
+        /*
+            改变默认优先级(提权)
+        */
         // let reg = /^(12|14)$/; // 分组改变默认优先级
         // console.log(reg.test('12')); //true
         // console.log(reg.test('14'));//true
@@ -32,21 +36,84 @@
         // console.log(reg.test('+kj14'));//false
         // console.log(reg.test('12dsjjkn14'));//false
 
+        /* 
+            关于replace的两个参数：
+            - 第1个参数`$0` 大正则捕获的内容
+            - 第2~n个参数`$1` 
+                - 1.如果没有小括号则从第二个参数开始依次为：`index`(正则捕获的起始索引)、`input`(原始操作的字符串)、`groups`(undefined)
+                - 2.如果有小括号提权，则从第一个参数开始依次为第一个小括号匹配的内容，第二个小括号匹配的内容...以此类推，直到所有的小括号匹配完毕，之后的参数依次为index（正则捕获的起始索引），input（原始操作的字符串），groups（undefined）
+            - 多个小括号嵌套的情况: `/((\d+)\D+(\d+))\D+(\d+)\D+/`
+                - 从左向右，第一个外层小括号为第一个，第一个外层小括号内的第一个小括号为第二个，第一个外层小括号内的第二个小括号为第三个，第二个外层小括号为第四个，以此类推
+        */
+
+        // let str = '2018---4//---/26//';
+        // let reg = /(\d+)\D+(\d+)\D+(\d+)\D+/
+        // let s = str.replace(reg,function($0,$1,$2,$3){
+        //     console.log($0); //2018---4//---/26//
+        //     console.log($1); //2018
+        //     console.log($2); //4
+        //     console.log($3); //26
+        //     return `${$1}年${$2}月${$3}日`
+        // });
+        // console.log(s); //2018年4月26日
+
+        // let str = '2018---4//---/26//2018---4//---/26//';
+        // let reg = /(\d+)\D+(\d+)\D+(\d+)\D+/g
+        // let s = str.replace(reg,function($0,$1,$2,$3){
+        //     console.log($0); //2018---4//---/26//
+        //     // console.log($1); //2018
+        //     // console.log($2); //4
+        //     // console.log($3); //26
+        //     return `${$1}年${$2}月${$3}日`
+        // });
+        // // console.log(s); //2018年4月26日
+
 
         // //分组引用
         // let reg = /^([a-z])([a-z])\2\1$/;//正则中出现的\1代表和第一个分组出现一模一样的内容
         // console.log(reg.test('oppo')); //true
         // console.log(reg.test('poop')); //true
 
+        /* 
+            编写一个方法：判断字符串中那个数字最多，出现多少次
+        */
+        let str = '437826357384623537463363726573384633278467382';
+        let min = -Infinity; //定义一个负无穷大的数
+        str = str.split('').sort().join('');
+        // 把乱序字符串用空字符串分割成数组，排序数组，再转成字符串，此时字符串为 '222223333333333333444445556666666777777788888'
+        /* 
+            \d 1个数字 
+            \d\1 2个一样的数字
+            \d\1+ 2个到多个一样的数字
+            /(\d)\1+/g 没找到2个以上一样的数字，函数就执行一次
+        */
+        str.replace(/(\d)\1+/g, function ($0, $1) {
+            // console.log($0); //22222  3333333333333  44444  555  6666666  7777777  88888
+            // console.log($1); // 2 3 4 5 6 7 8
+            if (min < $0.length) {
+                min = $0.length;
+                let index = $1
+            };
+        })
+        console.log(min, index); // 13 "3"
 
-        //分组捕获
-        //编写一个正则匹配身份证号码
-        let reg = /^(\d{6})(\d{4})(\d{2})(\d{2})\d{2}(\d)(?:\d|X)$/;
-        console.log(reg.exec('220802199603241523'));
-        //["220802199603241523", "220802", "1996", "03", "24", "2", "3", index: 0, input: "220802199603241523", groups: undefined]
-        
+
+        // //分组捕获
+        // let str = '201965641654';
+        // let reg = /(\d)+/;
+        // console.log(str.match(reg)); 
+        // //  ["2019", "9", index: 0, input: "2019", groups: undefined] 
+        // // 不仅把大正则的信息捕获到，子项的信息也捕获到
+        // //注意：子项如果包了一个规则，在规则之后有量词，那么结果为最后一个
+
+        // //编写一个正则匹配身份证号码
+        // let reg = /^(\d{6})(\d{4})(\d{2})(\d{2})\d{2}(\d)(?:\d|X)$/;
+        // console.log(reg.exec('220802199603241523'));
+        // //["220802199603241523", "220802", "1996", "03", "24", "2", "3", index: 0, input: "220802199603241523", groups: undefined]
+
 
 
     </script>
 </body>
+
 </html>
