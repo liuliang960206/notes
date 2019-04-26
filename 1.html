@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>运营</h1>
+        <input type="text" id="t1" />
+        <button id="btn">添加</button>
+        <ul id="ul">
+            <li>卧槽</li>
+        </ul>
+    </div>
+    <div>
+        <h1>自己</h1>
+        <input type="text" id="t1" />
+        <button>发送</button>
+        <ul id="ul">
+            <li>123</li>
+        </ul>
+    </div>
+
+    <script>
+        let sql = ['艹','尼玛','卧槽','垃圾','菜鸡','傻X']
+        console.log(sql.join('|'))
+        new RegExp('')
+
+        btn.onclick = function(){
+            let v1 = t1.value
+            if(v1){
+                //如果原数组没有要添加的词
+                if(!sql.some(item=>item === v1)){
+                    sql.push(v1);
+                }  
+            }
+        }
+        function render(arr){
+            let html = '';
+            arr.forEach(item => item
+        }
+
+
+
+
+
+        // let str = '为人民服务，为人民奋斗,为人民努力' 
+        // let s = str.replace(/服务|奋斗|努力/g,function($0,$1){
+        //     let temp = '';
+        //     for (let i = 0; i < $0.length; i++) {
+        //         temp += '*';
+        //     };
+        //     console.log($0)
+        //     console.log($0.length)
+        //     // console.log($0);
+        //     // console.log($1);
+        //     return temp
+        // })  
+        // console.log(s) 
+    </script>
+</body>
+
+</html>

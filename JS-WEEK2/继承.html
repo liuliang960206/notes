@@ -217,7 +217,7 @@
             A.call(this);
             this.age = 18
         }
-        B.prototype = deepClone(A.prototype);
+        B.prototype = deepClone(A.prototype); //将父类的原型上的属性和方法克隆一份 复制地址给子类
         let f = new B();
         console.log(f);
 
@@ -227,14 +227,16 @@
             let o = obj.push ? [] : {};
             //循环传进来的对象
             for (let attr in obj) {
-                // for(let i=0;i<arr.length;i++){
+                //检测对象中各项是否为该对象的私有属性，true则执行下面的代码
                 //判断对象中的某个值是否为引用类型
                 //如果是，就继续调用deepClone把引用值传到函数中
-                if (typeof obj[attr] === 'object') {
-                    o[attr] = deepClone(obj[attr])
-                } else {
-                    //如果是简单类型就直接赋值
-                    o[attr] = obj[attr];
+                if (obj.hasOwnProperty(attr)) {
+                    if (typeof obj[attr] === 'object') {
+                        o[attr] = deepClone(obj[attr])
+                    } else {
+                        //如果是简单类型就直接赋值
+                        o[attr] = obj[attr];
+                    }
                 }
             }
             return o;
@@ -242,7 +244,7 @@
 
 
 
-        
+
     </script>
 </body>
 

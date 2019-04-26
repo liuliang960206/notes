@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Fn { //Fn是类名，没有小括号
+            constructor(n, m) {
+                // super();
+                //=> 等价于传统ES5中类的构造体
+                this.x = n;
+                this.y = m;
+            }
+            //=> 给Fn的原型上设置方法(只能设置方法不能设置属性)
+            getX() {
+                console.log(this.x);
+            }
+            //设置静态方法：把Fn当做一个普通对象设置的私有方法（和实例没有关系），同样也只能设置方法不能写属性
+            static AA() {
+                console.log(3)
+            }
+        }
+        let f = new Fn(10, 20);
+        console.log(f.x); //10
+        f.getX(); //10
+        Fn.AA(); //3    
+    </script>
+</body>
+
+</html>
