@@ -16,11 +16,10 @@
         // console.log(reg.exec(str));
         // console.log(str.match(reg));
 
-        // //电话（手机）号码正则 1) 11位数字 2)以1开头
-        // // let reg = /^1\d{10}$/;
-        // let reg = /^1(?:87|59|86)\d{8}$/;
-        // let str = '18704366271';
-        // console.log(str.match(reg));
+        // //电话（手机）号码正则 1) 11位数字 2)以1开头 3)第二位：3456789
+        // //手机 1开头 第二位：3456789  剩下9
+        // let reg1 = /^1[3456789]\d{9}$/;
+        // console.log(reg1.test('18704366271'));
 
 
         // let str = 'zhufeng{2018}zhufeng{2019}zhufeng{2020}' ;
@@ -43,10 +42,15 @@
 
 
 
-        // 邮箱 1)数字、字母、下划线、- . 但是-和.不能作为开头，不能连续出现-或者. 2) @后面（域名）：xxx.xx.xx  xxx.xx  xxx.xx.xx.xx  xxx-xxx-xx.xx.xx
-        let reg = /^\w+((.|-)\w)*@[A-Za-z\d]+((-|\.)[A-Za-z0-9]+)?(\.[A-Za-z0-9]+)?$/
-        console.log(reg.test('zhufeng_peixun@zhufeng.com')); //true
-        console.log(reg.exec('zhufengpeixun@zhufeng.com.cn'));
+        // // 邮箱 1)数字、字母、下划线、- . 但是-和.不能作为开头，不能连续出现-或者. 2) @后面（域名）：xxx.xx.xx  xxx.xx  xxx.xx.xx.xx  xxx-xxx-xx.xx.xx
+        // let reg = /^\w+((.|-)\w)*@[A-Za-z\d]+((-|\.)[A-Za-z0-9]+)?(\.[A-Za-z0-9]+)?$/
+        // console.log(reg.test('zhufeng_peixun@zhufeng.com')); //true
+        // console.log(reg.exec('zhufengpeixun@zhufeng.com.cn'));
+
+
+        //身份证号 前六位省市区 年1800-1899 1900-1999 2000-2019    月[01-12]  01-09 10-12  日 01-31： 01-09 10-29 30-31 
+        let reg2 = /^\d{6}((18\d\d)|(19\d\d)|(20[01]\d))(0[1-9]|1[12])(0[1-9]|[12]\d|3[01])\d{3}[\dxX]$/;
+        console.log(reg2.test('220802199603241523'));
 
 
     </script>

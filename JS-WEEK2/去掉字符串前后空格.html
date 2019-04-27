@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //方案一： 获取'a  b'，去掉前后空格
+        // let str = '           a  b       ';
+        // //第一个for循环去掉了a前面的空格
+        // for (var i = 0; i < str.length; i++) {
+        //     if (str[i] !== ' ') {
+        //         //如果循环到字符串中各项不是空格，就强制停止整个循环
+        //         break;
+        //     }
+        // }
+        // str = str.substring(i);//此时 str用var i为全局变量
+        // //第二个for循环去掉了b后面的空格
+        // for (var k = str.length - 1; k > 0; k--) {
+        //     //从最后一位开始找，如果不是空格，就截取第一项到索引那项
+        //     if (str[k] !== ' ') {
+        //         str = str.substring(0, k + 1);
+        //         break;
+        //     }
+        // }
+        // console.log(str); //a  b  去掉了前后空格
+
+
+        // //方案二： 获取'a  b'，去掉前后空格
+        // let str = '           a  b       ';
+        // str = str.trim(); //字符串方法：去掉字符串前后空格
+        // console.log(str); //a  b  去掉了前后空格
+
+
+        //方案三： 获取'a  b'，去掉前后空格
+        let str = '           a  b       ';
+        let reg = /^\s+|\s+$/g; //以空格开头或者以空格结尾
+        console.log(str.replace(reg, ''));
+
+
+    </script>
+</body>
+
+</html>
