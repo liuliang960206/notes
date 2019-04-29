@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .li{
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul">
+        <li class="li">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li class="li li1">4</li>
+    </ul>
+    <script>
+        //手动写一个getElementsByClassNme(利用边界符)
+        function getClassName(liId) {
+            //获取所有的元素（TagName），循环所有获取到的元素，如果有哪个元素的className符合正则，就把这个元素push到空数组里面。
+            var eles = document.getElementsByTagName('*');
+            var ary = [];
+            for (let i = 0; i < eles.length; i++) {
+                //正则规则：匹配 边界符id边界符
+                let reg = new RegExp('\\b' + liId + '\\b');
+                if (reg.test(eles[i].className)) {
+                    ary.push(eles[i]);
+                };
+            };
+            return ary
+        };
+        let lis = getClassName('li');
+        
+
+    </script>
+</body>
+
+</html>
