@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #outer {
+            margin: 50px auto;
+            padding: 20px;
+            width: 260px;
+            height: 260px;
+            border: 10px solid red;
+            font-size: 18px;
+            /* overflow: hidden; */
+        }
+
+        #inner {
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            border: 10px solid green;
+        }
+
+        #center {
+            width: 180px;
+            height: 180px;
+            border: 10px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <!-- <div id="inner">
+            <div id='center'></div>
+        </div> -->
+        南都讯 记者夏嘉雯 4月29日，广州市人力资源和社会保障局在市政府定期新闻发布会上重点通报了人才落户、就业创业、社保工作等工作的开展情况。南都讯 记者夏嘉雯
+        4月29日，广州市人力资源和社会保障局在市政府定期新闻发布会上重点通报了人才落户、就业创业、社保工作等工作的开展情况。记者从会上获悉，《广州市引进人才入户管理办法实施细则》（以下简称“新政”），进一步放宽了对全日制本科学历、研究生学历人才以及专业技术资格人才入户的年龄限制，对应原来的要求大幅放宽5年，并首次明确了可以通过对薪酬、投资、社会贡献等市场化手段评价并引进创新创业人才。
+    </div>
+    <script>
+        //clientWidth & clientHeight :获取当前元素可视区的宽高（内容的宽高+左右/上下padding）
+        //clientTop & clientLeft :获取上/左边框的宽度
+        // 内容和是否有溢出无关（和是否设置了overflow: hidden无关，就是我们自己及设定的内容的宽高padding
+        // 获取当前元素一屏内（可视区域）的宽度和高度
+        // document.documentElement.clientWidth || document.body.clientWidth 
+        // document.documentElement.clientWidth || document.body.clientHeight
+
+
+        // offsetWidth & offsetHeight: 内容的宽高+左右/上下padding+左右/上下border（和内容是否溢出无关）
+
+
+        // scrollWidth & scrollHeight: 真实内容的宽高+左/上padding
+        //是一个约等于的值，在不同浏览器当中，或者是否设置overflow: hidden，都对结果有影响，所以这个值只做参考
+        //不一定是自己设定的值，因为可能会存在内容溢出，如果有内容溢出，需要把溢出的部分算上，如果没有内容溢出，和client一样
+        // 获取当前页面的真实宽高，包含溢出部分
+        // document.documentElement.scrollWidth || document.body.scrollWidth
+        // document.documentElement.scrollHeight || document.body.scrollHeight
+
+
+        /*
+            通过JS盒模型属性获取值的特点:
+            1.获取的都是数字，不带单位
+            2.获取的都是整数，不会出现小数（一般都是四舍五入，尤其是获取的偏移量）
+            3.获取的结果都是复合样式值（好几个元素样式组合在一起的值），如果只想获取单一样式值，例如只想获得padding值，盒子模型属性无法操作
+
+            如果想获取元素具体的某个样式值：
+            1.元素.style.xxx ：只能获取所有写在元素行内上的样式（不写在行内上，获取不到）
+            2.获取当前元素所有经过浏览器计算的样式：只要当样式前元素可以在页面中展现（或者浏览器渲染它了，那么他的样式都是被浏览器计算过的）
+            2.1 不管当前样式写在哪
+            2.2不管当前样式写没写（浏览器会给元素设置一些默认样式）
+
+            标准浏览器：（IE9+)
+            1.window.getComputedStyle([元素],[伪类，一般都写null])
+            获取到当前元素所有被浏览器计算过的样式
+            IE678：
+            元素.currentStyle 获取经过计算的样式
+        */
+
+
+
+
+
+        // /* 
+        //     getCss 方法获取当前元素某一个样式属性值
+        //     @param:
+        //     1.curEle[object]:当前要操作的元素
+        //     2.attr[string]:当前要获取的样式属性名
+        //     @return：
+        //     获取的样式属性值
+        // */
+        // let getCss = function getCss(curEle, attr) {
+        //     // window.getComputedStyle === undefined
+        //     if ('getComputedStyle' in window) {
+        //         let val = window.getComputedStyle(curEle, null)[attr];
+        //         //把获取的结果去除单位，不是所有的值都能去单位，例如：display,一些复合值，只有复合数字+单位这种模式的结果才能基于parseFloat去掉单位
+        //         let reg = /^-?\d+(\.\d+)?(px|rem|em|pt)?$/i; //整数前可能加-可能不加-，后面的小数点加小数部分可能有可能没有,(px|rem|em|pt)单位可能有可能没有
+        //         reg.test(val) ? val = parseFloat(val) : null;
+        //         return val;
+        //     }
+        //     // throw new Error(); //抛出错误
+        //     throw new SyntaxError('您的浏览器版本过低，请升级到最新版本，谢谢配合！'); //抛出语法错区，让浏览器崩溃，不再继续执行JS
+        // };
+        // console.log(getCss(outer, 'paddingLeft')); //20
+        // console.log(getCss(outer, 'border')); //10px solid rgb(255, 0, 0)
+
+
+
+
+        // /* 
+        //    setCss方法：
+        //    设置当前元素的某一个具体样式的属性值
+
+        //    JS中给元素设置样式只有两种
+        //    1.设置元素的样式类名（前提：样式类及对应的样式已经处理完成）
+        //    2.通过行内样式设置 xxx.style.xxx=xxx
+        // */
+        // let setCss = function (curEle, attr, value) {
+        //     /* 
+        //         细节处理：
+        //         1.如果需要考虑IE678兼容，透明度样式在低版本浏览器中不是使用opacity，而是filter
+        //         2.如果传递进来的value值没有带单位，我们需要根据情况设置px单位
+        //         => width/height/padding(left...)/margin(left..)/font-size/top/left/bottom/right...
+        //         => 用户自己传递的value值是没有单位的
+        //     */
+        //     if (!isNaN(value)) {
+        //         //=>isNaN检测的结果是false，说明value是纯数字没有单位
+        //         let reg = /^(width|height|fontSize|((margin|padding)?(top|left|right|bottom)?))$/i;
+        //         reg.test(attr) ? value += 'px' : null;
+        //     }
+        //     curEle['style'][attr] = value;
+        // };
+        // setCss(outer, 'width', 600);
+
+
+
+        // /* 
+        //     setGroupCss:实现批量设置元素的样式
+            
+        // */
+        // let setGroupCss = function(curEle,options = {}){
+        //     // for in:遍历传递的options，有多少键值对，就循环多少次，每一次都调用setCss方法逐一设置
+        //     for(let attr in options){
+        //         //options 传递进来的需要修改的样式对象（集合）
+        //         //attr：
+        //         if(!options.hasOwnProperty(attr)) break; //不想遍历原型上的公有属性
+        //         setCss(curEle,attr,options[attr]);
+        //     }
+        // };
+        // setGroupCss(outer,{
+        //     width:400,
+        //     height:400,
+        //     padding:30
+        // })
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

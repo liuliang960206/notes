@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // console.log(window.innerHeight); //625
+        // console.log(document.body.clientHeight); //3000
+        // // window.open('www.jd.com','_blank'); //通过新窗口打开这个网址
+        // document.onclick = function(){
+        //     window.close(); //关闭窗口
+        // }
+
+        //关于滚动条的距离
+        console.log(window.pageYOffset); //滚动条到顶部的距离（Y轴）
+        console.log(window.pageXOffset); //滚动条到左边的距离（X轴）
+        console.log(document.documentElement.clientTop)
+        document.onclick = function(){
+            window.scrollTo(0,100)
+            // console.log(document.documentElement.scrollTop = 0);
+        }
+
+
+       
+    </script>
+</body>
+
+</html>

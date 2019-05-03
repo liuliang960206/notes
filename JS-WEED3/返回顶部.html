@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            background: red;
+            font-size: 18px;
+            width: 100px;
+            height: 40px;
+            color: #fff;
+            line-height: 40px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            cursor: pointer;
+            display: none;
+        }
+
+        body {
+            height: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">返回顶部</div>
+    <script>
+        window.onscroll = function () {
+            if (pageYOffset >= 600) {
+                box.style.display = 'block';
+            } else {
+                box.style.display = 'none';
+            }
+        }
+        let timer = null;
+        box.onclick = function(){
+            let y = window.pageYOffset; //滚动体到顶部的距离
+            timer = setInterval(()=>{
+                y -= 100; //定时器每次执行都让滚动条到顶部的距离减100 有一个平缓滚动的效果 而不是瞬间回到顶部
+                if(y <= 0){
+                    y = 0;
+                    clearInterval(timer);
+                }
+                window.scrollTo(0,y);
+            },16.7)
+        }
+    </script>
+</body>
+
+</html>
