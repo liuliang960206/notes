@@ -17,11 +17,13 @@
             zdy: 'Tom',
             id:13,
         };
-        obj.length = 3
-        console.log(obj)
+
+        // obj.length = 3
+        // console.log(obj)
         Object.prototype.say = function(){
             console.log(1)
         }
+
         for(let attr in obj){
             // 如果attr是obj的私有属性为true，就执行
             if(obj.hasOwnProperty(attr)){

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    《sty
+</head>
+<body>
+    <div class="imgBox">
+        <!-- src为空 data-src存储真实的图片地址 -->
+        <img src="" data-src="img/1.jpg" alt=""/>
+    </div>
+    <script>
+        /* 
+           图片延迟加载：图片懒加载
+           1.在结构上，先把img图片放到一个div盒子当中，开始的时候图片的src为空（src中有地址就按照地址加载图片），我们把图片的地址存放到自定义属性DataSrc中（此位置不展示真实的图片），我们给图片所在的盒子设置一个默认的背景图片占位（要求这张图片却小越好，为了让页面加载速度变快）
+           2.在JS当中，当监听到页面中的结构和数据都加载完成后（或者设置一个间隔时间），开始把DataSrc自定义属性中存储的真实图片地址赋值给img的src属性（浏览器此时开始加载真实的图片=> 为了防止图片地址不存在导致的404错误，我们在赋值给图片的src属性时，往往都会验证一下图片是否存在）
+        */   
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script src="./tween.js"></script>
+    <script>
+        /* 
+            速度版运动：
+        */
+        // box.onclick = function () {
+        //     let oldDate = new Date;
+        //     let timer = setInterval(() => {
+        //         let newDate = new Date;
+        //         let diffTime = newDate - oldDate;
+        //         console.log(diffTime); //不是16.7的倍数，会因为浏览器的不同，电脑性能受到影响
+        //         oldDate = newDate;
+        //     }, 16.7)
+        // }
+
+
+
+        // /* 
+        //     时间版运动:
+        //     t : time 已过时间(ms)
+        //     b : begin 起始值
+        //     c : count 总的运动距离(px)
+        //     d : duration 持续时间(ms)
+        // */
+        // let t = 0;
+        // let c = 500;
+        // let d = 1000;
+        // let b = parseFloat(getComputedStyle(box).left); //带px单位的距离(parseFloat为了转换成数字)
+        // c = c - b; //总距离=设定的总距离-元素本身的距离
+        // box.onclick = function () {
+        //     let timer = setInterval(() => {
+        //         t += 16.7;
+        //         if(t >= d)t = d;// 当运动的时间大于等于总设定的时间 就相等
+        //         box.style.left = b + c * (t / d) + 'px'; //盒子向左进行均速运动
+        //         if(t === d){ //当运动的时间等于总设定的时间 清除定时器
+        //             clearInterval(timer)
+        //         }
+        //     }, 16.7)
+        // }
+
+
+
+        /* 
+            动画帧：requestAnimationFrame(函数) 
+            => 返回值为number（编号）
+            关闭动画帧: cancelAnimationFrame(编号)
+        */
+
+        box.onclick = function () {
+            startMove();
+        }
+        function startMove() {
+            let t = 0;
+            let c = 500;
+            let d = 1000;
+            let b = parseFloat(getComputedStyle(box).left);
+            c = c - b;
+            ; (function move() {
+                let timer = requestAnimationFrame(move); //递归
+                t += 16.7;
+                if (t >= d) t = d;
+                box.style.left = Tween.linear(t, b, c, d) + 'px';
+                //调用tween.js库中的方法
+            })();
+            if (t === d) {
+                cancelAnimationFrame(timer);
+            }
+        }
+    </script>
+</body>
+
+</html>
