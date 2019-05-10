@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        num1 = 0;
+        num2 = 0
+        let timer = null;
+        document.addEventListener('keydown', function move(ev) {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                switch (ev.keyCode) {
+                    case 39:
+                        num1 += 10;
+                        // box.style.left = num1 + 'px';
+                        break;
+                    case 40:
+                        num2 += 10;
+                        // box.style.top = num2 + 'px';
+                        break;
+                    case 37:
+                        num1 -= 10;
+                        // box.style.left = num1 + 'px';
+                        break;
+                    case 38:
+                        num2 -= 10;
+                        // box.style.top = num2 + 'px';
+                        break;
+                }
+                num1 < 0 ? num1 = 0 : null;
+                box.style.left = num1 + 'px';
+                num2 < 0 ? num2 = 0 : null;
+                box.style.top = num2 + 'px';
+            }, 22)
+        });
+        document.addEventListener('keyup',function(){
+            clearInterval(timer)
+        })
+
+    </script>
+</body>
+
+</html>

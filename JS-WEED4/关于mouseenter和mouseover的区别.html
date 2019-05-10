@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #outer {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 500px;
+            height: 500px;
+            background: red;
+            cursor: pointer;
+        }
+
+        #center {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 300px;
+            height: 300px;
+            background: pink;
+            cursor: pointer;
+        }
+
+        #inner {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="inner"></div>
+    </div>
+    <script>
+        /* 
+            关于mouseenter和mouseover的区别：
+            mouseover: 鼠标经过
+            mouseout：鼠标移出
+            mouseenter：鼠标进入(阻止冒泡传播)
+            mouseleave：鼠标离开(阻止冒泡传播)
+            真实项目中多用mouseenter/mouseleave
+        */
+
+        // inner.onmouseover = function () {
+        //     console.log('进入白盒子')
+        // }
+        // inner.onmouseout = function () {
+        //     console.log('离开白盒子')
+        // }
+        // outer.onmouseover = function () {
+        //     console.log('进入红盒子')
+        // }
+        // outer.onmouseout = function () {
+        //     console.log('离开红盒子')
+        // }
+
+        inner.onmouseenter = function () {
+            console.log('进入白盒子')
+        }
+        inner.onmouseleave = function () {
+            console.log('离开白盒子')
+        }
+        outer.onmouseenter = function () {
+            console.log('进入红盒子')
+        }
+        outer.onmouseleave = function () {
+            console.log('离开红盒子')
+        }
+       
+        
+
+    </script>
+</body>
+
+</html>

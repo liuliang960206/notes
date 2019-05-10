@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <input type="text" id="input1"/>
+    <form action="https://www.baidu.com/">
+        <input type="submit" value="提交"/>
+    </form> 
+     <a href="javascript:;">珠峰最新视频</a>
+    <a href="https://www.baidu.com/" id="link">珠峰最新视频</a>
+    <script>
+        /* 
+            事件：一件事情或者一种行为（对于元素来说，他的很多事件都是天生自带的），只要我们去操作这个元素，就会触发这些行为
+            如果没有事件函数赋值，事件默认值为null
+            系统默认事件：null
+            自定义事件：undefined
+
+            元素天生自带的事件(事件本身不带on）：
+            【鼠标事件】
+            click: 点击（PC端是点击，移动端的click代表单击[移动端使用click会有300ms的延迟]）
+            dblclick: 双击
+            mouseover: 鼠标经过
+            mouseout：鼠标移出
+            mouseenter：鼠标进入(没有冒泡)
+            mouseleave：鼠标离开(没有冒泡)
+            mousemove：鼠标移动
+            mousedown：鼠标按下（鼠标左右键都起作用，按下即触发，click是按下抬起才触发，而且先把down和up触发，才触发click）
+            mouseup：鼠标抬起
+            mousewheel：鼠标滚轮滚动
+
+            【键盘事件】
+            keydown：键盘按下（获取不到最新的value值，只能获取到上一个）
+            keyup：键盘抬起（可以获取到新的value值）
+            keypress：键盘长按（一般不用），和keydown类似，但keydown返回的是键盘码，keypress返回的是ASCII码
+            input：移动端的内容改变事件。由于PC端有物理键盘，可以监听到键盘的按下和抬起，但是移动端时虚拟键盘，所以keydown和keyup在大部分手机上都没有，所以使用input事件统一代替他们
+
+            【表单元素常用的事件】
+            focus：获取焦点
+            blur：失去焦点
+            change：内容改变
+
+            【其他常用事件】
+            load：加载完成
+            unload：在窗口关闭或者document对象将要卸载时触发
+            beforeunload:事件在窗口、文档、各种资源将要卸载前触发。它可以用来防止用户不小心卸载资源
+            scroll: 滚动条滚动事件
+            resize：大小改变事件 window.onresize = function(){} 当浏览器窗口大小发生改变，会触发这个事件
+            error：事件是在页面或资源加载失败时触发
+            hashchange：事件在 URL 的 hash 部分（即#号后面的部分，包括#号）发生变化时触发
+
+            【移动端手指事件】
+            [单手指操作：touch]
+            touchstart：手指按下
+            touchmove：手指移动
+            touchend：手指离开
+            touchcancel：因为意外情况导致手指操作取消
+            [多手指操作：gesture]
+            gesturestart：多手指按下
+            gesturechange：手指改变
+            gestureend：手指离开
+
+            【H5中audio/video音视频事件】
+            canplay：可以播放（播放过程中可能出现由于资源没有加载完成导致的卡顿）
+            canplaythrough：资源加载完成，可以正常无障碍播放
+
+            可自主扩展其他事件
+        */
+
+        /* 
+            事件绑定：
+            给元素天生自带的事件行为绑定方法，当事件触发，会把对应的方法执行
+
+            【DOM0级事件绑定】
+            element.onxxx = function(){}
+            解除事件：ele.事件 = null
+
+            【DOM2级事件绑定】
+            element.addEventListener('xxx', function(){}, false);
+            该方法接受三个参数。
+                第一个参数：事件名称，大小写敏感。
+                第二个参数：监听函数。事件发生时，会调用该监听函数。
+                第三个参数：布尔值，表示监听函数是否在捕获阶段（capture）触发，默认为false（监听函数只在冒泡阶段被触发）。该参数可选。
+            移除事件的监听函数:ele.removeEventListener('click', listener, false);
+            注意：listener参数如果为 fn.bind(this),则不能移除，因为bind会改变函数地址
+
+            事件绑定的目的：给当前元素的某个事件绑定方法（不管是基于DOM0还是DOM2），都是为了触发元素的相关行为的时候，能把绑定的方法执行，不仅把方法执行，而且浏览器还给方法传递了一个实参信息 ===>事件对象
+        */
+
+
+        /* 
+            事件对象：
+            MouseEvent 鼠标事件对象
+            KeyboardEvent 键盘事件对象
+            Event 普通事件对象
+            TouchEvent 手指事件对象
+
+            事件对象的目的：
+            事件对象中记录了很多属性名和属性值，这些信息中心包含了当前操作的基础信息，例如：
+            鼠标点击位置的X/Y轴坐标
+            鼠标点击的是谁（事件源）
+
+            事件对象中常用的属性：
+            【MouseEvent:鼠标事件对象中的属性】
+            ev.target: 事件源（操作的是哪个元素）,在嵌套关系中，给上层元素绑定事件，可以通过事件源，查到事件触发的对象（元素）tagName: 'LI' 查看标签名（大写）
+            ev.clientX / ev.clientY: 当前鼠标触发点距离当前窗口可视区左上角的X/Y轴坐标
+            ev.pageX / ev.pageY: 当前鼠标触发点距离body（第一屏幕）左上角X/Y轴坐标 
+            相当于 pageXOffset + event.clientX (元素到body左边的距离+元素本身宽度)
+            相当于 pageYOffset + event.clientY (元素到body顶部的距离+元素本身高度)
+            ev.preventDefault(): 阻止默认行为
+            ev.stopPropagation(): 阻止事件的冒泡传播(低版本浏览器不兼容)
+            ev.cnacelbubble = true: 阻止事件的冒泡传播(chrome/IE: window中都有一个event对象，火狐中没有event对象)
+            ev.type: 当前事件类型
+
+            【KeyboardEvent: 键盘事件对象中的属性】
+            ev.keycode: 当前按键的键盘码(数字类型) 13
+            ev.ctrlKey: 布尔值
+            ev.shiftKey: 布尔值
+            ev.altKey: 布尔值
+            [常用的键盘码]
+            左-上-右-下： 37 38 39 40
+            Backspace: 8
+            Enter: 13
+            Space: 32
+            Delete: 46
+            Shift: 16
+            Alt: 18
+            Ctrl: 17
+            F1-F12: 112-123
+            0-9: 48-57
+            小写字母: 65-90
+
+        */
+
+        // // MouseEvent 鼠标事件对象
+        // box.onclick = function(ev){
+        //     //定义一个形参ev用来接收方法执行的时候，浏览器传递的信息值（事件对象）
+        //     console.log(ev); //MouseEvent {isTrusted: true, screenX: 52, screenY: 161, clientX: 52, clientY: 58, …}
+        // }
+
+        // // KeyboardEvent 键盘事件对象
+        // box.onkeydown = function(ev){
+        //     console.log(ev); 
+        // }
+        // input.onkeydown = function(ev){
+        //     console.log(ev); //KeyboardEvent {isTrusted: true, key: "Enter", code: "Enter", location: 0, ctrlKey: false, …}
+        // }
+        
+        // // Event 普通事件对象
+        // window.onload = function(ev){
+        //     console.log(ev); //Event {isTrusted: true, type: "load", target: document, currentTarget: Window, eventPhase: 2, …}
+        // }
+        
+
+        /* 
+            事件的默认行为：
+            事件本身就是天生就有的，某些事件触发，即使没有绑定方法，也会存在一些效果，这些默认的效果就是“事件的默认行为”
+
+            例如：a标签的点击操作就存在默认行为
+            1.页面跳转
+            <a href="http://www.baidu.com" target="_blank"><a/>   
+            2.描点定位（hash定位）
+            <a href="#box" target="_blank"><a/> 
+            首先会在当前页面URL地址栏末尾设置一个hash值，浏览器检测到hash值后，会默认定位到当前页面中id和hash相同的盒子的位置（基于hash值实现spa单页面应用）
+
+            例如：input标签的默认行为：
+            1.输入内容可以呈现到文本框当中
+            2.输入内容时，会把之前输入的一些信息呈现出来（并不是所有浏览器和所有情况都有）
+
+            例如：submit标签的默认行为：
+            在form当中设置anction，点击1.submit，会默认按照anction的地址进行页面跳转，并且把表单中的信息传递进去（非前后端分离项目中，有服务器进行页面渲染，由其他语言实现数据交互）
+            <form action="https://www.baidu.com/">
+            <input type="submit" value="提交"/>
+            </form>
+        */
+
+        /* 
+            阻止默认行为：
+            [阻止a标签的默认行为]
+            很多时候我们使用a标签仅仅是想做一个普通的按钮，点击实现一个功能，不想页面跳转，也不想锚点定位
+            1) 在结构中阻止：<a href="javascript:void 0/undefined/null/false;">珠峰最新视频</a>
+            2) 在JS中阻止
+            给其click事件绑定方法，当我们点击a标签，先触发click事件，其次才会执行自己的默认行为
+            link.onclick = function(ev){
+            ev = ev || window.event;
+            // return false;
+            ev.preventDefault ? ev.preventDefault():ev.returnValue = false;
+            }
+
+            [阻止input标签的默认行为]
+            
+         */
+
+        // 阻止a标签的默认行为
+        // link.onclick = function(ev){
+        //     ev = ev || window.event;
+        //     // return false;
+        //     ev.preventDefault ? ev.preventDefault():ev.returnValue = false;
+        // }
+
+        // // 阻止input标签的默认行为，即不能输入内容 
+        // // DOM0
+        // input1.onkeydown = function(ev){
+        //     // ev = ev || window.event;
+        //     ev.preventDefault() ? ev.preventDefault() : ev.returnValue = false;
+        //     // return false;
+        // }
+        // // DOM2
+        // input1.addEventListener('keydown',function(ev){
+        //     ev.preventDefault();
+        // })
+
+        // // input输入框里只能输入六位字符 ？？？
+        // input1.onkeydown = function(ev){
+        //     let val = this.value.trim();
+        //     let len = val.length;
+        //     let code = ev.which || ev.KeyCode;
+        //     // 阻止默认行为要去除特殊按键（delete,backspace,方向键）
+        //     if(!/^(46|8|37|38|39|40)$/.test(code)){
+        //         ev.preventDefault ? ev.preventDefault():ev.returnValue = false;
+        //     }
+        // }
+        
+        
+    </script>
+</body>
+</html>

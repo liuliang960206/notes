@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #outer {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 500px;
+            height: 500px;
+            background: red;
+            cursor: pointer;
+        }
+
+        #center {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 300px;
+            height: 300px;
+            background: pink;
+            cursor: pointer;
+        }
+
+        #inner {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 150px;
+            height: 150px;
+            background: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="center">
+            <div id="inner">
+                <button id="btn">按钮</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        /*
+            事件的传播机制：（事件流/事件模型机制)
+            冒泡传播：触发当前元素的某一个事件（比如点击事件）行为，不仅当前元素事件行为触发，而且其祖先元素的相关事件行为也会被依次触发，这种机制就是事件的传播机制
+
+                这种传播分成三个阶段。
+                第一阶段：从window对象传导到目标节点（上层传到底层），称为“捕获阶段”（capture phase）。
+                第二阶段：在目标节点上触发，称为“目标阶段”（target phase）。
+                第三阶段：从目标节点传导回window对象（从底层传回上层），称为“冒泡阶段”（bubbling phase）。
+                这三个阶段的传播模型，使得同一个事件会在多个节点上触发
+            
+            xxx.onxxx = function(){};
+            DOM0级事件绑定方式，只有冒泡阶段。如果事件绑定的是目标元素，就按照目标事件的先后顺序依次绑定
+
+            xxx.addEventListener('xxx',function(){},false);
+            第三个参数：
+            为false：是控制绑定的方法在事件传播的冒泡阶段（或者目标阶段）执行；
+            为true：代表让当前方法在事件传播的捕获阶段触发执行（这种捕获阶段
+
+            事件对象的一些理解：
+            1.事件对象是用来存储当前本次操作的相关信息的，和操作有关，和元素无必然关联。
+            2.当我们基于鼠标或者键盘等操作的时候，浏览器会把本次操作的信息存储起来（标准浏览器存储到默认的内存当中（自己找不到），IE低版本存储到window.event中），存储的值是一个对象（堆内存）；操作会触发元素的某个行为，把绑定的方法执行，此时标准浏览器会把之前存储的对象（内存地址）当做实参传递给每一个执行的方法，所以操作一次，即使再多方法中都有ev，但是存储的值都是一个（本次操作的信息对象）
+        */
+
+
+        // let aa = null;
+        // window.onclick = function(ev){
+        //     console.log(ev === aa); //true
+        //     alert('window')
+        // }
+        // outer.onclick = function(ev){
+        //     console.log(ev === aa); //true
+        //     alert('红盒子')
+        // }
+        // center.onclick = function(ev){
+        //     console.log(ev === aa); //true
+        //     alert('粉盒子')
+        // }
+        // inner.onclick = function(ev){
+
+        //     aa = ev;
+        //     alert('白盒子')
+        // }
+        // btn.onclick = function(ev){
+        //     ev = ev || window.event;
+        //     ev.stopPropagation()?ev.stopPropagation():ev.cancelBubble = true;
+        //     // 阻止冒泡传播 ev.stopPropagation()低版本不兼容  ev.cancelBubble = true 所有浏览器都兼容
+        //     alert('按钮')
+        // }
+
+
+
+        //练习题：
+        function fn() { alert('btn1'); }
+        btn.addEventListener('click', fn, true);
+        outer.addEventListener('click',function(){alert('red');});
+        btn.addEventListener('click', fn, true);
+        inner.addEventListener('click', function () { alert('yellow'); }, true);
+        center.addEventListener('click', function () { alert('green'); });
+        btn.addEventListener('click', function () { alert('btn捕获'); }, true);
+        btn.addEventListener('click', function () { alert('btn冒泡'); });
+        btn.addEventListener('click', fn, false);
+        // 答案：yellow btn1 btn捕获 btn冒泡 btn1 green red
+
+    </script>
+</body>
+
+</html>

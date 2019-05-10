@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+            #outer {
+                position: relative;
+                margin: 50px auto;
+                padding: 20px;
+                width: 260px;
+                height: 260px;
+                border: 10px solid red;
+                font-size: 18px;
+                /* overflow: hidden; */
+            }
+
+            #inner {
+                /* position: absolute; */
+                padding: 20px;
+                width: 200px;
+                height: 200px;
+                border: 10px solid green;
+            }
+
+            #center {
+                width: 180px;
+                height: 180px;
+                border: 10px solid blue;
+            }
+        </style>
+    </head>
+
+<body>
+    <div id="outer">
+        <div id="inner">
+            <div id='center'></div>
+        </div>
+        <script>
+            /* 
+                offsetParent: 当前盒子的父级参照物
+
+                参照物：同一个平面当中，元素的父级参照物和结构没有必然联系，默认他们的父级参照物都是body（当前平面最外层的盒子）
+                body的父级参照物为null
+
+                例如上面结构中：
+                outer.offsetParent //=>body
+                inner.offsetParent //=>body
+                center.offsetParent //=>body
+
+                参照物可以改变：
+                构建出不同的平面即可（使用zIndex，但是这个属性只对定位有作用），所以改变元素的定位（position:relative/absolute/fixed),可以改变其父级参照物
+
+                例如上面结构中，
+                如果给outer设置position:relative之后(把outer脱离原有的平面，独立出一个新的平面，后代元素的父级参照物都会以他为参考)
+                inner.offsetParent //=>outer
+                center.offsetParent //=>outer
+                outer.offsetParent //=> body
+                
+                上面结构中：
+                如果给inner设置position:absolute之后
+                center.offsetParent //=>inner
+                inner.offsetParent //=>outer
+                outer.offsetParent //=>body
+            */
+
+            /* 
+                offsetTop/offsetLeft: 获取当前盒子距离其父级参照物的偏移量（上偏移/左偏移）
+                当前盒子的外边框开始 - 父级参照物的内边框
+            */
+
+            /* 
+                不管父级参照物是谁，都要获取当前元素距离body的偏移量（左偏移/上偏移）
+                不能改变既定的样式（不能基于position方式改变他的参照物）
+                任意元素距离body的偏移（不管参照物）
+                1.首先获取当前元素的左偏移
+                2.在这个基础上累加
+                    A.父级参照物的边框
+                    B.父级参照物的偏移
+                累加完父级的，再找父级的父级(A)，加上A的左边框和左偏移，加到父级参照物是body为止
+            */
+
+            
+            
+        </script>
+</body>
+
+</html>

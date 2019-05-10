@@ -24,19 +24,19 @@
             [].sort((a,b)=>{})
             ''.replace(/\d+/,()=>{})
         */
-        // let fn = (callback)=>{
-        //     // callback && callback.call(obj,100,200);
-        //     // callback => 传递进来的函数 
-        //     // 如果传了参数，即传了函数（为真），则执行这个函数；如果没传函数，为undefined（为假）
-        //     //=> typeof callback === 'function'?callback():null;
-        //     let res = callback(10,20);
-        //     console.log(res); //30
-        // }
-        // fn((n,m)=>{
-        //     // this => window 
-        //     // console.log(n,m); //100,200
-        //     return n + m;
-        // });
+        let fn = (callback)=>{
+            // callback && callback.call(obj,100,200);
+            // callback => 传递进来的函数 
+            // 如果传了参数，即传了函数（为真），则执行这个函数；如果没传函数，为undefined（为假）
+            //=> typeof callback === 'function'?callback():null;
+            let res = callback(10,20);
+            console.log(res); //30
+        }
+        fn((n,m)=>{
+            // this => window 
+            // console.log(n,m); //100,200
+            return n + m;
+        });
 
 
         // // forEach只能遍历数组 

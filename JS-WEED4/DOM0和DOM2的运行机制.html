@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            margin: 20px auto;
+            width:200px;
+            height: 200px;
+            background: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /* 
+            事件绑定：
+            DOM0: element.onxxx = function(){}
+            每一个元素对象都是对应类的实例，浏览器天生为其设置了很多私有属性和公有的属性方法，而onclick就是其中的一个私有属性（事件类似私有属性，还有很多其他的事件私有属性），这些属性默认值是null
+            DOM0事件绑定原理：
+            就是给元素的某一个事件私有属性赋值（浏览器会建立监听机制，当我们触发元素的某个行为，浏览器会自己把属性中赋的值去执行）
+
+
+            DOM2:
+            element.addEventListener('xxx', function(){}, false);
+            移除事件的监听函数:ele.removeEventListener('click', listener, false);
+            使用的方法都是EventTarget.prototype上定义的
+            DOM2事件池：
+            当我们触发box的click行为后，浏览器会到事件池中“按照顺序”依次把之前监听的方法执行
+            1.每一个被执行的方法，浏览器都会把事件对象传递给他
+            2.方法中的this是当前操作的元素
+            3.执行的方法不会出现重复，在向事件池增加的时候就去重了
+            完整事件池机制：
+            DOM2事件绑定可以给当前元素的某一个行为绑定“多个不同的方法”
+
+
+            DOM0和DOM2事件绑定的区别：
+            1.机制不一样
+                DOM0采用的是给私有属性赋值，所以只能绑定一个方法，DOM2采用的是事件池机制，所以能绑定多个不同的方法
+            2.关于移除的操作
+                DOM0移除，将事件赋值为null即可，不需要考虑绑定的是谁
+                DOM2移除，必须清楚要移除的是哪一个方法，才能在事件池当中移除掉。多以基于DOM2做事件绑定，要有“瞻前顾后”的思路，也就是绑定的时候要考虑一下如何移除（不要绑定匿名函数）
+            3.DOM2事件绑定中增加了一些DOM0无法操作的事件行为；例如：DOMContentLoaded事件（当页面中的页面中HTML结构加载完成就会触发执行）
+
+        */  
+
+        // // DOM0事件绑定：只允许给当前元素的某个事件行为绑定一个方法，多次绑定，后面绑定的内容会替换前面绑定的，以最后一次绑定的方法为主
+        // box.onclick = function(){
+        //     console.log(1)
+        // }  
+        // box.onclick = function(){
+        //     console.log(2);// 触发点击行为，只输出2
+        // }  
+
+        // // DOM2事件绑定
+        // function fn1(){console.log(1)}
+        // function fn2(){console.log(2)}
+        // function fn3(){console.log(3)}
+        // function fn4(ev){
+        //     console.log(4,this === box,ev.target)
+        //     box.removeEventListener('click',fn5);
+        //     box.removeEventListener('click',fn8);
+        // }
+        // function fn5(){console.log(5)}
+        // function fn6(){console.log(6)}
+        // function fn7(){console.log(7)}
+        // function fn8(){console.log(8)}
+        // function fn9(){console.log(9)}
+        // function fn10(){console.log(10)}
+
+        // box.addEventListener('click',fn1);
+        // box.addEventListener('click',fn3);
+        // box.addEventListener('click',fn5);
+        // box.addEventListener('click',fn7);
+        // box.addEventListener('click',fn9);
+        // box.addEventListener('click',fn2);
+        // box.addEventListener('click',fn2);//重复
+        // box.addEventListener('click',fn2);//重复
+        // box.addEventListener('mouseenter',fn2); //增加到事件池当中的
+        // box.addEventListener('click',fn4);
+        // box.addEventListener('click',fn6);
+        // box.addEventListener('click',fn8);
+        // box.addEventListener('click',fn10);
+
+        /* 
+            首先在事件未执行前，会把box的click的所有方法添加到一个数组里面(即添加到事件池里面），
+            此时数组中有[fn1,fn3,fn5,fn7,fn9,fn2,fn4,fn6,fn8,fn10]
+            当第一次点击box，会依次输出1,3,5,7,9,2,4(此时移除了数组中的fn5和fn8方法),6,10
+            当第二次点击box，会依次输出1,3,7,9,2,4,6,10 
+        */
+
+
+        // let fn = function(){ }
+        // box.addEventListener('DOMContentLoaded',fn); //可以
+        // box.onDOMContentLoaded = fn; //不可以，box没有这个属性
+
+    </script>
+</body>
+</html>

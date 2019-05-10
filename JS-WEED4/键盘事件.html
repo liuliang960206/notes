@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="txt">
+    <ul id="ul"></ul>
+    <script>
+        /* 
+            keydown：键盘按下（获取不到最新的value值，只能获取到上一个）
+            keyup：键盘抬起（可以获取到新的value值）
+
+            【KeyboardEvent: 键盘事件对象中的属性】
+            ev.keycode: 当前按键的键盘码(数字类型) 13
+            ev.ctrlKey: 布尔值
+            ev.shiftKey: 布尔值
+            ev.altKey: 布尔值
+            [常用的键盘码]
+            左-上-右-下： 37 38 39 40
+            Backspace: 8
+            Enter: 13
+            Space: 32
+            Delete: 46
+            Shift: 16
+            Alt: 18
+            Ctrl: 17
+            F1-F12: 112-123
+            0-9: 48-57
+            小写字母: 65-90
+        */
+
+        /* 
+            element.insertAdjacentElement(position, element);
+            方法一共可以接受两个参数，第一个参数是一个字符串，表示插入的位置，第二个参数是将要插入的节点。第一个参数只可以取如下的值。
+            
+            beforebegin：当前元素之前
+            afterbegin：当前元素内部的第一个子节点前面
+            beforeend：当前元素内部的最后一个子节点后面
+            afterend：当前元素之后
+
+
+            element.insertAdjacentHTML(position, text);
+            该方法接受两个参数，第一个是一个表示指定位置的字符串，第二个是待解析的 HTML 字符串。第一个参数只能设置下面四个值之一。
+
+            beforebegin：当前元素之前
+            afterbegin：当前元素内部的第一个子节点前面
+            beforeend：当前元素内部的最后一个子节点后面
+            afterend：当前元素之后
+        */
+
+        let ul = document.getElementById('ul')
+        txt.addEventListener('keyup',function(ev){
+            console.log(ev);
+            if(ev.keyCode === 13 && ev.ctrlKey){
+                ul.insertAdjacentHTML('afterbegin',`<li>${this.value}</li>`)
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

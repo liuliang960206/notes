@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #outer {
+            position: relative;
+            margin: 1000px auto;
+            padding: 20px;
+            width: 260px;
+            height: 260px;
+            border: 10px solid red;
+            font-size: 18px;
+            /* overflow: hidden; */
+        }
+
+        #inner {
+            /* position: absolute; */
+            padding: 20px;
+            width: 200px;
+            height: 200px;
+            border: 10px solid green;
+        }
+
+        #center {
+            width: 180px;
+            height: 180px;
+            border: 10px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <div id="inner">
+            <div id='center'></div>
+        </div>
+        <script>
+            /*
+                scrollTop/scrollLeft:
+                滚动条卷曲的宽度/高度
+
+                document.documentElement.clientHeight: 一屏幕的高度（即可视区的高度，不算横向滚动条的高度，值是固定的）
+                
+                最小卷去值：0
+                最大卷去值：真实页面的高度 - 一屏幕的高度
+                document.documentElement.scrollHeight - document.documentElement.clientHeight
+
+                在JS盒子模型13个属性中，只有scrollTop/scrollLeft是可读可写属性，其余都是只读属性
+             */
+        </script>
+</body>
+
+</html>
