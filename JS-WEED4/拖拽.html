@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+</head>
+
+<body>
+    无意义文字
+    <div id="box"></div>
+    <script>
+        box.addEventListener('mousedown',function(ev){
+            let left = ev.pageX - this.offsetLeft
+            let top = ev.pageY - this.offsetTop
+            function move(ev){
+                box.style.left = ev.pageX - left + 'px';
+                box.style.top = ev.pageY - top + 'px';
+            }
+            document.addEventListener('mousemove',move);
+            function up(){
+                box.removeEventListener('mousemove',move); // 在鼠标抬起的时候，解除鼠标跟随（即mousemove）
+                box.removeEventListener('mouseup',up)
+            }
+            box.addEventListener('mouseup',up)
+        });
+    </script>
+</body>
+
+</html>

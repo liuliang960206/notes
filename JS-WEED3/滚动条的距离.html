@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 3000px;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: relative;
+            left: 200px;
+            top: 1200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        // console.log(window.innerHeight); //625
+        // console.log(document.body.clientHeight); //3000
+        // // window.open('www.jd.com','_blank'); //通过新窗口打开这个网址
+        // document.onclick = function(){
+        //     window.close(); //关闭窗口
+        // }
+
+        /* 
+            关于滚动条的距离
+            Element.getBoundingClientRect 方法返回一个对象，提供当前元素节点的大小、位置等信息，基本上就是 CSS 盒状模型的所有信息。
+
+        */
+
+        // console.log(box.getBoundingClientRect())
+        // console.log(window.pageYOffset); //滚动条到顶部的距离（Y轴）
+
+        // console.log(window.pageXOffset); //滚动条到左边的距离（X轴）
+        // console.log(document.documentElement.scrollTop);
+        // console.log(document.documentElement.clientTop); //可视区（一屏）的高度
+        // document.onclick = function(){
+        //     window.scrollTo(0,100)
+        //     // console.log(document.documentElement.scrollTop = 0);
+        // }
+
+
+       
+    </script>
+</body>
+
+</html>

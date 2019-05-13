@@ -40,6 +40,7 @@
             mousedown：鼠标按下（鼠标左右键都起作用，按下即触发，click是按下抬起才触发，而且先把down和up触发，才触发click）
             mouseup：鼠标抬起
             mousewheel：鼠标滚轮滚动
+            contextmetu：右键上下文菜单
 
             【键盘事件】
             keydown：键盘按下（获取不到最新的value值，只能获取到上一个）
@@ -48,15 +49,23 @@
             input：移动端的内容改变事件。由于PC端有物理键盘，可以监听到键盘的按下和抬起，但是移动端时虚拟键盘，所以keydown和keyup在大部分手机上都没有，所以使用input事件统一代替他们
 
             【表单元素常用的事件】
+            input：当<input>、<select>、<textarea>的值发生变化时触发
+            select：在<input>、<textarea>里面选中文本时触发。（也有聚焦的功能）
             focus：获取焦点
             blur：失去焦点
-            change：内容改变
+            change：事件当<input>、<select>、<textarea>的值发生变化时触发。
+            它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发，另一方面input事件必然伴随change事件。
+            具体来说，分成以下几种情况:
+            A. 激活单选框（radio）或复选框（checkbox）时触发。
+            B. 用户提交时触发。比如，从下列列表（select）完成选择，在日期或文件输入框完成选择。
+            C. 当文本框或<textarea>元素的值发生改变，并且丧失焦点时触发。
 
             【其他常用事件】
             load：加载完成
             unload：在窗口关闭或者document对象将要卸载时触发
             beforeunload:事件在窗口、文档、各种资源将要卸载前触发。它可以用来防止用户不小心卸载资源
-            scroll: 滚动条滚动事件
+            scroll：滚动条滚动事件（页面必须要有滚动条）
+            mousewheel：滚动条滚动事件(只要鼠标滚轮就触发)
             resize：大小改变事件 window.onresize = function(){} 当浏览器窗口大小发生改变，会触发这个事件
             error：事件是在页面或资源加载失败时触发
             hashchange：事件在 URL 的 hash 部分（即#号后面的部分，包括#号）发生变化时触发
@@ -89,6 +98,7 @@
 
             【DOM2级事件绑定】
             element.addEventListener('xxx', function(){}, false);
+            
             该方法接受三个参数。
                 第一个参数：事件名称，大小写敏感。
                 第二个参数：监听函数。事件发生时，会调用该监听函数。
@@ -121,7 +131,7 @@
             相当于 pageYOffset + event.clientY (元素到body顶部的距离+元素本身高度)
             ev.preventDefault(): 阻止默认行为
             ev.stopPropagation(): 阻止事件的冒泡传播(低版本浏览器不兼容)
-            ev.cnacelbubble = true: 阻止事件的冒泡传播(chrome/IE: window中都有一个event对象，火狐中没有event对象)
+            ev.cnacelBubble = true: 阻止事件的冒泡传播(chrome/IE: window中都有一个event对象，火狐中没有event对象)
             ev.type: 当前事件类型
 
             【KeyboardEvent: 键盘事件对象中的属性】

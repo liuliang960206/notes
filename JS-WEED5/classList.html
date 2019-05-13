@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        /*
+            元素身上有个classList对象
+            add(类名)  添加一个或多个类
+            remove(类名) 删除一个或多个类
+            replace(替换谁，替换成什么)替换
+            contains(类名) 检查是否含有某个CSS类: true & false
+            toggle(类名) ：
+            当元素上没有这个CSS类时，它就新增这个CSS类；如果元素已经有了这个CSS类，它就是删除它。就是反转操作
+             返回值还是布尔值
+        */
+        let box = document.getElementById('box');
+        // box.classList.add('oDiv'); // 为div元素添加一个类
+        box.classList.add('oDiv','oDiv1','oDiv2'); // 为div元素添加多个类
+        // box.classList.remove('oDiv1','oDiv2'); //移除一个或多个类
+
+        // box.classList.toggle('aa'); // 新增一个类
+        // console.log(box.classList.toggle('aa')); // false
+        // box.classList.toggle('aa'); // 删除一个类
+        // console.log(box.classList.toggle('aa')); // false
+
+        // console.log(box.classList.contains('abc')); // false
+        // console.log(box.classList.contains('oDiv')); // true
+
+        box.classList.replace('oDiv','abc'); //替换类名
+
+
+    </script>
+</body>
+
+</html>

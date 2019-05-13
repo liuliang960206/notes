@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box{
+            width: 30px;
+            height: 300px;
+            background: #000;
+            position: relative;
+        }
+        #box2{
+            width:30px;
+            height: 30px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="box2"></div>
+    </div>
+    <script>
+        box2.onmousedown =function(ev){
+            let disY = ev.pageY - box2.offsetTop;
+            document.onmousemove = function(ev){
+                box.style.top = ev.pageY - top + 'px'; 
+            }
+        }
+    </script>
+</body>
+</html>

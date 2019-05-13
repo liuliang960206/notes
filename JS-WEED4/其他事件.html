@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea id="txt"></textarea>
+    <span id="span">0字</span>
+    <input type="text" id="txt1" />
+    <button id="btn">选中代码</button>
+    <select name="" id="sele">
+        <option>哈哈</option>
+        <option>呵呵</option>
+        <option>嘿嘿</option>
+        <option>嘻嘻</option>
+    </select>
+    <div id="div">哈哈</div>
+    <script>
+        /* 
+            contextmetu:
+            右键菜单
+        */
+
+        // // 阻止右键菜单的默认行为
+        // document.addEventListener('contextmenu',function(ev){
+        //     ev.preventDefault()
+        // })
+
+        /* 
+            input：
+            改变输入框内容就触发
+        */
+        // txt.addEventListener('input',function(ev){
+        //     span.innerHTML = txt.value.length + '字'
+        // })
+
+        /* 
+            焦点事件：focus()
+            失焦事件：blur()
+            选中文本框中的内容（同时自动聚焦）：select()
+            
+        */
+        // txt1.addEventListener('focus', function () {
+        //     console.log(1)
+        // })
+        // txt1.focus(); //打开页面自动聚焦
+        // btn.onclick = function () {
+        //     txt1.select()
+        // }
+            
+
+        /*
+            内容改变事件：change
+            内容一定要不一致时触发
+        */
+        // sele.onchange = function(){
+        //     console.log(this.value);
+        //     div.innerHTML = this.value;
+        // }
+
+        /*
+            滚轮事件（页面必须有滚轮）：scroll
+            滚轮滚动即触发
+
+            滚轮事件(页面有无滚动条都可以）：mousewheel
+
+            ev.wheelDelta: 可以检测滚动的方向
+            180 上滚轮
+            -180 下滚轮
+
+            火狐的滚轮：DOMMouseScroll（只支持DOM2）
+            ev.detail: 检测滚动的方向
+            -3 上滚轮
+            3 下滚轮
+        */
+
+        /*
+            加载：load
+            把页面中的所有静态资源加载完成后触发window.onload
+
+            DOMContentLoaded 高版本
+            onreadystateschange 低版本支持
+
+            在低版本IE下，document有个doScroll的方法
+            document.documentElement.doScroll('left')
+
+            这个方法在DOM没有加载出来之前是没有的，也就是说
+            调用该方法会报错，换句话来说，只要DOM记载成功
+            就有doScroll方法
+
+            try{
+                document.documentElement.doScroll('left')
+                console.log('DOM加载完成');
+            }catch(e){
+                再次调用try、catch直到进try
+            }
+
+        */
+        /*
+            在try中包裹可能会报错的代码，包裹之后不会影响下面代码执行
+            只要捕获到错误，那么会进catch
+        */
+        
+        // let a = 5;
+        try{
+            console.log(a);
+        }catch(error){
+            a = 10;
+            console.log(error);//字符串
+        }
+
+
+        alert(a);
+
+
+    </script>
+</body>
+
+</html>
