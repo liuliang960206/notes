@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        63455613
+    </div>
+    <script src="jquery-1.11.3.js"></script>
+    <script>
+        /* 
+            工具方法：
+            不止jQuery对象能使用，还能处理原生的数据
+            $.ajax()
+            $.each()
+            $.isAarray()
+
+            功能方法：
+            只能是jQuery对象才能使用
+            $('#box').css();
+            $.fn.extend()
+
+            $.extend:
+            1.浅拷贝：Object.assign()
+            2.深拷贝：deepClone 第一个参数为true
+            3.插件接口：$.extend({});
+            
+        */
+        let arr = [1,2,3,4];
+        let arr2 = $.extend([],arr); //浅拷贝
+        let arr3 = [1,2,3,[4,5]];
+        let arr4 = $.extend(true,[],arr3); //深拷贝
+        console.log(arr4)
+
+        // 去除末尾空格 trimRight
+        $.extend({
+            // trimRight插件
+            trimRight: function (str) {
+                return str.replace(/\s+$/g, '');
+            }
+        });
+        console.log($.trimRight('   hello world   '));
+
+        /* 
+            jQuery运动：
+            $('#box').animate({},2000,function(){})
+            所有与的运动都是animate二次封装的
+            show() => display：block
+            hide() => display：none
+            toggle 
+            改变高度：
+            slideDown()
+            slideUp()
+            sildeToggle()
+            fadeIn() 淡入
+            fadeOut() 淡出
+            fadeToggle()
+        */
+
+        $('#box').animate({
+            width: 500,
+            height: 500,
+            fontSize: 60
+        }, 2000, function () {
+            // animate 运动结束执行此后调函数
+            console.log('运动完成')
+        })
+        $(document).click(function(){
+            // 淡出
+            $('#box').fadeOut(200)
+        })
+    </script>
+</body>
+
+</html>

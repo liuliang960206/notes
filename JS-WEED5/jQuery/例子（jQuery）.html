@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 50px;
+            border: 1px solid #000;
+        }
+
+        #box div {
+            display: none;
+        }
+
+        #box div.show {
+            display: block;
+        }
+
+        .active {
+            background: yellow;
+        }
+
+        #box4-1 {
+            width: 200px;
+            height: 200px;
+            background: #000;
+        }
+
+        #box5 #box6{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="warp">
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+    </div>
+
+    <br />
+    <div id="box2">
+        <button id="all">全选</button>
+        <button id="no">不选</button>
+        <button id="reverse">反选</button>
+        <input type="checkbox" />
+        <input type="checkbox" />
+        <input type="checkbox" />
+        <input type="checkbox" />
+        <input type="checkbox" />
+        <input type="checkbox" />
+    </div>
+
+    <br />
+    <div id="box3">
+        <input type="text" />
+        <ul></ul>
+    </div>
+
+    <br />
+    <div id="box4">
+        <div id="box4-1">
+            <button>点击请求</button>
+        </div>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+    <br/>
+    <div id="box5">
+        <div id="box6"></div>
+        <button id="btn1">点击</button>
+    </div>
+
+    <script src="./jquery-1.11.3.js"></script>
+    <script>
+        /*
+            1.选择器：# . 标签选择器  属性选择器  li:gt() li:lt() li:odd li:even li.eq(0) li:get(0) 
+
+            2.操作属性
+            innerHTML    html()
+            innerText    text()
+            value        val()
+            getAttribute|setAttribute   attr(id,'box') 
+            removeAttribute   removeAttr('box') 删除属性
+            className    addClass   removeClass  replaceClass
+            style        css('width')
+            cssText      css('height','200px')
+            prop 复选框
+
+            在JQ中一般都有这么一个特性，传一个字符串或者不传参就是获取
+            两个参数就是设置css('height','200px')
+            如果传入一个参数，这个参数还是对象，批量设置
+
+            divs.eq(数字)  div中的第某个元素，是个jquery对象
+            index('缩小范围')  自动去找某个元素基于父级的子级为第几个元素
+        */
+
+        // 选项卡
+        const btns = $('#wrap button');
+        const divs = $('#box div');
+        // const all = $('#all')
+        btns.click(function () {
+            btns.removeClass('active');
+            divs.removeClass('show');
+            $(this).addClass('active');
+            divs.eq($(this).index('button')).addClass('show')
+        });
+
+        // 全选 不选 反选
+        $('#all').click(function () {
+            $('#box2 input').prop('checked', true);
+        })
+        $('#no').click(function () {
+            $('#box2 input').prop('checked', false);
+        })
+        $('#reverse').click(function () {
+            $('#box2 input').each(function (i, item) {
+                if ($(item).prop('checked')) {
+                    $(item).prop('checked', false);
+                } else {
+                    $(item).prop('checked', true);
+                }
+            })
+        })
+
+
+        /*
+            操作DOM:
+            append 向后添加
+            remove
+            prepend(content)  向前添加
+            siblings('设置范围') 兄弟 
+            parent
+            chilren
+        */
+        $('#box3 input').keyup(function (ev) {
+            if (ev.keyCode === 13) {
+                let val = $('#box3 input').val()
+                $('#box3 ul').append($(`<li>${val}</li>`));
+                $('#box3 input').val('')
+            }
+        })
+
+
+        /*
+            jq中所有的事件都为事件绑定
+            都有on()二次封装
+            事件委托
+            1. on('不带On的事件名','事件源元素',事件函数)  
+            2. delegate的原理：
+
+            解绑为off()
+
+            jq中的ev是二次封装的对象
+            ev.originalEvent  原生事件对象
+
+            事件的冒泡和事件的阻止默认行为
+            return false;
+        */
+        $('#box4 ul').on('click', 'li', function () {
+            $(this).css('color', 'green');
+        });
+
+        $('#box4-1').mouseover(function () {
+            $(this).css('background', 'red');
+
+            //在绑定click之前，解除上次click
+            $('button').off('click')
+            $('button').on('click', function () {
+                console.log(1)
+            })
+            $('button').on('click', function () {
+                console.log(2)
+            })
+        });
+        $('#box4-1').mouseout(function () {
+            $(this).css('background', 'black');
+        })
+
+
+        /* 
+            盒子模型属性:
+            width: 宽
+            height: 高
+            innerWidth: 宽（加padding）
+            innerHeight: 高（加padding）
+            outerWidth: 宽（加padding+border）
+            outerHeight: 高（加padding+border）
+
+            绝对位置：
+            offset().top/left: 元素到可视区的距离 绝对位置
+            position().top/left: 元素到父级元素的距离 相对位置
+            scrollTop: 滚动距离
+        */
+
+        /* 
+            发布订阅：
+            trigger
+        */
+       
+        $('#btn1').on('click',function(){
+            console.log('abc')
+        })
+        //在移入box的时候，让btn的点击事件调用
+        $('#box6').mouseover(function(){
+            $('#btn1').trigger('click')
+        })
+
+
+
+    </script>
+</body>
+
+</html>

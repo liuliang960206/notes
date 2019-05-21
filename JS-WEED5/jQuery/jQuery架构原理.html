@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            1. 类库：JQ/ZEPTO... 提供一些真实项目中常用的方法，任何项目都可以把类库导入进来，调去里面的方法实现自己需要的业务逻辑
+            2. 插件：具备一定的业务功能，例如：封装轮播图插件，选项卡插件，模态框插件（插件规定了当前这个功能的样式结构，把实现功能的js进行封装，以后想实现这个功能，导入插件即可），swiper/iscroll/jqery-dialog/jqery-drag/jqery-datepocker/ECharts...
+            3. UI组件：把结构，css，js全部封装好，我们想实现一个功能，直接导入进来即可（偶尔需要修改），bootstrap...
+            4. 框架：具备一定的编程思想，要求我们按照框架思想开发。框架中提供了常用的类库方法，提供了强大的功能插件，UI组件 React(React native)/Vue/Angular/Backbone/Sea.js/Require.js
+
+            jQuery: 优秀的js类库
+            基于原生js封装的一个类库，提供了很多方法，而且这些方法是兼容所有浏览器
+            jQ版本：V1（常用）1.8.3 1.9.3 1.11.3 V2 V3
+        */
+
+        /* 
+            jQ核心结构：
+
+
+        */
+        (function (global, factory) {
+            if (typeof module === "object" && typeof module.exports === "object") {
+                module.exports = global.document ?
+                    factory(global, true) :
+                    function (w) {
+                        if (!w.document) {
+                            throw new Error("jQuery requires a window with a document");
+                        }
+                        return factory(w);
+                    };
+            } else {
+                factory(global);
+            }
+
+            // Pass this if window is not defined yet
+        }(typeof window !== "undefined" ? window : this, function (window, noGlobal) {
+            // 判断是否为window环境，如果不是undefined，则为全局；如果是undefined，则为this(即当前环境)
+            // noGlobal: 为undefined，因为在低版本下undefined会被修改
+
+            version = "1.11.3" // 版本号
+            jQuery = function (selector, context) { }
+            //jQuery是一个类，在它的原型上提供了很多属性和方法，供jQ的实例调取使用
+            jQuery.fn = jQuery.prototype = {
+                jquery: version,
+                constructor: jQuery, // 当前类的原型重定向后，自己开辟的堆内存中是没有constructor的，需要手动增加保证它的完整性
+                selector: "",
+                length: 0,
+            }
+
+            /* 
+                给jQ原型上增加extend方法，同时把jQ当做一个普通对象，给对象设置了一个私有的方法是一个类（也是一个普通对象）：函数的两种角色
+                jQ是一个类库，提供了很多方法，其中这些方法由两部分：
+                1.放到原型上的(jQuery.fn/jQuery.prototype),这里面的方法是供jQ实例调取使用的
+                2.把jQ当做一个普通对象，在对象上设置一些私有的属性和方法，这类方法以后用的时候直接的jQuery.xxx()执行即可
+            */
+            jQuery.extend = jQuery.fn.extend = function() {}
+
+            if (typeof noGlobal === strundefined) {
+                window.jQuery = window.$ = jQuery;
+            }
+            return jQuery;
+        })); 
+    </script>
+</body>
+
+</html>

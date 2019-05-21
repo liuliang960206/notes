@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            bind(this,无限个参数)
+            改变this指向，返回一个函数，函数才会执行
+            1.改变this
+            2.传参
+            3.如果是构造函数的话，this不需要被改变
+        */
+        function fn(a,b,c){
+            this.a = a;
+            console.log(this,a,b,c)
+        };
+        Function.prototype.bind = function(context,...arg){
+            console.log(...arg); // 剩余参数 1 2 3
+            let that = this; // 此时this为实例 fn函数
+
+            function bound(...arg2){ 
+                console.log(that); // 实例 fn函数
+                console.log(arg2); //[6]
+                console.log(this);// 如果new，则this为bound的实例 即 bound{} ,如果没有new，this为window
+
+                // 如果bound上有这个实例，说明new
+                if(this instanceof bound){
+                    that.apply(this,[...arg,...arg2]);
+                    // context,[...arg] 从上级作用域（即bind方法上）找到
+                }else{
+                    that.apply(context,[...arg,...arg2])
+                }
+            };
+
+            // new f的时候（即new bound)的时候，如果fn上有prototype,就让bound的原型赋值给fn的原型
+            if(this.prototype){ //此时this为fn即实例
+                bound.prototype = this.prototype;
+                // 如果没有这一步，下面new f().AA为undefined ，因为此时f为bound，new bound函数 本身没有AA属性，他的原型上没有AA方法（压根没有new bound的原型）
+            }
+            return bound;
+            // 此时返回值即f 
+        };
+        fn.prototype.AA = 666;
+        let f = fn.bind(document,1,2);//此时改变的是fn的this 没改之前是window
+        // f();
+        console.log(new f(6).AA); // 666
+        // fn调用所属类(Function)原型上的方法bind，并返回一个新函数 f !== fn
+    </script>
+</body>
+
+</html>
