@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>移动端</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            font-size: 12px;
+            width: 1rem;
+            height: 1rem;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+
+        // function refreshRem() {
+        //     let desW = 750; //设计图
+        //     let doc = document.documentElement; //html
+        //     // alert(doc.nodeName);
+        //     let winW = doc.clientWidth;
+        //     // //设计图 / 可视区
+        //     // let winW = window.innerWidth;
+        //     let radio = desW / winW;  //开发模拟器也要640的位置上
+
+
+        //     if (winW >= 750) {
+        //         doc.style.fontSize = '100px';
+        //         return;
+        //     };
+        //     doc.style.fontSize = 100 / radio + 'px';
+        // };
+        // refreshRem();
+
+        function htmlsize() {
+            var w = 750;//设计稿宽度
+            var ww = window.innerWidth//屏幕宽度;
+            let scale = w / ww;
+            if (ww > 750) { ww = 750; }
+            else if (ww < 320) { ww = 320; }
+            let html = document.documentElement
+            html.style.fontSize = 100 / scale + 'px';
+        }
+        htmlsize();
+        window.onresize = function () {
+            htmlsize();
+        };
+
+    </script>
+    <div id="box"></div>
+</body>
+
+</html>

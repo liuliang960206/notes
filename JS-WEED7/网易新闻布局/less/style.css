@@ -1,0 +1,17 @@
+/**- public -**/
+* {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+header {
+  background: #ddd;
+}
+header h1 {
+  display: block;
+  font-size: 0px;
+  width: 0.98rem;
+  height: 0.37rem;
+  background: url('../img/logo.png') 0px 0px no-repeat;
+  background-size: contain;
+}

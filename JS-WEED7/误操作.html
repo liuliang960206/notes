@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="active">按钮一</button>
+    <button>按钮二</button>
+    <button>按钮三</button>
+    <div id="box"></div>
+    <script>
+        let btns = document.querySelectorAll('button');
+        btns.forEach((item,i)=>{
+            item.addEventListener('touchstart',function(ev){
+                console.log(ev.touches)
+                console.log(ev.changedTouches)
+                console.log(ev.targetTouches)
+            })
+        })
+    </script>
+</body>
+
+</html>

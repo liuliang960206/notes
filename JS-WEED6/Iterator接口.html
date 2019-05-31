@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // let ary = [1, 2, 3, 4];
+        // console.log(ary[Symbol.iterator]);
+
+        let obj = {
+            name: "Tom",
+            age: 18
+        }
+        // console.log(obj[Symbol.iterator])
+
+        for(let attr of Object.keys(obj)){
+            console.log(attr,obj[attr])
+        }
+
+        console.log(Object.keys(obj))
+
+        let ary = ['name','age','abc']
+        console.log(Object.keys(ary));
+
+        // var arr = ["a", "b", "c"];
+        // console.log(Object.keys(arr)); 
+        // // console: ["0", "1", "2"]
+
+        /* 
+            因为对象没有Symbol.iterator属性，不能使用for of
+            所以可以给obj写一个Symbol.iterator的方法
+            这个方法必须return对象，在这个对象下有2个属性
+            value，done
+            value就是for of中的attr
+            done:为true的时候不遍历
+            done:为false的时候遍历
+        */
+        // obj[Symbol.iterator] = function () {
+        //     let keys = Object.keys(obj);
+        //     console.log(keys); // ["name", "age"]
+        //     let len = keys.length;
+        //     console.log(len); // 2
+        //     let i = 0; //???
+        //     return {
+        //         next() {
+        //             if (i < len) {
+        //                 return {
+        //                     // 遍历
+        //                     value: {
+        //                         key: keys[i],
+        //                         val: obj[keys[i++]], 
+        //                         done: false
+        //                     }
+        //                 }
+        //             } else {
+        //                 //不遍历
+        //                 return { done: true };
+        //             }
+        //         }
+        //     }
+        // }
+        // let obj2 = obj[Symbol.iterator]();
+        // console.log(obj2.next()); 
+        // //value: {key: "name", val: "Tom", done: false}
+        // console.log(obj2.next()); 
+        // //value: {key: "age", val: 18, done: false}
+
+
+    </script>
+</body>
+
+</html>

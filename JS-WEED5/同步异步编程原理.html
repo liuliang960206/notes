@@ -29,7 +29,7 @@
 
             每一个应用程序都可以理解为一个进程（浏览器打开一个页面，就相当于开辟一个进程），在一个程序中（进程中），经常会同时处理多个事情，此时需要分配多个线程区同时完成多项任务
 
-            2.浏览器在单线程当中实现异步的机制，主要依赖于任务队列完成的，浏览器中有两个任务队列：主任务队列 & 等待任务队列
+            2.浏览器在单线程当中实现异步的机制，主要依赖于任务队列完成的，浏览器中有两个任务队列：主任务队列(入栈) & 等待任务队列
             
         */
 
@@ -82,28 +82,41 @@
         // },0); // 定时器时间因子设置为0也不是立即执行，每一个浏览器都有一个自己最小的等待和反应时间（谷歌：5-6 IE:10-13)，所以写0还是异步编程
         // console.log(n)
 
-        // 练习3
-        setTimeout(() => {
-            console.log(1);
-        }, 20);
-        console.log(2);
-        setTimeout(() => {
-            console.log(3);
-        }, 10);
-        console.log(4);
-        for (let i = 0; i < 90000000; i++) {
+        // // 练习3
+        // setTimeout(() => {
+        //     console.log(1);
+        // }, 20);
+        // console.log(2);
+        // setTimeout(() => {
+        //     console.log(3);
+        // }, 10);
+        // console.log(4);
+        // for (let i = 0; i < 90000000; i++) {
 
-        }
-        console.log(5);
+        // }
+        // console.log(5);
+        // setTimeout(() => {
+        //     console.log(6);
+        // }, 8);
+        // console.log(7);
+        // setTimeout(() => {
+        //     console.log(8);
+        // }, 15);
+        // console.log(9);
+        // // 2 4 5 7 9 3 1 6 8 
+
+        let a = 10;
         setTimeout(() => {
-            console.log(6);
-        }, 8);
-        console.log(7);
-        setTimeout(() => {
-            console.log(8);
-        }, 15);
-        console.log(9);
-        // 2 4 5 7 9 3 1 6 8 
+            a++;
+            console.log(a)
+        }, 2000)
+        setInterval(() => {
+            a++;
+            console.log(a)
+        }, 1000)
+        console.log(a);
+
+
     </script>
 </body>
 

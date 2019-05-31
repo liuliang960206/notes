@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            async 函数(ES2017 标准)
+            使得异步操作变成同步编程
+        */
+
+        // let a = 10;
+        // setTimeout(()=>{
+        //     a++;
+        //     console(a)
+        // },1000);
+        // console.log(a)
+
+
+        let a = 10;
+        async function fn() {
+            console.log('abc');
+            a = await fn(); //11
+            a++;
+            console.log(a); //12
+        }
+        fn();
+
+        function fn() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    a++;
+                    resolve(a);
+                }, 3000);
+            });
+        }
+        console.log(a);
+    </script>
+</body>
+
+</html>

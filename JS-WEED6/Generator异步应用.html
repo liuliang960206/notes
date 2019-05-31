@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            **协程**
+            传统的编程语言，早有异步编程的解决方案（其实是多任务的解决方案）。其中有一种叫做"协程"（coroutine），意思是多个线程互相协作，完成异步任务。
+
+            协程有点像函数，又有点像线程。它的运行流程大致如下。
+            第一步，协程A开始执行。
+            第二步，协程A执行到一半，进入暂停，执行权转移到协程B。
+            第三步，（一段时间后）协程B交还执行权。
+            第四步，协程A恢复执行。
+            上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行。
+        */
+        
+        function* asyncJob() {
+            // ...其他代码
+            var f = yield readFile(fileA);
+            // ...其他代码
+        };
+        
+    </script>
+</body>
+
+</html>

@@ -12,7 +12,7 @@
     <script>
         /* 
             Promise: ES6中新增加的类(new Promise)
-            目的：为了管理JS中的异步编程，所以我们也把它称为“Promise设计模式”
+            目的：为了管理JS中的异步编程，所以我们也把它称为“Promise设计模式”,让异步编程变成同步编程
 
             let p = new Promise();
             p.then();
@@ -32,7 +32,7 @@
         // console.log(2); //再输出2
 
 
-        // new Promise((resolve,relect)=>{
+        // new Promise((resolve,reject)=>{
         //     //=>resolve: 当异步操作执行成功，执行resolve方法
         //     //=>relect: 当异步操作执行失败，执行relect方法
         //     setTimeout(()=>{
@@ -60,38 +60,38 @@
         // xhr.send(null);
         // console.log(val); // 如果使用异步ajax请求，不等ajax彻底完成，就把val输出，此时结果是null
 
-        // 基于promise ajax获取数据
-        let pro = new Promise((resolve, rejected) => {
-            //=> 执行异步操作
-            let xhr = new XMLHttpRequest();
-            xhr.open('get', '1.js', true);
-            xhr.onreadystatechange = () => {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    val = xhr.responseText;
-                    resolve(val);
-                }
-                if(xhr.status !== 200){
-                    rejected();
-                }
-            };
-            xhr.send(null);
-        });
-        pro.then((res)=>{
-            console.log(res);
-            //=> 数据绑定
-            return 100; // 返回的结果传递给第二个then了
-        },()=>{
-           console.log('no')
-        }).then((res)=>{
-            // 当第一个then中的函数执行完，会执行第二个then
-            console.log(res); // 100
-        },()=>{
+        // // 基于promise ajax获取数据
+        // let pro = new Promise((resolve, rejected) => {
+        //     //=> 执行异步操作
+        //     let xhr = new XMLHttpRequest();
+        //     xhr.open('get', '1.js', true);
+        //     xhr.onreadystatechange = () => {
+        //         if (xhr.readyState === 4 && xhr.status === 200) {
+        //             val = xhr.responseText;
+        //             resolve(val);
+        //         }
+        //         if(xhr.status !== 200){
+        //             rejected();
+        //         }
+        //     };
+        //     xhr.send(null);
+        // });
+        // pro.then((res)=>{
+        //     console.log(res);
+        //     //=> 数据绑定
+        //     return 100; // 返回的结果传递给第二个then了
+        // },()=>{
+        //    console.log('no')
+        // }).then((res)=>{
+        //     // 当第一个then中的函数执行完，会执行第二个then
+        //     console.log(res); // 100
+        // },()=>{
 
-        }).then(()=>{
-            // 当第二个then中的函数执行完，会执行第三个then
-        },()=>{
+        // }).then(()=>{
+        //     // 当第二个then中的函数执行完，会执行第三个then
+        // },()=>{
             
-        })
+        // })
 
     </script>
 </body>

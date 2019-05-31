@@ -131,10 +131,39 @@
 
 
 
-        // /* 
-        //     for of循环：Es6 中新增的语句
-        //     for…of循环可以使用的范围包括数组、Set 和 Map 结构、某些类似数组的对象（比如arguments对象、DOM NodeList 对象）、Generator 对象，以及字符串）
-        // */
+        /* 
+            for of循环：Es6 中新增的语句
+            for…of循环可以使用的范围包括数组、Set 和 Map 结构、某些类似数组的对象（比如arguments对象、DOM NodeList 对象）、Generator 对象，以及字符串）
+
+            ES6 提供三个新的方法——entries()，keys()和values()——用于遍历数组。可以用for...of循环进行遍历，
+            区别:
+            keys()是对键名的遍历
+            values()是对键值的遍历
+            entries()是对键值对的遍历
+
+            这三个方法的返回值都是Iterator的一个对象，可以通过next()方法调用执行
+
+            关于Iterator遍历器:
+            只要数据拥有Symbol.Iterator, 就可以用for of 循环
+            遍历接口返回一个对象，对象中有next()方法，next()方法必须返回对象，这个对象下有两个属性：
+            done:
+                为true的时候不遍历
+                为false的时候遍历
+
+            obj[Symbol.Iterator] = function(){
+                return {
+                    next(){
+                        return{
+                            value:"hello",
+                            done:false
+                        };
+                    };
+                    _first:true
+                }
+            }
+
+            当使用for of 时候，内部会调用next()方法
+        */
 
         // // 循环数组
         // let arr = [true, 'haha', 10, {}, [1, 2, 3]];
@@ -149,6 +178,18 @@
         //     };
         //     console.log(item); // true haha
         // };
+
+        // let arr = [true, 'haha', 10, {}, [1, 2, 3]];
+        // for(let [key,val] of arr.entries()){
+        //     console.log(key,val); // key为索引，val为键值
+        //     /* 
+        //         0 true
+        //         1 "haha"
+        //         2 10
+        //         3 {}
+        //         4 [1, 2, 3]
+        //     */ 
+        // }
 
         // // 循环字符串
         // let str = 'hello';
@@ -166,9 +207,40 @@
 
         // for of不能直接遍历对象 ，可以使用Object.keys()
         // Object.keys()可以将对象里的所以的属性名取出来放到一个数组中
-        // let obj = { name: 'Tom', age: 33, id: 6 };
+        let obj = { name: 'Tom', age: 33, id: 6 };
+        obj[Symbol.Iterator] = function () {
+            let keys = Object.keys(obj);
+            let len = keys.length;
+            let i = 0;
+            return {
+                next() {
+                    if (i<len) {
+                        return {
+                            value: {key:keys[i],val:ovj[keys[i++]]},
+                            done: false
+                        };
+                    }else{
+                        return {
+                            value: "hello",
+                            done: true
+                        };
+                    }
+                }
+            }
+        }
+
+        // let obj = { 
+        //     name: 'Tom',
+        //     age: 33, 
+        //     id: 6 
+        // };
         // for (let item of Object.keys(obj)) {
-        //     console.log(item + ':' + obj[item]); // name:Tom age:33 id:6
+        //     console.log(item,obj[item]); 
+        //     /* 
+        //         name Tom
+        //         age 33
+        //         id 6
+        //     */  
         // };
 
 
@@ -205,14 +277,14 @@
         // while(ary[i]);
 
 
-        /* 
+        /*
             Object.keys():遍历对象 返回一个包括对象属性名的数组 （可枚举的属性名）
             Object.getOwnPropertyNames()
             keys getOwnPropertyNames 是Object基类上的内置属性
         */
-        let obj = { name: 'Tom', age: 33, id: 6 };
-        console.log(Object.keys(obj)); // ["name", "age", "id"] 
-        console.log(Object.getOwnPropertyNames(obj)); // ["name", "age", "id"] 
+        // let obj = { name: 'Tom', age: 33, id: 6 };
+        // console.log(Object.keys(obj)); // ["name", "age", "id"] 
+        // console.log(Object.getOwnPropertyNames(obj)); // ["name", "age", "id"] 
 
 
 

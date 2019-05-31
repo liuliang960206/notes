@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body> 
+    <script>
+        const promise1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('success');
+            }, 1000);
+        });
+        
+        const promise2 = promise1.then(() => {
+            throw new Error('error!!!'); //报错
+        });
+
+        console.log('promise1', promise1);//promise对象 pending
+        console.log('promise2', promise2);//promise对象 pending
+
+        setTimeout(() => {
+            console.log('promise1', promise1);//promise对象 resolved
+            console.log('promise2', promise2);//promise对象 rejected
+        }, 2000);
+
+    </script>
+</body>
+
+</html>

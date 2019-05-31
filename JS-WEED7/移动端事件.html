@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="box2"></div>
+    <script>
+        /*
+            手机三大事件：
+            touchstart 手指按下
+            touchmove 手指移动
+            touchend 手指离开
+            一个目标按下。移动、抬起是一套事件
+        */
+
+        /*
+            TouchEvent 接口:
+            TouchEvent 接口继承了 Event 接口，表示由触摸引发的事件实例，通常来自触摸屏或轨迹板。除了被继承的属性以外，它还有一些自己的属性。
+
+            touches：TouchList实例，代表所有的当前处于活跃状态的触摸点，默认值是一个空数组[]。
+            targetTouches：TouchList实例，代表所有处在触摸的目标元素节点内部、且仍然处于活动状态的触摸点，默认值是一个空数组[]。
+            changedTouches：TouchList实例，代表本次触摸事件的相关触摸点，默认值是一个空数组[]。
+
+            移动端事件用DOM2：
+            因为DOM0在有些浏览器上调试是不正常的，但是真机上是OK的
+            所以为了方便开发，移动端的事件都用DOM2绑定
+        */
+        let event = document.createEvent('HTMLEvents');
+        event.initEvent("top", false, false);
+        let event2 = document.createEvent('HTMLEvents');
+        event2.initEvent("bottom", false, false);
+
+        document.addEventListener('touchstart', start);
+        document.addEventListener('touchmove', move);
+        document.addEventListener('touchend', end);
+
+
+
+        document.addEventListener('top', function () {
+            console.log('上划')
+        });
+        document.addEventListener('bottom', function () {
+            console.log('下划')
+        });
+
+
+
+
+        let disX = 0;
+        let disY = 0;
+        function start(ev) {
+            disX = ev.changedTouches[0].pageX;
+            disY = ev.changedTouches[0].pageY;
+        }
+        function move() {
+
+        }
+        function end(ev) {
+            let endX = ev.changedTouches[0].pageX;
+            let endY = ev.changedTouches[0].pageY;
+            let X = endX - disX;
+            let Y = endY - disY;
+
+            if (Math.abs(X) > Math.abs(Y) && X > 0) {
+                alert("像右滑动");
+            } else if (Math.abs(X) > Math.abs(Y) && X < 0) {
+                alert("像左滑动");
+            } else if (Math.abs(Y) > Math.abs(X) && Y > 0) {
+                document.dispatchEvent(event2);
+            } else if (Math.abs(Y) > Math.abs(X) && Y < 0) {
+                // alert("上滑动");
+                document.dispatchEvent(event);
+            } else {
+                alert("触摸");
+            }
+        }
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

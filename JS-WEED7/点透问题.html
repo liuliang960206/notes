@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: .5;
+
+        }
+
+        #a {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1
+        }
+
+        #txt {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <!-- <a id="a" href="http://www.baidu.com">点击</a> -->
+    <!-- <a id="a" href="javascript:void(0)">点击</a> -->
+    <input id="txt" type="text" />
+    <script>
+        /* 
+           点透：移动端事件会比pc端事件快300ms左右
+           如：touchend会比mouseout快300ms  所以移动端大多数用touch事件
+
+           在移动端中，点击某个元素，如果盒子下方有焦点元素，300ms内，上方的盒子消失或者偏移，会触发下面的焦点元素
+           结构例子中：a元素为下方元素（焦点元素），div为上方元素
+
+           解决方案（焦点元素为a元素）：
+           A. 不放焦点元素，需要跳转使用js window.location.href跳转
+               弊端：对seo优化有影响
+           B. 放焦点元素，<a id="a" href="javascript:void(0)">点击</a>
+           C. 通过阻止全局的默认行为，阻止焦点的默认行为，然后另外在焦点元素上绑定跳转 
+               document.ontouchend = function(){ return false; };
+               a.ontouchend = function(){ window.location.href = 'http://www.baidu.com'; };
+           D. 利用300ms的原理,设置>300ms的时间
+               <a id="a" href="http://www.baidu.com">点击</a>
+               box.ontouchend = function () { setTimeout(()=>{ this.style.display = 'none'; },310); };
+           E. 不让元素在结构中消失，可以让元素在视觉效果中隐藏
+               可以使用： 
+               1) visibility: hidden;
+               2) opacity: 0;
+
+           解决方案（焦点元素为input元素）：
+           阻止全局的默认行为,但是会把input的点击聚焦行为阻止掉，需要单独在input元素上阻止冒泡或者单独添加自动聚焦
+              box.ontouchend = function () { this.style.display = 'none'; };
+              txt.ontouchend = function(ev){ // this.focus(); ev.cancelBubble = true; };
+              document.ontouchend = function(){ return false; };
+       */
+       
+        // document.ontouchend = function(){
+        //     return false;
+        // };
+
+        // a.ontouchend = function(){
+        //     window.location.href = 'http://www.baidu.com';
+        // };
+
+        box.ontouchend = function () {
+            this.style.display = 'none';
+            // setTimeout(()=>{
+            //     this.style.display = 'none';
+            // },310);
+        };
+
+        txt.ontouchend = function (ev) {
+            // this.focus();
+            ev.cancelBubble = true;
+        }
+        document.ontouchend = function () {
+            return false;
+        }
+    </script>
+</body>
+
+</html>
