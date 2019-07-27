@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // document.cookie = 'name=Tom';
+        // document.cookie = 'name2=Jess';
+        // document.cookie = 'name3=haha; Expires=' + new Date('2019-6-9 07:00:00');
+        // console.log(document.cookie);
+        // Tom; name2=Jess; name=Tom; name3=haha
+
+        //setCookie方法：创建cookie
+        function setCookie(...arg){
+            // 可能有两个参数或者三个参数，参数不固定用剩余参数...arg获取所有参数
+            // console.log(arg);// ["name", "Tom", 1000]
+            if(arg.length === 2){
+                //如果有两个参数  第一项为属性名，第二项为属性值
+                document.cookie = arg[0] + '=' + arg[1];
+                return;
+            }
+            if(arg.length === 3){
+                /* 
+                    如果有三个参数
+                    A. 第三个参数为字符串类型
+                    setCookie('zhufeng','001','2019-6-7 16:20:00')
+                    B. 第三个参数为数字类型
+                    setCookie('name','Tom',1000);
+                */ 
+                if(typeof arg[2] === 'string'){
+                    document.cookie = `${arg[0]}=${arg[1]}; Expires=${new Date(arg[2])}`;
+                    return;
+                };
+                if(typeof arg[2] === 'number'){
+                    // 设置当前时间 date为当天是几号 
+                    // setDate 设置当前月的天 例如：setDate(20) 即为当前月20号
+                    let nowDate = new Date();
+                    let date = nowDate.getDate();
+                    // date 为当前月的几号 arg[2] 为传递进来的第三个参数，即几天之后失效  setDate(date+arg[2]) 即在几号cookie失效
+                    let sd = new Date();
+                    sd.setDate(date+arg[2]);
+                    document.cookie = `${arg[0]}=${arg[1]}; Expires=${sd}`
+                    // console.log(document.cookie)
+                }
+            }
+        }
+        // setCookie('name6','Tom','2019-6-10 14:47:00');
+        // setCookie('name','Tom',7);
+
+
+        /* 
+            获取cookie方法
+            name=Tom; name2=Jess; name3=haha
+            先用 "; " 切割，
+        */
+        function getCookie(val){
+            let ary = document.cookie.split('; ');
+            // console.log(ary); //["name=Tom", "name2=Jess", "name3=haha"]
+            let v =''; // ???
+            ary.forEach(item=>{
+                let arr = item.split('=');
+                if(arr[0] === val){
+                    v = arr[1];
+                }
+            })
+            return v;
+        }
+
+
+        /* 
+            删除cookie方法 
+            设置一个过期的时间，就死亡
+        */
+        function removeCookie(...arg){
+            setCookie(arg[0],arg[1],-1)
+        }
+        // removeCookie('name2','Jess');
+    </script>
+</body>
+
+</html>

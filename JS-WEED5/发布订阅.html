@@ -44,124 +44,126 @@
         // $plan.removed(()=>{});
         // $plan.fire(10,20);
 
-        // (function anonymous(window) {
-        //     class Subscribe {
-        //         constructor() {
-        //             //=> 创建一个容器（每一个实例都有一个自己独有的容器，管理自己需要执行的方法即可）
-        //             console.log(this);//实例
-        //             this.pond = [];
-        //         }
-        //         add(fn) {
-        //             //向计划表（pond）中增加方法,要去重
-        //             //fn:我们需要增加的方法
-        //             let pond = this.pond; // 数组地址
-        //             let isExist = false;
-        //             //是否存在：假设不存在
-        //             pond.forEach(item => item === fn ? isExist = true : null);
-        //             !isExist ? pond.push(fn) : null;//如果不存在就存到空数组
-        //         }
-        //         remove(fn) {
-        //             // 从计划表中（pond池子）中移除方法
-        //             let pond = this.pond;
-        //             pond.forEach((item, i) => {
-        //                 if (item === fn) {
-        //                     // pond.splice(i, 1);//从索引项开始删除一个
-        //                     // // 此时不能基于splice删除，这种删除方式会改变原有数组，例如：我们通知方法执行，当执行到fn3时（fire中的循环索引是2），但是基于splice把fn1/fn2删除后，原始数组后面的项都向前提取两位，此时fire中继续遍历下一个方法（索引3），已经找不到索引为3的那一项了
+        (function anonymous(window) {
+            class Subscribe {
+                constructor() {
+                    //=> 创建一个容器（每一个实例都有一个自己独有的容器，管理自己需要执行的方法即可）
+                    console.log(this);//实例
+                    this.pond = [];
+                }
+                add(fn) {
+                    //向计划表（pond）中增加方法,要去重
+                    //fn:我们需要增加的方法
+                    let pond = this.pond; // 数组地址
+                    let isExist = false;
+                    //是否存在：假设不存在
+                    pond.forEach(item => item === fn ? isExist = true : null);
+                    !isExist ? pond.push(fn) : null;//如果不存在就存到空数组
+                }
+                remove(fn) {
+                    // 从计划表中（pond池子）中移除方法
+                    let pond = this.pond;
+                    pond.forEach((item, i) => {
+                        if (item === fn) {
+                            // pond.splice(i, 1);//从索引项开始删除一个
+                            // // 此时不能基于splice删除，这种删除方式会改变原有数组，例如：我们通知方法执行，当执行到fn3时（fire中的循环索引是2），但是基于splice把fn1/fn2删除后，原始数组后面的项都向前提取两位，此时fire中继续遍历下一个方法（索引3），已经找不到索引为3的那一项了
 
-        //                     //=> 让当前项赋值为null（这样函数移除掉了，但是数组结构没有变，不会出现数组塌陷）
-        //                     pond[i] = null; //=>item=null是不可以的
-        //                 }
-        //             })
-        //         }
-        //         fire(...arg) { //剩余运算符
-        //             //通知计划表中的方法依次执行，如果传递了参数，把这些参数依次赋值给执行的每一个方法
-        //             let pond = this.pond;
-        //             // remove机制处理了，此时item不一定都是函数，还有可能是null
-        //             // null不是不执行，而是把这一项删除掉
-        //             // pond.forEach((item, i) => {
-        //             //     item(...arg);//展开运算符
-        //             // })
-        //             for (let i = 0; i < pond.length; i++) {
-        //                 let item = pond[i];
-        //                 if(item === null){
-        //                     pond.splice(i,1);
-        //                     i--;
-        //                     continue;
-        //                 }
-        //                 item(...arg);
+                            //=> 让当前项赋值为null（这样函数移除掉了，但是数组结构没有变，不会出现数组塌陷）
+                            pond[i] = null; //=>item=null是不可以的
+                        }
+                    })
+                }
+                fire(...arg) { //剩余运算符
+                    //通知计划表中的方法依次执行，如果传递了参数，把这些参数依次赋值给执行的每一个方法
+                    let pond = this.pond;
+                    // remove机制处理了，此时item不一定都是函数，还有可能是null
+                    // null不是不执行，而是把这一项删除掉
+                    // pond.forEach((item, i) => {
+                    //     item(...arg);//展开运算符
+                    // })
+                    for (let i = 0; i < pond.length; i++) {
+                        let item = pond[i];
+                        if(item === null){
+                            pond.splice(i,1);
+                            i--;
+                            continue;
+                        }
+                        item(...arg);
 
-        //             }
-        //         }
-        //     }
-        //     window.Subscribe = Subscribe;
-        // })(window);
-
-        // let subscribe = new Subscribe();
-
-        // let fn1 = function fn1(x, y) {
-        //     console.log(1, x, y);
-
-        // };
-        // let fn2 = function fn2() {
-        //     console.log(2);
-        // };
-        // let fn3 = function fn3() {
-        //     console.log(3);
-        //     subscribe.remove(fn1);
-        //     subscribe.remove(fn2);
-        // };
-        // let fn4 = function fn4() {
-        //     console.log(4);
-        // };
-        // subscribe.add(fn1)
-        // subscribe.add(fn1)
-        // subscribe.add(fn2)
-        // subscribe.add(fn3)
-        // subscribe.add(fn1)
-        // subscribe.add(fn3)
-        // subscribe.add(fn4)
-        // setInterval(() => {
-        //     subscribe.fire(100, 200);
-        // }, 1000);
-
-
-
-        function addEvent(ele, evName, fn) {
-            ele.bindEvent = ele.bindEvent || {};
-            ele.bindEvent[evName] = ele.bindEvent[evName] || [];
-            if (typeof fn === 'function' && !ele.bindEvent[evName].includes(fn)) {
-                ele.bindEvent[evName].push(fn);
+                    }
+                }
             }
-        }
+            window.Subscribe = Subscribe;
+        })(window);
 
-        function dispatch(ele, evName) {
-            if (!ele.bindEvent[evName]) return;
-            ele.bindEvent[evName].forEach(fn => {
-                fn.call(ele);
-            });
-        }
+        let subscribe = new Subscribe();
 
-        function removeEvent(ele, evName, fn) {
-            if (!ele.bindEvent[evName]) return;
-            ele.bindEvent[evName] = ele.bindEvent[evName].filter(f => f !== fn);
-        }
+        let fn1 = function fn1(x, y) {
+            console.log(1, x, y);
 
-        addEvent(document, '点击', function () {
-            console.log(this);
-        });
+        };
+        let fn2 = function fn2() {
+            console.log(2);
+        };
+        let fn3 = function fn3() {
+            console.log(3);
+            subscribe.remove(fn1);
+            subscribe.remove(fn2);
+        };
+        let fn4 = function fn4() {
+            console.log(4);
+        };
+        subscribe.add(fn1)
+        subscribe.add(fn1)
+        subscribe.add(fn2)
+        subscribe.add(fn3)
+        subscribe.add(fn1)
+        subscribe.add(fn3)
+        subscribe.add(fn4)
+        setInterval(() => {
+            subscribe.fire(100, 200);
+        }, 1000);
 
-        addEvent(document, '点击', fn);
 
-        function fn() {
-            alert(2);
-            removeEvent(document, '点击', fn);
-        }
 
-        document.onclick = function () {
-            dispatch(document, '点击');
-        }
 
-        console.dir(document);
+
+        // function addEvent(ele, evName, fn) {
+        //     ele.bindEvent = ele.bindEvent || {};
+        //     ele.bindEvent[evName] = ele.bindEvent[evName] || [];
+        //     if (typeof fn === 'function' && !ele.bindEvent[evName].includes(fn)) {
+        //         ele.bindEvent[evName].push(fn);
+        //     }
+        // }
+
+        // function dispatch(ele, evName) {
+        //     if (!ele.bindEvent[evName]) return;
+        //     ele.bindEvent[evName].forEach(fn => {
+        //         fn.call(ele);
+        //     });
+        // }
+
+        // function removeEvent(ele, evName, fn) {
+        //     if (!ele.bindEvent[evName]) return;
+        //     ele.bindEvent[evName] = ele.bindEvent[evName].filter(f => f !== fn);
+        // }
+
+        // addEvent(document, '点击', function () {
+        //     console.log(this);
+        // });
+
+        // addEvent(document, '点击', fn);
+
+        // function fn() {
+        //     alert(2);
+        //     removeEvent(document, '点击', fn);
+        // }
+
+        // document.onclick = function () {
+        //     dispatch(document, '点击');
+        // }
+
+        // console.dir(document);
 
 
     </script>

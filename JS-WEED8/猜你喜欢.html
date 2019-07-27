@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active {
+            background: yellow;
+        }
+
+        #box ul {
+            width: 200px;
+            border: 1px solid #000;
+            list-style: none;
+            _display: none;
+        }
+
+        #box ul li {
+            padding: 5px;
+        }
+
+        #box ul.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="button" value="猜你喜欢" id="xh">
+        <div id="div"></div>
+        <ul id="ul"></ul>
+    </div>
+    <script>
+        let obj = {
+            "电影": ['我不是药神', '大护法', '流浪地球', '七号房的礼物', '这个杀手不太冷'],
+            "音乐": ['我明白', '烟花易冷', '寒衣调', '相逢何必曾相识', '红尘客栈'],
+            "综艺": ['明星大侦探', '向往的生活', '极限挑战', '爸爸去哪儿', '密室大逃脱']
+        }
+
+        let arr = Object.keys(obj);
+        console.log(arr); // ["电影", "音乐", "电视剧"]
+
+        //渲染页面
+        function render(arr) {
+            let html = '';
+            arr.forEach(item => {
+                html += `<li>${item}</li>`
+            })
+            ul.innerHTML = html;
+        }
+        render(obj[arr[0]]);
+
+        // 循环数组，创建三个按钮
+        arr.forEach((item, i) => {
+            let btn = document.createElement('button');
+            btn.innerHTML = item;
+            // 默认第一组按钮按钮
+            if (i === 0) {
+                btn.className = 'active';
+            }
+            btn.onclick = function () {
+                // 点击按钮时，所有按钮类名清空,当前点击的按钮加类名'active'
+                let btns = document.querySelectorAll('button');
+                btns.forEach((item, i) => {
+                    item.className = '';
+                })
+                this.className = 'active';
+
+
+                // 点击按钮时，记录cookie，
+                let cookieArr = getCookie('xihuan')
+                console.log(cookieArr); // 字符串["音乐","综艺"]
+                // 如果是字符串，就传化成数组；如果是空字符串就创建空数组
+                if(cookieArr){
+                    cookieArr = JSON.parse(cookieArr);
+                }else{
+                    cookieArr = [];
+                }
+                //如果数组中不包含点击的内容，那么就把点击的内容push数组中，再把数组转化成字符串设置在cookie中
+                if(!cookieArr.includes(item)){
+                    cookieArr.push(item);
+                    setCookie('xihuan',JSON.stringify(cookieArr));
+                };
+                render(obj[arr[i]]);
+            }
+            div.append(btn);
+        })
+
+        // 获取点击过的按钮字符串 
+        let xharr = getCookie('xihuan');
+        console.log(xharr); // 没点击为'' 点击过后显示点击过的内容比如["音乐","综艺"]'
+
+        //如果有内容
+        if(xharr){
+            xh.style.display = 'block';
+            xh.onclick = function(){
+                xharr = JSON.parse(getCookie('xihuan'));
+                // console.log(xharr); //数组["综艺"]
+                //把浏览过的数据放到concatArr中
+                let concatArr = [];
+                xharr.forEach(item=>{
+                    concatArr.push(...obj[item]);
+                })
+               
+                //把得到的数组内容随机乱序截取5个
+                let disorder = concatArr.sort((a,b)=>Math.random() - .5).slice(0,5);
+                console.log(disorder);
+                render(disorder);
+            }
+        }
+
+
+
+        // 创建cookie、获取cookie方法
+        function setCookie(...arg) {
+            if (arg.length === 2) {
+                document.cookie = arg[0] + '=' + arg[1];
+                return;
+            }
+            if (arg.length === 3) {
+                if (typeof arg[2] === 'string') {
+                    document.cookie = arg[0] + '=' + arg[1] + '; Expires=' + new Date(arg[2]);
+                    return;
+                }
+                if (typeof arg[2] === 'number') {
+                    let data = new Date(); //当前的时间
+                    let sd = new Date;
+                    sd.setDate(data.getDate() + arg[2]);
+                    document.cookie = arg[0] + '=' + arg[1] + '; Expires=' + sd;
+                }
+            }
+        }
+        function getCookie(val) {
+            let ary = document.cookie.split('; ');
+            let v = '';
+            ary.forEach(item => {
+                let ary2 = item.split('=');
+                if (ary2[0] === val) {
+                    v = ary2[1];
+                    return;
+                }
+            })
+            //console.log(ary);
+            return v;
+        }
+    </script>
+</body>
+
+</html>

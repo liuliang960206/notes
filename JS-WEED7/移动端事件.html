@@ -45,7 +45,7 @@
             touches：TouchList实例，代表所有的当前处于活跃状态的触摸点，默认值是一个空数组[]。
             targetTouches：TouchList实例，代表所有处在触摸的目标元素节点内部、且仍然处于活动状态的触摸点，默认值是一个空数组[]。
             changedTouches：TouchList实例，代表本次触摸事件的相关触摸点，默认值是一个空数组[]。
-
+            
             移动端事件用DOM2：
             因为DOM0在有些浏览器上调试是不正常的，但是真机上是OK的
             所以为了方便开发，移动端的事件都用DOM2绑定
@@ -67,8 +67,6 @@
         document.addEventListener('bottom', function () {
             console.log('下划')
         });
-
-
 
 
         let disX = 0;

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            源：域名、端口、协议
+            
+            同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。
+
+            所谓同源是指，域名，协议，端口相同。
+            当一个浏览器的两个tab页中分别打开来 百度和谷歌的页面
+            当浏览器的百度tab页执行一个脚本的时候会检查这个脚本是属于哪个页面的，
+            即检查是否同源，只有和百度同源的脚本才会被执行。 [1] 
+            如果非同源，那么在请求数据时，浏览器会在控制台中报一个异常，提示拒绝访问。
+            同源策略是浏览器的行为，是为了保护本地数据不被JavaScript代码获取回来的数据污染，因此拦截的是客户端发出的请求回来的数据接收，即请求发送了，服务器响应了，但是无法被浏览器接收。
+
+            同源策略限制以下几种行为：
+            1.) Cookie、LocalStorage 和 IndexDB 无法读取
+            2.) DOM 和 Js对象无法获得
+            3.) AJAX 请求不能发送
+
+            跨域（跨源）
+            不同域名 || 不用端口 || 不同协议
+
+            跨域问题解决方案：
+            A. CORS
+                -> 需要高版本浏览器下使用XMLHttpRequest进行请求
+                -> 需要服务器端在响应头上设置一个白名单
+                    Access-Control-Allow-Origin:"*"
+                -> 低版本不兼容
+            B. 服务器代理
+                -> A能访问B（同域），但是A不能访问C（跨域），B能访问C（服务器操作）；让A去访问B就等同于A能访问C
+            C. jsonp(JSON with Padding)：内填充的数据
+                -> 能够兼容低版本
+                -> 前后端操作不复杂
+                原理：
+                1.必须在全局暴露一个函数
+                function fn(data){
+                    console.log(data);
+                }
+                2.服务器传输的数据必须是函数名+括号 括号中填充的数据的这种格式
+                fn([1,2,3,4,5]);
+        */
+    </script>
+</body>
+</html>

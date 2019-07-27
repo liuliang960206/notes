@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            本地存储和服务器存储
+            本地存储：把一些信息存储到客户端本地（主要目的有很多，其中一个就是实现多页面之间的信息共享）
+            -> 离线缓存 xxx.manifest 
+            H5处理一些缓存还是存在一些问题，所以真实项目中一般用传统的native app来完成这件事情
+            -> localStorage / sessionStorage: H5中新增加的API，基于这个API可以把一些数据缓存到客户端本地（常用）
+            -> indexDB / webSQL: 本地数据库存储
+            -> cookie：本地信息存储（常用）
+            -> CacheStorage / ApplicationCache: 本地缓存存储
+
+            用到本地存储的地方：
+            [页面之间信息的通信]：
+            - A页面存储信息，B页面中可以获取
+            - 登录
+            - 记住用户名密码（或者自动登录）
+            - 购物车
+            - 跳转到其他页面，返回上级页面的时候停留在之前最后一个点击的位置
+            [做一些性能优化]
+            - 把一些不经常改变的数据，在第一次从服务器端获取到之后，存储到客户端本地（记录一个存储时间），假设我们设置的有效存储期是10分钟，那么10分钟以内，我们再刷新页面，就不用再向服务器发送请求了，直接从本地数据中获取展示即可；超过10分钟，重新向服务器发送请求，请求回来的最新数据参考第一次，也一样存储到本地
+                => 减轻服务器的压力
+                => 对于不经常更新的数据我们可以把存储周期设置的长一些，有助于页面第二次加载的时候，渲染的速度（移动端经常做这些事情）
+
+            [本地存储的局限性]
+            A. 本地存储都是存储到当前浏览器指定的地方
+                -> 在谷歌浏览器中存储的信息，在IE浏览器中获取不到，也就是本地存储信息无法跨浏览器进行传输
+            B. 存储的信息是按照域来管理的
+                -> 访问京东的网站，把信息都存储到了jd.com中，其他域的网站无法直接获取这些信息，也就是本地存储不能直接跨域访问
+            
+        */
+
+        /* 
+            登录/注册：
+            真实项目中的登录注册，都是基于session服务器存储的登录信息，而不是本地存储（因为本地存储不安全，明文存储，直接在浏览器控制台中就可以查看到）
+
+            session与cookie的关联：
+            1.session是服务器存储，cookie是客户端存储
+            2.在服务器端建立sessio后，当服务器和当前客户端之间会建立一个唯一的标识（sessionID / sid），而本次存储的session信息都存放到对应的sid下（目的为了区分不同客户端都在服务器上建立session信息，后期查找的时候，可以找到自己建立的）
+            3.当服务器端把一些成功或者失败的结果返回给客户端的时候，在响应头信息中会增加set-cookie（客户端的cookie）这样的字段，把connect.sid存储到客户端的cookie信息当中
+            4.当客户端在向服务器发送任何请求的时候，在请求头中，都会把cookie信息带上，传递给服务器（包含了之前存储的connect.sid信息）
+        */
+
+        /* 
+            cookie：类似自定义属性 
+            cookie能被客户端修改查看
+            document.cookie = 'name=Tom';
+            生命周期（临时、永久或可控）
+                (1)默认生命周期为浏览器关闭
+                (2)Expires=要设置的时间  这样就可以让cookie在指定时间内死亡 ???
+        */
+
+
+        /* 
+            localStorage：本地存储(前端小型的数据库)
+            window.localStorage  window下的属性
+
+            [Cookie]
+            1.兼容所有浏览器
+            2.有存储的大小限制，一般一个源（一个域下）只能储2kb左右（现已扩增为5MB）
+            3.cookie有过期时间（当然我们可以手动设置这个时间）
+            4.杀毒软件或者浏览器的垃圾清理都可能会把xookie信息强制清除
+            5.在隐私或者无痕浏览模式下，是不记录xookie的
+            6.cookie不是严格的本地存储，因为要和服务器之间来回传输
+
+            [localStorage]
+            1.不兼容IE8及以下
+            2.也有存储的大小限制，一个源下最多存储5MB左右
+            3.本地永久存储，只要不手动删除，永远存储在本地（但是可以基于API remove/clear手动清除一些自己想要删除的信息）
+            4.杀毒软件或者浏览器的垃圾清理暂时不会清除localStorage
+            5.在隐私或者无痕模式下，是记录localStorage的
+            6.localStorage和服务器无关
+
+            真实项目中使用本地存储来完成一些需求的情况不是很多，一般是基于服务器的session或者数据库存储完成的（服务器的session和本地的cookie是有关联的）
+            如果不考虑兼容，就想基于本地存储来完成一些事情，一般用localStorage的（尤其是移动端开发）
+
+            [localStorage => API]
+            localStorage.setItem(key,value)
+                注意：value必须是字符串格式的(如果写的不是字符串也会默认转换为字符串)
+                用数组或者对象的时候，要用JSON.stringify(value)
+            localStorage.getItem(key) 
+                通过属性名获取存储的信息
+            localStorage.removeItem() 
+                删除指定的存储信息
+            localStorage.clear()
+                清除当前域下存储的有所信息
+            localStorage.key(0)
+                基于索引获取指定的key名
+
+            [localStorage事件：onstorage]
+                当localStorage的值发生改变就触发（兄弟页面触发，自己不触发）
+        */
+
+        // localStorage.setItem('name','hahaha')
+        // console.log(localStorage.getItem('name'));//'hahaha'
+
+
+    </script>
+</body>
+
+</html>

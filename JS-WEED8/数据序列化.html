@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 把对象转化成 字符串user=我&pw=123&wd=上庄水库
+        let data = {
+            user: '我',
+            pw: 123,
+            wd: '上庄水库'
+        }
+        let ary = [];
+        for (let attr in data) {
+            ary.push(attr + '=' + data[attr]);
+        }
+        console.log(ary.join('&')); //user=我&pw=123&wd=上庄水库
+
+
+        // // 把字符串user=我&pw=123&wd=上庄水库 转化成对象
+        // let str = 'user=我&pw=123&wd=上庄水库';
+        // let ary = str.split('&'); 
+        // console.log(ary); //["user=我", "pw=123", "wd=上庄水库"]
+        // let obj = {};
+        // for(let attr of ary){
+        //     let arr = attr.split('=');
+        //     console.log(arr[0],arr[1])
+        //     obj[arr[0]]= arr[1];
+        // }
+        // console.log(obj); // {user: "我", pw: "123", wd: "上庄水库"}
+    </script>
+</body>
+
+</html>

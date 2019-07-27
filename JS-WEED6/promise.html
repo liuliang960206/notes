@@ -20,7 +20,7 @@
             new Promise().then();
         */
 
-        // //=> pending(准备：初始化成功，开始执行异步的任务）/fulfiled(成功)/rejected(失败)
+        //=> pending(准备：初始化成功，开始执行异步的任务）/fulfiled(成功)/rejected(失败)
         // new Promise(()=>{
         //     //=>执行一个异步的任务(new Promise的时候，创建Promise的一个实例，立即会把当前函数体中的异步操作执行)
         //     // Promise本身是同步的，但它可以管理异步操作
@@ -32,19 +32,19 @@
         // console.log(2); //再输出2
 
 
-        // new Promise((resolve,reject)=>{
-        //     //=>resolve: 当异步操作执行成功，执行resolve方法
-        //     //=>relect: 当异步操作执行失败，执行relect方法
-        //     setTimeout(()=>{
-        //         resolve(100);
-        //     },1000);
-        // }).then((res)=>{
-        //     //第一个传递的函数：resolve
-        //     console.log('ok',res); //1s后输出ok 100
-        // },()=>{
-        //     //第一个传递的函数：relect
-        //     console.log('no');
-        // });
+        new Promise((resolve,reject)=>{
+            //=>resolve: 当异步操作执行成功，执行resolve方法
+            //=>relect: 当异步操作执行失败，执行relect方法
+            setTimeout(()=>{
+                resolve(100);
+            },1000);
+        }).then((res)=>{
+            //第一个传递的函数：resolve
+            console.log('ok',res); //1s后输出ok 100
+        },()=>{
+            //第一个传递的函数：relect
+            console.log('no');
+        });
 
         // // ajax获取数据
         // let val = null;
